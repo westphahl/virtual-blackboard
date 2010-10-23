@@ -1,7 +1,7 @@
-CC		= gcc
-CFLAGS	= -g -pthread -ansi -std=c99 -D_SVID_SOURCE -pedantic-errors -Wall \
-	   	  `pkg-config --cflags gtk+-2.0`
-LDFLAGS	= `pkg-config --libs gtk+-2.0` -lgthread-2.0
+CC      = gcc
+CFLAGS  = -g -pthread -ansi -std=c99 -D_SVID_SOURCE -pedantic-errors -Wall \
+          `pkg-config --cflags gtk+-2.0`
+LDFLAGS = `pkg-config --libs gtk+-2.0` -lgthread-2.0
 
 # Build everything
 all: client
