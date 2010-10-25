@@ -1,3 +1,5 @@
+#define _POSIX_SOURCE 1
+
 /* System */
 #include <pthread.h>
 #include <stdio.h>
@@ -10,6 +12,9 @@
 #include <netdb.h>
 #include <arpa/inet.h>
 #include <limits.h>
+#include <string.h>
+#include <getopt.h>
+#include <sys/time.h>
 #include <string.h>
 
 #include <gtk/gtk.h>
@@ -162,7 +167,102 @@ void on_text_buffer_changed (GtkTextBuffer *textbuffer, gpointer user_data)
  \**************************************************************************************/
 int main (int argc, char **argv)
 {
-	/* GTK threading aktivieren */
+	unsigned int listen_port = DEFAULT_PORT;
+    char *server_addr;
+    struct addrinfo *addr_info, *p, hints;
+    int ret;
+
+    /* RTFM getopt_long */
+    const char* short_options = "hs:p:";
+    struct option long_options[] = {
+        {"help", 0, NULL, 'h'},
+        {"server", 1, NULL, 's'},
+        {"port", 1, NULL, 'p'},
+        {NULL, 0, NULL, 0}
+    };
+    int long_index = 0;
+    int c;
+
+    printf("(argc) = %d\n", argc);
+
+    while(1) {
+        c = getopt_long(argc, argv, short_options, long_options, &long_index);
+        if(c == -1) break;
+
+        switch(c) {
+            case 's':
+                server_addr = optarg;
+                fprintf(stdout, " %s", server);
+                fflush(stdout);
+                break;
+            case 'p':
+                listen_port = strtol(optarg, NULL, 10);
+                if((listen_port < PORT_RANGE_MIN) || (listen_port > PORT_RANGE_MAX)) {
+                    fprintf(stderr,
+                        "Invalid port range: must be between %i and %i.\n" \
+                        "Falling back to default (%i)\n", 
+                        PORT_RANGE_MIN, PORT_RANGE_MAX, DEFAULT_PORT);
+                    listen_port = DEFAULT_PORT;
+                }
+                break;
+        }
+    }
+
+    memset(&hints, 0, sizeof(hints));
+    hints.ai_family = AF_UNSPEC;
+    hints.ai_socktype = SOCK_STREAM;
+    hints.ai_protocol = IPPROTO_TCP;
+    hints.ai_flags = 0;
+
+    /* RTFM: getaddrinfo */
+    ret = getaddrinfo(server_addr, "50000", &hints, &addr_info);
+    if(ret) {
+		printf("getaddrinfo: %s\n", gai_strerror(ret));
+		exit(1);
+	}
+
+	printf("\n");
+    p = addr_info;
+    
+    while(p) {
+		int s;
+		char dst[INET6_ADDRSTRLEN];
+
+		/* Create socket for found family */		
+        s = socket(p->ai_family, p->ai_socktype, 0);
+
+		/* RTFM: getnameinfo */
+		getnameinfo(p->ai_addr,
+			p->ai_addrlen,
+			dst,
+			sizeof(dst),
+			NULL,
+			0,
+			NI_NUMERICHOST);
+
+		printf("Trying %s ... ",dst);
+		fflush(stdout);
+
+		/* Try to connect */
+        if (connect(s, p->ai_addr, p->ai_addrlen) == 0) {
+            printf("Connected\n");
+			
+			/* Do stuff when connected*/
+			printf("CONNECTED\n");
+		
+			close(s);
+			break;
+        } else {
+			perror("FAILED");
+		}
+		close(s);
+
+		p = p->ai_next;
+    }
+
+    freeaddrinfo(addr_info);
+
+    /* GTK threading aktivieren */
 	g_thread_init(NULL);
 	gdk_threads_init();
 
