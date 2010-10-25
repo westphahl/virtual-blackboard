@@ -12,11 +12,14 @@ LDSERVER	= $(LDFLAGS)
 all: client server
 
 # Build the server
-server: build/server.o
-	$(CC) $(CSERVER) $(LDSERVER) -o build/server build/server.o
+server: build/server.o build/signal_handler.o
+	$(CC) $(CSERVER) $(LDSERVER) -o build/server build/server.o build/signal_handler.o
 
 build/server.o:
 	$(CC) $(CSERVER) -c -o build/server.o src/server/server.c
+
+build/signal_handler.o:
+	$(CC) $(CSERVER) -c -o build/signal_handler.o src/server/signal_handler.c
 
 # Build the logger
 # logger:

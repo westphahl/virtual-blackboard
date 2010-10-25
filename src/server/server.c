@@ -1,19 +1,12 @@
-/*
- * stdlib.h: 
- *      exit()
- *      EXIT_SUCCESS, EXIT_FAILURE
- * stdio.h:
- *      fprintf()
- *      stdout
- * getopt.h:
- *      getopt()
- *      optarg
- */
 #include <getopt.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <sys/wait.h>
+#include <signal.h>
+
 #include "../commons.h"
+#include "signal_handler.h"
 
 int main(int argc, char **argv) {
     unsigned int listen_port = DEFAULT_PORT;
@@ -46,22 +39,29 @@ int main(int argc, char **argv) {
     // Fork Logger
     l_pid = fork();
     if (l_pid == 0) {
-        // Logger: excel()
+        // TODO Exec logger
+        execl("/bin/sleep", "sleep", "999", NULL);
     } else if (l_pid < 0) {
         perror("fork logger");
         exit(EXIT_FAILURE);
-    } else {
-        // Fork Archiver
-        a_pid = fork();
-        if (a_pid == 0) {
-            // Archiver: excel()
-        } else if (a_pid < 0) {
-            perror("fork archiver");
-            exit(EXIT_FAILURE);
-        } else {
-            // Server goes here
-        }
     }
+    
+    // Fork Archiver
+    a_pid = fork();
+    if (a_pid == 0) {
+        // TODO Exec archiver
+        execl("/bin/sleep", "sleep", "999", NULL);
+    } else if (a_pid < 0) {
+        perror("fork archiver");
+        exit(EXIT_FAILURE);
+    }
+    
+    // Don't care about exit status
+    // Register signal handler
+    signal(SIGINT, sigint);
+    waitpid(l_pid, NULL, 0);
+    waitpid(a_pid, NULL, 0);
+    fprintf(stdout, "Child processes terminated.\n");
 
     exit(EXIT_SUCCESS);
 }
