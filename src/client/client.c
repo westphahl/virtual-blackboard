@@ -167,12 +167,14 @@ void on_text_buffer_changed (GtkTextBuffer *textbuffer, gpointer user_data)
  \**************************************************************************************/
 int main (int argc, char **argv)
 {
+    /* socket variables */
 	unsigned int listen_port = DEFAULT_PORT;
-    char *server_addr;
+    char *listen_port_s = NULL;
+    char *server_addr = NULL;
     struct addrinfo *addr_info, *p, hints;
     int ret;
 
-    /* RTFM getopt_long */
+    /* command-line parser variables */
     const char* short_options = "hs:p:";
     struct option long_options[] = {
         {"help", 0, NULL, 'h'},
@@ -181,21 +183,18 @@ int main (int argc, char **argv)
         {NULL, 0, NULL, 0}
     };
     int long_index = 0;
-    int c;
+    int opt;
 
-    printf("(argc) = %d\n", argc);
-
-    while(1) {
-        c = getopt_long(argc, argv, short_options, long_options, &long_index);
-        if(c == -1) break;
-
-        switch(c) {
+    /* parse command-line options */
+    while ((opt = getopt_long(argc, argv, short_options, long_options, &long_index)) != -1) {
+        switch (opt) {
             case 's':
                 server_addr = optarg;
-                fprintf(stdout, " %s", server);
+                fprintf(stdout, " %s", server_addr);
                 fflush(stdout);
                 break;
             case 'p':
+                listen_port_s = optarg;
                 listen_port = strtol(optarg, NULL, 10);
                 if((listen_port < PORT_RANGE_MIN) || (listen_port > PORT_RANGE_MAX)) {
                     fprintf(stderr,
@@ -208,14 +207,15 @@ int main (int argc, char **argv)
         }
     }
 
+    /* clear struct */
     memset(&hints, 0, sizeof(hints));
     hints.ai_family = AF_UNSPEC;
     hints.ai_socktype = SOCK_STREAM;
     hints.ai_protocol = IPPROTO_TCP;
     hints.ai_flags = 0;
 
-    /* RTFM: getaddrinfo */
-    ret = getaddrinfo(server_addr, "50000", &hints, &addr_info);
+    /* getaddrinfo */
+    ret = getaddrinfo(server_addr, listen_port_s, &hints, &addr_info);
     if(ret) {
 		printf("getaddrinfo: %s\n", gai_strerror(ret));
 		exit(1);
@@ -224,14 +224,14 @@ int main (int argc, char **argv)
 	printf("\n");
     p = addr_info;
     
-    while(p) {
-		int s;
+    while (p) {
+		int sock;
 		char dst[INET6_ADDRSTRLEN];
 
-		/* Create socket for found family */		
-        s = socket(p->ai_family, p->ai_socktype, 0);
+		/* create socket for found family */		
+        sock = socket(p->ai_family, p->ai_socktype, 0);
 
-		/* RTFM: getnameinfo */
+		/* getnameinfo */
 		getnameinfo(p->ai_addr,
 			p->ai_addrlen,
 			dst,
@@ -240,26 +240,27 @@ int main (int argc, char **argv)
 			0,
 			NI_NUMERICHOST);
 
-		printf("Trying %s ... ",dst);
+		printf("Trying %s:%i ... ", dst, listen_port);
 		fflush(stdout);
 
 		/* Try to connect */
-        if (connect(s, p->ai_addr, p->ai_addrlen) == 0) {
-            printf("Connected\n");
+        if (connect(sock, p->ai_addr, p->ai_addrlen) == 0) {
+            fprintf(stdout, "Connected\n");
 			
 			/* Do stuff when connected*/
-			printf("CONNECTED\n");
+			fprintf(stdout, "DO STUFF\n");
 		
-			close(s);
+			close(sock);
 			break;
         } else {
 			perror("FAILED");
 		}
-		close(s);
+		close(sock);
 
 		p = p->ai_next;
     }
 
+    /* delete addressinfo */
     freeaddrinfo(addr_info);
 
     /* GTK threading aktivieren */
