@@ -22,7 +22,11 @@ int main(int argc, char **argv) {
     key_t bshm_key = BLACKBOARD_SHM_KEY;
     int bshm_id;
 
-    // Parse command line options
+    /*
+     * Parse command line option
+     * User defined port:   -p <PORT-NR>    (optional)
+     * Debug mode:          -d              (optional)
+     */
     while ((opt = getopt(argc, argv, "dp:")) != -1) {
         switch(opt) {
             case 'd':
@@ -84,6 +88,7 @@ int main(int argc, char **argv) {
     waitpid(a_pid, NULL, 0);
     fprintf(stdout, "Child processes terminated.\n");
 
+    // Delete shared memory segment
     delete_blackboard(bshm_id);
     // Delete message queue
     delete_mq(lmq_id);
