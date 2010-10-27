@@ -19,7 +19,7 @@
 int create_mq(key_t key) {
     int mq_id;
 
-    if ((mq_id = msgget(key, IPC_CREAT | IPC_EXCL| 0600)) < 0) {
+    if ((mq_id = msgget(key, IPC_CREAT | IPC_EXCL| 0666)) < 0) {
         perror("msgget");
         exit(EXIT_FAILURE);
     }
