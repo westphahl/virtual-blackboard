@@ -19,6 +19,7 @@
 #include "shared.h"
 #include "signal_handler.h"
 #include "mq.h"
+#include "utils.h"
 #include "blackboard.h"
 
 /*
@@ -173,7 +174,10 @@ int main(int argc, char **argv) {
     }
 
     // Create message queue for logger
-    lmq_id = create_mq(lmq_key);
+    //lmq_id = create_mq(lmq_key);
+    lmq_id = get_mq(lmq_key);
+
+    log_message("Hallo Welt. Ich schreibe jetzt mal mehr als 255 Zeichen, ich versuche auch mal Sonderzeichen wie zum Beispiel ä ö ü ß. Wenn das geht bin ich echt gut, oder? Ich hab jetzt keine Lust mehr, ich mach das jetzt fertig und mach dann schluss! Das gibts ja nicht. Das sind immer noch nicht 255 Zeichen, wie viel Text soll ich denn noch schreiben? Reicht es jetzt?");
 
     // Create blackboard in shared memory
     bshm_id = init_blackboard(bshm_key);
