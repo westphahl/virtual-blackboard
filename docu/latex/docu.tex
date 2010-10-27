@@ -1,57 +1,66 @@
-\documentclass[12pt, twoside, a4paper, DIV12, BCOR16mm]{scrartcl}
+\documentclass{article}
 
-\usepackage[english, ngerman]{babel}
-\usepackage{graphicx, fancyhdr, lastpage, listings, wasysym, 
-            bibgerm, comment, changebar} 
-
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-
+\usepackage{amssymb,amsmath,amsbsy,amsfonts}
+\usepackage{color}
+\usepackage{epsfig}
+\usepackage{fancybox,fancyhdr}
+\usepackage{float}
+\usepackage{framed}
+\usepackage{fullpage}
+\usepackage{graphicx}
 \usepackage{listing}
+\usepackage{listings}
+\usepackage{shadow}
+\usepackage{url}
+\usepackage{version}
+\usepackage{wrapfig}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, ngerman]{babel}
+\usepackage{ae}
+
 \lstset{
-  literate={ö}{{\"o}}1
-           {Ö}{{\"O}}1
-           {ä}{{\"a}}1
-           {Ä}{{\"A}}1
-           {ü}{{\"u}}1
-           {Ü}{{\"U}}1
-           {ß}{{ss}}1
+	literate=
+		{ö}{{\"o}}1
+		{Ö}{{\"O}}1
+		{ä}{{\"a}}1
+		{Ä}{{\"A}}1
+		{ü}{{\"u}}1
+		{Ü}{{\"U}}1
+		{ß}{{ss}}1
 }
 
 \lstset{ %
-language=c,                % choose the language of the code
-basicstyle=\footnotesize,       % the size of the fonts that are used for the code
-numbers=left,                   % where to put the line-numbers
-numberstyle=\tiny,      % the size of the fonts that are used for the line-numbers
-stepnumber=1,                   % the step between two line-numbers. If it's 1 each line 
-                                % will be numbered
-numbersep=5pt,                  % how far the line-numbers are from the code
-backgroundcolor=\color{white},  % choose the background color. You must add \usepackage{color}
-showspaces=false,               % show spaces adding particular underscores
-showstringspaces=false,         % underline spaces within strings
-frame=single,	                % adds a frame around the code
-showtabs=false,                 % show tabs within strings adding particular underscores
-tabsize=2,	                	% sets default tabsize to 2 spaces
-captionpos=none,                   % sets the caption-position to bottom
-breaklines=true,                % sets automatic line breaking
-breakatwhitespace=false,        % sets if automatic breaks should only happen at whitespace
-title=\lstname,                 % show the filename of files included with \lstinputlisting;
-                                % also try caption instead of title
-escapeinside={\#}{\ },         % if you want to add a comment within your code
-morekeywords={*,...}            % if you want to add more keywords to the set
+	language=c,
+	basicstyle=\footnotesize,
+	numbers=left,
+	numberstyle=\tiny,
+	stepnumber=1,
+	numbersep=5pt,
+	backgroundcolor=\color{white},
+	showspaces=false,
+	showstringspaces=false,
+	frame=single,
+	showtabs=false,
+	tabsize=2,
+	captionpos=none,
+	breaklines=true,
+	breakatwhitespace=false,
+	title=\lstname,
+	escapeinside={\#}{\ },
+	morekeywords={*,...}
 }
-\usepackage{framed,shadow}
 
-\usepackage{ae} 
 \usepackage[
-pdftitle={Systemprogrammierung Dokumentation},
-bookmarks=true,
-bookmarksnumbered=true, % Verwendete Bookmarks anzeigen
-colorlinks,   % Farbige Links
-linkcolor=black,
-urlcolor=blue,
-citecolor=black]{hyperref}
-%\usepackage[dvips]{thumbpdf}
+	pdftitle={Systemprogrammierung Dokumentation},
+	bookmarks=true,
+	bookmarksnumbered=true,
+	colorlinks,
+	linkcolor=red,
+	urlcolor=blue,
+	citecolor=black
+]{hyperref}
 
 \pagestyle{fancy}
 
@@ -61,20 +70,32 @@ citecolor=black]{hyperref}
 \setlength{\headheight}{13mm}
 \setlength{\topskip}{10mm}
 
-\setcounter{tocdepth}{3}
+\setcounter{tocdepth}{4}
 
 \input{macros}
 
 \begin{document} 
 
-\include{titlepage}
+	\include{titlepage}
 
-\tableofcontents 
+	\tableofcontents
 
-\include{client}
+	\include{komponentenentwurf}
+ 
+	\include{client}
 
-\include{server}
+	\include{server}
 
-\include{network}
+	\include{logger}
+
+	\include{archivierer}
+
+	\include{clientlist}
+
+	\include{blackboard}
+
+	\include{fazit}
+
+	\include{network}
 
 \end{document} 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2010.10.6)  22 OCT 2010 11:33
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2010.10.6)  27 OCT 2010 14:10
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -13,122 +13,114 @@ skrit, italian, latin, latvian, lithuanian, mongolian2a, mongolian, bokmal, nyn
 orsk, romanian, irish, coptic, serbian, turkish, welsh, esperanto, uppersorbian
 , estonian, indonesian, interlingua, icelandic, kurmanji, slovenian, polish, po
 rtuguese, spanish, galician, catalan, swedish, ukenglish, pinyin, loaded.
-(/usr/share/texmf-texlive/tex/latex/koma-script/scrartcl.cls
-Document Class: scrartcl 2009/07/24 v3.04a KOMA-Script document class (article)
-
-(/usr/share/texmf-texlive/tex/latex/koma-script/scrkbase.sty
-Package: scrkbase 2009/07/24 v3.04a KOMA-Script package (KOMA-Script-dependent 
-basics and keyval usage)
-
-(/usr/share/texmf-texlive/tex/latex/koma-script/scrbase.sty
-Package: scrbase 2009/07/24 v3.04a KOMA-Script package (KOMA-Script-independent
- basics and keyval usage)
-
-(/usr/share/texmf-texlive/tex/latex/graphics/keyval.sty
-Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
-\KV@toks@=\toks14
+(/usr/share/texmf-texlive/tex/latex/base/article.cls
+Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
+(/usr/share/texmf-texlive/tex/latex/base/size10.clo
+File: size10.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 )
-(/usr/share/texmf-texlive/tex/latex/koma-script/scrlfile.sty
-Package: scrlfile 2009/03/25 v3.03 KOMA-Script package (loading files)
-
-Package scrlfile, 2009/03/25 v3.03 KOMA-Script package (loading files)
-                  Copyright (C) Markus Kohm
-
-))) (/usr/share/texmf-texlive/tex/latex/koma-script/tocbasic.sty
-Package: tocbasic 2009/06/08 v3.03b KOMA-Script package (handling toc-files)
-)
-Package tocbasic Info: omitting babel extension for `toc'
-(tocbasic)             because of feature `nobabel' available
-(tocbasic)             for `toc' on input line 115.
-Package tocbasic Info: omitting babel extension for `lof'
-(tocbasic)             because of feature `nobabel' available
-(tocbasic)             for `lof' on input line 116.
-Package tocbasic Info: omitting babel extension for `lot'
-(tocbasic)             because of feature `nobabel' available
-(tocbasic)             for `lot' on input line 117.
-Package scrartcl Info: You've used obsolete option `12pt'.
-(scrartcl)             \KOMAExecuteOptions{fontsize=12pt} will be
-(scrartcl)             used instead.
-(scrartcl)             You may simply replace `12pt'
-(scrartcl)             by `fontsize=12pt'.
-Class scrartcl Info: File `scrsize12pt.clo' used to setup font sizes on input l
-ine 1171.
-
-(/usr/share/texmf-texlive/tex/latex/koma-script/scrsize12pt.clo
-File: scrsize12pt.clo 2009/07/24 v3.04a KOMA-Script font size class option (12p
-t)
-)
-(/usr/share/texmf-texlive/tex/latex/koma-script/typearea.sty
-Package: typearea 2009/07/24 v3.04a KOMA-Script package (type area)
-
-Package typearea, 2009/07/24 v3.04a KOMA-Script package (type area)
-                  Copyright (C) Frank Neukam, 1992-1994
-                  Copyright (C) Markus Kohm, 1994-
-
-\ta@bcor=\skip41
-\ta@div=\count79
-Package typearea Info: You've used standard option `a4paper'.
-(typearea)             This is correct!
-(typearea)             Internaly I'm using `paper=a4'.
-(typearea)             If you'd like to set the option with \KOMAoptions,
-(typearea)             you'd have to use `paper=a4' there
-(typearea)             instead of `a4paper', too.
-\ta@hblk=\skip42
-\ta@vblk=\skip43
-\ta@temp=\skip44
-Package typearea Info: These are the values describing the layout:
-(typearea)             DIV  = 12
-(typearea)             BCOR = 45.5244pt
-(typearea)             \paperwidth      = 597.50793pt
-(typearea)              \textwidth      = 413.98766pt
-(typearea)              DIV departure   = 0%
-(typearea)              \evensidemargin = 19.72726pt
-(typearea)              \oddsidemargin  = 19.25304pt
-(typearea)             \paperheight     = 845.04694pt
-(typearea)              \textheight     = 635.5pt
-(typearea)              \topmargin      = -41.72441pt
-(typearea)              \headheight     = 18.125pt
-(typearea)              \headsep        = 21.75pt
-(typearea)              \topskip        = 12.0pt
-(typearea)              \footskip       = 50.75pt
-(typearea)              \baselineskip   = 14.5pt
-(typearea)              on input line 1115.
-)
-\c@part=\count80
-\c@section=\count81
-\c@subsection=\count82
-\c@subsubsection=\count83
-\c@paragraph=\count84
-\c@subparagraph=\count85
-\abovecaptionskip=\skip45
-\belowcaptionskip=\skip46
-\c@pti@nb@sid@b@x=\box26
-\c@figure=\count86
-\c@table=\count87
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
 \bibindent=\dimen102
-) (/var/lib/texmf/tex/generic/babel/babel.sty
-Package: babel 2008/07/06 v3.8l The Babel package
-
-(/usr/share/texmf-texlive/tex/generic/babel/english.ldf
-Language: english 2005/03/30 v3.3o English support from the babel system
-
-(/usr/share/texmf-texlive/tex/generic/babel/babel.def
-File: babel.def 2008/07/06 v3.8l Babel common definitions
-\babel@savecnt=\count88
-\U@D=\dimen103
 )
-\l@canadian = a dialect from \language\l@american 
-\l@australian = a dialect from \language\l@british 
-\l@newzealand = a dialect from \language\l@british 
-)
-(/usr/share/texmf-texlive/tex/generic/babel/ngermanb.ldf
-Language: ngermanb 2008/07/06 v2.6n new German support from the babel system
-\l@naustrian = a dialect from \language\l@ngerman 
-Package babel Info: Making " an active character on input line 92.
+(/usr/share/texmf-texlive/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2009/06/22 v3.00
+
+(/usr/share/texmf-texlive/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2009/06/22 v3.00 Basic AMSFonts support
+\@emptytoks=\toks14
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 96.
 ))
+(/usr/share/texmf-texlive/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2000/07/18 v2.13 AMS math features
+\@mathmargin=\skip43
+
+For additional information on amsmath, use the `?' option.
+(/usr/share/texmf-texlive/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01
+
+(/usr/share/texmf-texlive/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0
+\@emptytoks=\toks15
+\ex@=\dimen103
+))
+(/usr/share/texmf-texlive/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d
+\pmbraise@=\dimen104
+)
+(/usr/share/texmf-texlive/tex/latex/amsmath/amsopn.sty
+Package: amsopn 1999/12/14 v2.01 operator names
+)
+\inf@bad=\count87
+LaTeX Info: Redefining \frac on input line 211.
+\uproot@=\count88
+\leftroot@=\count89
+LaTeX Info: Redefining \overline on input line 307.
+\classnum@=\count90
+\DOTSCASE@=\count91
+LaTeX Info: Redefining \ldots on input line 379.
+LaTeX Info: Redefining \dots on input line 382.
+LaTeX Info: Redefining \cdots on input line 467.
+\Mathstrutbox@=\box26
+\strutbox@=\box27
+\big@size=\dimen105
+LaTeX Font Info:    Redeclaring font encoding OML on input line 567.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 568.
+\macc@depth=\count92
+\c@MaxMatrixCols=\count93
+\dotsspace@=\muskip10
+\c@parentequation=\count94
+\dspbrk@lvl=\count95
+\tag@help=\toks16
+\row@=\count96
+\column@=\count97
+\maxfields@=\count98
+\andhelp@=\toks17
+\eqnshift@=\dimen106
+\alignsep@=\dimen107
+\tagshift@=\dimen108
+\tagwidth@=\dimen109
+\totwidth@=\dimen110
+\lineht@=\dimen111
+\@envbody=\toks18
+\multlinegap=\skip44
+\multlinetaggap=\skip45
+\mathdisplay@stack=\toks19
+LaTeX Info: Redefining \[ on input line 2666.
+LaTeX Info: Redefining \] on input line 2667.
+)
+(/usr/share/texmf-texlive/tex/latex/graphics/color.sty
+Package: color 2005/11/14 v1.0j Standard LaTeX Color (DPC)
+
+(/etc/texmf/tex/latex/config/color.cfg
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package color Info: Driver file: pdftex.def on input line 130.
+
+(/usr/share/texmf-texlive/tex/latex/pdftex-def/pdftex.def
+File: pdftex.def 2010/03/12 v0.04p Graphics/color for pdfTeX
+\Gread@gobject=\count99
+))
+(/usr/share/texmf-texlive/tex/latex/graphics/epsfig.sty
+Package: epsfig 1999/02/16 v1.7a (e)psfig emulation (SPQR)
+
 (/usr/share/texmf-texlive/tex/latex/graphics/graphicx.sty
 Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
 
+(/usr/share/texmf-texlive/tex/latex/graphics/keyval.sty
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks20
+)
 (/usr/share/texmf-texlive/tex/latex/graphics/graphics.sty
 Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
 
@@ -139,105 +131,124 @@ Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
 File: graphics.cfg 2009/08/28 v1.8 graphics configuration of TeX Live
 )
 Package graphics Info: Driver file: pdftex.def on input line 91.
+)
+\Gin@req@height=\dimen112
+\Gin@req@width=\dimen113
+)
+\epsfxsize=\dimen114
+\epsfysize=\dimen115
+)
+(/usr/share/texmf-texlive/tex/latex/fancybox/fancybox.sty
+Package: fancybox 2000/09/19 1.3
 
-(/usr/share/texmf-texlive/tex/latex/pdftex-def/pdftex.def
-File: pdftex.def 2010/03/12 v0.04p Graphics/color for pdfTeX
-\Gread@gobject=\count89
-))
-\Gin@req@height=\dimen104
-\Gin@req@width=\dimen105
+Style option: `fancybox' v1.3 <2000/09/19> (tvz)
+\@fancybox=\box28
+\shadowsize=\dimen116
+\@Sbox=\box29
+\do@VerbBox=\toks21
+\the@fancyput=\toks22
+\this@fancyput=\toks23
+\EndVerbatimTokens=\toks24
+\Verbatim@Outfile=\write3
+\Verbatim@Infile=\read1
+) (/usr/share/texmf-texlive/tex/latex/fancyhdr/fancyhdr.sty
+\fancy@headwidth=\skip46
+\f@ncyO@elh=\skip47
+\f@ncyO@erh=\skip48
+\f@ncyO@olh=\skip49
+\f@ncyO@orh=\skip50
+\f@ncyO@elf=\skip51
+\f@ncyO@erf=\skip52
+\f@ncyO@olf=\skip53
+\f@ncyO@orf=\skip54
 )
-(/usr/share/texmf-texlive/tex/latex/fancyhdr/fancyhdr.sty
-\fancy@headwidth=\skip47
-\f@ncyO@elh=\skip48
-\f@ncyO@erh=\skip49
-\f@ncyO@olh=\skip50
-\f@ncyO@orh=\skip51
-\f@ncyO@elf=\skip52
-\f@ncyO@erf=\skip53
-\f@ncyO@olf=\skip54
-\f@ncyO@orf=\skip55
+(/usr/share/texmf-texlive/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count100
+\float@exts=\toks25
+\float@box=\box30
+\@float@everytoks=\toks26
+\@floatcapt=\box31
 )
-(/usr/share/texmf-texlive/tex/latex/lastpage/lastpage.sty
-Package: lastpage 1994/06/25 v0.1b LaTeX2e package for refs to last page number
- (JPG)
+(/usr/share/texmf-texlive/tex/latex/ltxmisc/framed.sty
+Package: framed 2007/10/04 v 0.95: framed or shaded text with page breaks
+\fb@frw=\dimen117
+\fb@frh=\dimen118
+\FrameRule=\dimen119
+\FrameSep=\dimen120
 )
-(/usr/share/texmf-texlive/tex/latex/listings/listings.sty
-\lst@mode=\count90
-\lst@gtempboxa=\box27
-\lst@token=\toks15
-\lst@length=\count91
-\lst@currlwidth=\dimen106
-\lst@column=\count92
-\lst@pos=\count93
-\lst@lostspace=\dimen107
-\lst@width=\dimen108
-\lst@newlines=\count94
-\lst@lineno=\count95
-\lst@maxwidth=\dimen109
+(/usr/share/texmf-texlive/tex/latex/preprint/fullpage.sty
+Package: fullpage 1999/02/23 1.1 (PWD)
+\FP@margin=\skip55
+)
+(/usr/share/texmf-texlive/tex/latex/ltxmisc/listing.sty
+Package: listing 1999/05/25
+
+Package `listing', V1.2, <1999/05/25>
+\c@listing=\count101
+) (/usr/share/texmf-texlive/tex/latex/listings/listings.sty
+\lst@mode=\count102
+\lst@gtempboxa=\box32
+\lst@token=\toks27
+\lst@length=\count103
+\lst@currlwidth=\dimen121
+\lst@column=\count104
+\lst@pos=\count105
+\lst@lostspace=\dimen122
+\lst@width=\dimen123
+\lst@newlines=\count106
+\lst@lineno=\count107
+\lst@maxwidth=\dimen124
 
 (/usr/share/texmf-texlive/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2007/02/22 1.4 (Carsten Heinz)
-\c@lstnumber=\count96
-\lst@skipnumbers=\count97
-\lst@framebox=\box28
+\c@lstnumber=\count108
+\lst@skipnumbers=\count109
+\lst@framebox=\box33
 )
 (/usr/share/texmf-texlive/tex/latex/listings/listings.cfg
 File: listings.cfg 2007/02/22 1.4 listings configuration
 ))
 Package: listings 2007/02/22 1.4 (Carsten Heinz)
 
-(/usr/share/texmf-texlive/tex/latex/wasysym/wasysym.sty
-Package: wasysym 2003/10/30 v2.0 Wasy-2 symbol support package
-\symwasy=\mathgroup4
-LaTeX Font Info:    Overwriting symbol font `wasy' in version `bold'
-(Font)                  U/wasy/m/n --> U/wasy/b/n on input line 90.
+(/usr/share/texmf-texlive/tex/latex/ltxmisc/shadow.sty
+Package: shadow 2003/02/19 v1.3 shadow boxes (M.O.)
+\txtwdth=\dimen125
+\sht=\dimen126
+\shw=\dimen127
+\shbox=\box34
+\sboxsep=\dimen128
+\sboxrule=\dimen129
+\sdim=\dimen130
 )
-(/usr/share/texmf-texlive/tex/latex/germbib/bibgerm.sty
-Package: bibgerm 2000/08/18 v0.1 Support for mixed language bibliographies
-
-** Macros for german `BibTeX'ing added to Style Option `german' 20 Apr 1993 **
-** idea and languages `german' and `USenglish' implemented by M. Wallmeier **
-** Modified for LaTeX 2e and german.sty 2.5b by A. Scherer 1 Nov 1995 **
-** Modified for ngerman.sty and babel.sty by H. Harders 21 August 2000 **)
-(/usr/share/texmf-texlive/tex/latex/comment/comment.sty
-\CommentStream=\write3
-
-Excluding comment 'comment')
-(/usr/share/texmf-texlive/tex/latex/changebar/changebar.sty
-Package: changebar 2005/09/18 v3.5c Indicate changes with marginal bars
-\cb@nextpoint=\count98
-\cb@topleft=\count99
-\cb@topright=\count100
-\cb@botleft=\count101
-\cb@botright=\count102
-\cb@cnta=\count103
-\cb@cntb=\count104
-\cb@dima=\dimen110
-\cb@curbarwd=\dimen111
-\cb@page=\count105
-\cb@pagecount=\count106
-\cb@odd@left=\dimen112
-\cb@odd@right=\dimen113
-\cb@even@left=\dimen114
-\cb@even@right=\dimen115
-\cb@writexy=\write4
-\cb@readxy=\read1
-\openout4 = `docu.cb2'.
-
-\changebarwidth=\skip56
-\deletebarwidth=\skip57
-\changebarsep=\skip58
-\c@changebargrey=\count107
-\cb@write=\write5
-\cb@read=\read2
-\openout5 = `docu.cb'.
-
+(/usr/share/texmf-texlive/tex/latex/ltxmisc/url.sty
+\Urlmuskip=\muskip11
+Package: url 2006/04/12  ver 3.3  Verb mode for urls, etc.
 )
+(/usr/share/texmf-texlive/tex/latex/version/version.sty
+Package: version 2009/09/15  v 2.0
+Package version Info: Excluding comment environments declared on input line 115
+.
+)
+(/usr/share/texmf-texlive/tex/latex/wrapfig/wrapfig.sty
+\wrapoverhang=\dimen131
+\WF@size=\dimen132
+\c@WF@wrappedlines=\count110
+\WF@box=\box35
+\WF@everypar=\toks28
+Package: wrapfig 2003/01/31  v 3.6
+)
+(/usr/share/texmf-texlive/tex/latex/base/fontenc.sty
+Package: fontenc 2005/09/27 v1.99g Standard LaTeX package
+
+(/usr/share/texmf-texlive/tex/latex/base/t1enc.def
+File: t1enc.def 2005/09/27 v1.99g Standard LaTeX file
+LaTeX Font Info:    Redeclaring font encoding T1 on input line 43.
+))
 (/usr/share/texmf-texlive/tex/latex/base/inputenc.sty
 Package: inputenc 2008/03/30 v1.1d Input encoding file
-\inpenc@prehook=\toks16
-\inpenc@posthook=\toks17
+\inpenc@prehook=\toks29
+\inpenc@posthook=\toks30
 
 (/usr/share/texmf-texlive/tex/latex/base/utf8.def
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
@@ -451,41 +462,26 @@ Now handling font encoding U ...
    defining Unicode char U+2122 (decimal 8482)
    defining Unicode char U+2423 (decimal 9251)
 ))
-(/usr/share/texmf-texlive/tex/latex/base/fontenc.sty
-Package: fontenc 2005/09/27 v1.99g Standard LaTeX package
+(/var/lib/texmf/tex/generic/babel/babel.sty
+Package: babel 2008/07/06 v3.8l The Babel package
 
-(/usr/share/texmf-texlive/tex/latex/base/t1enc.def
-File: t1enc.def 2005/09/27 v1.99g Standard LaTeX file
-LaTeX Font Info:    Redeclaring font encoding T1 on input line 43.
+(/usr/share/texmf-texlive/tex/generic/babel/english.ldf
+Language: english 2005/03/30 v3.3o English support from the babel system
+
+(/usr/share/texmf-texlive/tex/generic/babel/babel.def
+File: babel.def 2008/07/06 v3.8l Babel common definitions
+\babel@savecnt=\count111
+\U@D=\dimen133
+)
+\l@canadian = a dialect from \language\l@american 
+\l@australian = a dialect from \language\l@british 
+\l@newzealand = a dialect from \language\l@british 
+)
+(/usr/share/texmf-texlive/tex/generic/babel/ngermanb.ldf
+Language: ngermanb 2008/07/06 v2.6n new German support from the babel system
+\l@naustrian = a dialect from \language\l@ngerman 
+Package babel Info: Making " an active character on input line 92.
 ))
-(/usr/share/texmf-texlive/tex/latex/ltxmisc/listing.sty
-Package: listing 1999/05/25
-
-Package `listing', V1.2, <1999/05/25>
-\c@listing=\count108
-) (/usr/share/texmf-texlive/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2004/09/05 1.3 listings language file
-)
-(/usr/share/texmf-texlive/tex/latex/listings/lstmisc.sty
-File: lstmisc.sty 2007/02/22 1.4 (Carsten Heinz)
-)
-(/usr/share/texmf-texlive/tex/latex/ltxmisc/framed.sty
-Package: framed 2007/10/04 v 0.95: framed or shaded text with page breaks
-\fb@frw=\dimen116
-\fb@frh=\dimen117
-\FrameRule=\dimen118
-\FrameSep=\dimen119
-)
-(/usr/share/texmf-texlive/tex/latex/ltxmisc/shadow.sty
-Package: shadow 2003/02/19 v1.3 shadow boxes (M.O.)
-\txtwdth=\dimen120
-\sht=\dimen121
-\shw=\dimen122
-\shbox=\box29
-\sboxsep=\dimen123
-\sboxrule=\dimen124
-\sdim=\dimen125
-)
 (/usr/share/texmf-texlive/tex/latex/ae/ae.sty
 Package: ae 2001/02/12 1.3 Almost European Computer Modern
 
@@ -501,6 +497,12 @@ LaTeX Font Info:    Try loading font information for T1+aer on input line 100.
 (/usr/share/texmf-texlive/tex/latex/ae/t1aer.fd
 File: t1aer.fd 1997/11/16 Font definitions for T1/aer.
 )))
+(/usr/share/texmf-texlive/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2004/09/05 1.3 listings language file
+)
+(/usr/share/texmf-texlive/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2007/02/22 1.4 (Carsten Heinz)
+)
 (/usr/share/texmf-texlive/tex/latex/hyperref/hyperref.sty
 Package: hyperref 2009/10/09 v6.79a Hypertext links for LaTeX
 
@@ -522,9 +524,9 @@ O)
 (/usr/share/texmf-texlive/tex/latex/oberdiek/xcolor-patch.sty
 Package: xcolor-patch 2009/10/02 xcolor patch
 ))
-\@linkdim=\dimen126
-\Hy@linkcounter=\count109
-\Hy@pagecounter=\count110
+\@linkdim=\dimen134
+\Hy@linkcounter=\count112
+\Hy@pagecounter=\count113
 
 (/usr/share/texmf-texlive/tex/latex/hyperref/pd1enc.def
 File: pd1enc.def 2009/10/09 v6.79a Hyperref: PDFDocEncoding definition (HO)
@@ -564,12 +566,7 @@ Package hyperref Info: Backreferencing OFF on input line 2995.
 
 Implicit mode ON; LaTeX internals redefined
 Package hyperref Info: Bookmarks ON on input line 3191.
-(/usr/share/texmf-texlive/tex/latex/ltxmisc/url.sty
-\Urlmuskip=\muskip10
-Package: url 2006/04/12  ver 3.3  Verb mode for urls, etc.
-)
 LaTeX Info: Redefining \url on input line 3428.
-
 (/usr/share/texmf-texlive/tex/generic/oberdiek/bitset.sty
 Package: bitset 2007/09/28 v1.0 Data type bit set (HO)
 
@@ -595,10 +592,10 @@ Package pdftexcmds Info: LuaTeX not detected.
 Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
 )))
-\Fld@menulength=\count111
-\Field@Width=\dimen127
-\Fld@charsize=\dimen128
-\Field@toks=\toks18
+\Fld@menulength=\count114
+\Field@Width=\dimen135
+\Fld@charsize=\dimen136
+\Field@toks=\toks31
 Package hyperref Info: Hyper figures OFF on input line 4377.
 Package hyperref Info: Link nesting OFF on input line 4382.
 Package hyperref Info: Hyper index ON on input line 4385.
@@ -610,76 +607,69 @@ Package hyperref Info: PDF/A mode OFF on input line 4407.
 (/usr/share/texmf-texlive/tex/generic/oberdiek/atbegshi.sty
 Package: atbegshi 2008/07/31 v1.9 At begin shipout hook (HO)
 )
-\Hy@abspage=\count112
-\c@Item=\count113
-\c@Hfootnote=\count114
+\Hy@abspage=\count115
+\c@Item=\count116
+\c@Hfootnote=\count117
 )
 *hyperref using default driver hpdftex*
 (/usr/share/texmf-texlive/tex/latex/hyperref/hpdftex.def
 File: hpdftex.def 2009/10/09 v6.79a Hyperref driver for pdfTeX
-\Fld@listcount=\count115
-) (./macros.tex
-(/usr/share/texmf-texlive/tex/latex/graphics/color.sty
-Package: color 2005/11/14 v1.0j Standard LaTeX Color (DPC)
+\Fld@listcount=\count118
+) (./macros.tex)
+(./docu.aux (./titlepage.aux) (./komponentenentwurf.aux) (./client.aux)
+(./server.aux) (./logger.aux) (./archivierer.aux) (./clientlist.aux)
+(./blackboard.aux) (./fazit.aux) (./network.aux
 
-(/etc/texmf/tex/latex/config/color.cfg
-File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
-)
-Package color Info: Driver file: pdftex.def on input line 130.
-)) (./docu.aux (./titlepage.aux)
-(./client.aux) (./server.aux) (./network.aux))
+LaTeX Warning: Label `Header' multiply defined.
+
+))
 \openout1 = `docu.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 68.
-LaTeX Font Info:    ... okay on input line 68.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 68.
-LaTeX Font Info:    ... okay on input line 68.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 68.
-LaTeX Font Info:    ... okay on input line 68.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 68.
-LaTeX Font Info:    ... okay on input line 68.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 68.
-LaTeX Font Info:    ... okay on input line 68.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 68.
-LaTeX Font Info:    ... okay on input line 68.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 68.
-LaTeX Font Info:    ... okay on input line 68.
-
-(/usr/share/texmf/tex/context/base/supp-pdf.mkii
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 77.
+LaTeX Font Info:    ... okay on input line 77.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 77.
+LaTeX Font Info:    ... okay on input line 77.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 77.
+LaTeX Font Info:    ... okay on input line 77.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 77.
+LaTeX Font Info:    ... okay on input line 77.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 77.
+LaTeX Font Info:    ... okay on input line 77.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 77.
+LaTeX Font Info:    ... okay on input line 77.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 77.
+LaTeX Font Info:    ... okay on input line 77.
+ (/usr/share/texmf/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count116
-\scratchdimen=\dimen129
-\scratchbox=\box30
-\nofMPsegments=\count117
-\nofMParguments=\count118
-\everyMPshowfont=\toks19
-\MPscratchCnt=\count119
-\MPscratchDim=\dimen130
-\MPnumerator=\count120
-\everyMPtoPDFconversion=\toks20
+\scratchcounter=\count119
+\scratchdimen=\dimen137
+\scratchbox=\box36
+\nofMPsegments=\count120
+\nofMParguments=\count121
+\everyMPshowfont=\toks32
+\MPscratchCnt=\count122
+\MPscratchDim=\dimen138
+\MPnumerator=\count123
+\everyMPtoPDFconversion=\toks33
 )
-\c@lstlisting=\count121
-
-
-bibgerm.sty: babel.sty detected
-
-Package hyperref Info: Link coloring ON on input line 68.
-(/usr/share/texmf-texlive/tex/latex/hyperref/nameref.sty
+\c@lstlisting=\count124
+Package hyperref Info: Link coloring ON on input line 77.
+ (/usr/share/texmf-texlive/tex/latex/hyperref/nameref.sty
 Package: nameref 2007/05/29 v2.31 Cross-referencing by name of section
 
 (/usr/share/texmf-texlive/tex/latex/oberdiek/refcount.sty
 Package: refcount 2008/08/11 v3.1 Data extraction from references (HO)
 )
-\c@section@level=\count122
+\c@section@level=\count125
 )
-LaTeX Info: Redefining \ref on input line 68.
-LaTeX Info: Redefining \pageref on input line 68.
+LaTeX Info: Redefining \ref on input line 77.
+LaTeX Info: Redefining \pageref on input line 77.
  (./docu.out)
 (./docu.out)
-\@outlinefile=\write6
-\openout6 = `docu.out'.
+\@outlinefile=\write4
+\openout4 = `docu.out'.
 
-\AtBeginShipoutBox=\box31
+\AtBeginShipoutBox=\box37
 \openout2 = `titlepage.aux'.
 
  (./titlepage.tex
@@ -687,17 +677,16 @@ LaTeX Font Info:    Try loading font information for T1+aess on input line 3.
  (/usr/share/texmf-texlive/tex/latex/ae/t1aess.fd
 File: t1aess.fd 1997/11/16 Font definitions for T1/aess.
 )
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 5.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 5.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 5.
-LaTeX Font Info:    Try loading font information for U+wasy on input line 5.
-(/usr/share/texmf-texlive/tex/latex/wasysym/uwasy.fd
-File: uwasy.fd 2003/10/30 v2.0 Wasy-2 symbol font definitions
+LaTeX Font Info:    Try loading font information for U+msa on input line 5.
+(/usr/share/texmf-texlive/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2009/06/22 v3.00 AMS symbols A
 )
-<Bilder/logo_welle_de.png, id=187, 171.039pt x 66.7293pt>
+LaTeX Font Info:    Try loading font information for U+msb on input line 5.
+
+(/usr/share/texmf-texlive/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2009/06/22 v3.00 AMS symbols B
+)
+<Bilder/logo_welle_de.png, id=299, 171.039pt x 66.7293pt>
 File: Bilder/logo_welle_de.png Graphic file (type png)
 
 <use Bilder/logo_welle_de.png>
@@ -709,102 +698,203 @@ Underfull \hbox (badness 10000) in paragraph at lines 5--20
 
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./Bilder/logo_welle_de.png
- (PNG copy)>]) (./docu.toc
-Class scrartcl Info: You've told me to use the font selection of the element
-(scrartcl)           `sectioning' that is an alias of element `disposition'
-(scrartcl)            on input line 3.
-Class scrartcl Info: You've told me to use the font selection of the element
-(scrartcl)           `sectioning' that is an alias of element `disposition'
-(scrartcl)            on input line 17.
-Class scrartcl Info: You've told me to use the font selection of the element
-(scrartcl)           `sectioning' that is an alias of element `disposition'
-(scrartcl)            on input line 33.
- [2
+ (PNG copy)>]) (./docu.tocpdfTeX warning (ext4): destination with the same iden
+tifier (name{page.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.51 ....1}Programmstart}{17}{subsubsection.3.4.1}
+                                                   [1
 
 ])
-\tf@toc=\write7
-\openout7 = `docu.toc'.
+\tf@toc=\write5
+\openout5 = `docu.toc'.
 
- [3]
-\openout2 = `client.aux'.
+ [2]
+\openout2 = `komponentenentwurf.aux'.
 
- (./client.tex
-LaTeX Font Info:    Try loading font information for OMS+aer on input line 6.
 
-(/usr/share/texmf-texlive/tex/latex/ae/omsaer.fd
+(./komponentenentwurf.tex
+LaTeX Font Info:    Try loading font information for OMS+aer on input line 7.
+ (/usr/share/texmf-texlive/tex/latex/ae/omsaer.fd
 File: omsaer.fd 1999/12/27
 )
-LaTeX Font Info:    Font shape `OMS/aer/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 6.
-LaTeX Font Info:    Try loading font information for T1+aett on input line 29.
+LaTeX Font Info:    Font shape `OMS/aer/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 7.
+LaTeX Font Info:    Try loading font information for T1+aett on input line 16.
 
 (/usr/share/texmf-texlive/tex/latex/ae/t1aett.fd
 File: t1aett.fd 1997/11/16 Font definitions for T1/aett.
-) [4
+) [3
 
-]
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 52.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 52.
- [5] [6]
-LaTeX Font Info:    Font shape `OMS/aer/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 150.
-LaTeX Font Info:    Font shape `OMS/aer/m/it' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 158.
- [7]) [8]
+] [4]
+LaTeX Font Info:    Font shape `OMS/aer/m/n' in size <8> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 147.
+LaTeX Font Info:    Font shape `OMS/aer/m/it' in size <8> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 155.
+ [5] [6] [7] [8]
+
+pdfTeX warning: /usr/bin/pdflatex (file ./Bilder/header.pdf): PDF inclusion: fo
+und PDF version <1.5>, but at most version <1.4> allowed
+<Bilder/header.pdf, id=717, 910.48819pt x 113.81102pt>
+File: Bilder/header.pdf Graphic file (type pdf)
+ <use Bilder/header.pdf>
+
+pdfTeX warning: /usr/bin/pdflatex (file ./Bilder/login.pdf): PDF inclusion: fou
+nd PDF version <1.5>, but at most version <1.4> allowed
+<Bilder/login.pdf, id=719, 910.48819pt x 170.71654pt>
+File: Bilder/login.pdf Graphic file (type pdf)
+ <use Bilder/login.pdf>
+
+pdfTeX warning: /usr/bin/pdflatex (file ./Bilder/board_content.pdf): PDF inclus
+ion: found PDF version <1.5>, but at most version <1.4> allowed
+<Bilder/board_content.pdf, id=721, 910.48819pt x 113.81102pt>
+File: Bilder/board_content.pdf Graphic file (type pdf)
+
+<use Bilder/board_content.pdf>
+
+pdfTeX warning: /usr/bin/pdflatex (file ./Bilder/clear_board.pdf): PDF inclusio
+n: found PDF version <1.5>, but at most version <1.4> allowed
+<Bilder/clear_board.pdf, id=723, 682.86612pt x 113.81102pt>
+File: Bilder/clear_board.pdf Graphic file (type pdf)
+
+<use Bilder/clear_board.pdf> [9 <./Bilder/header.pdf> <./Bilder/login.pdf> <./B
+ilder/board_content.pdf>]
+
+pdfTeX warning: /usr/bin/pdflatex (file ./Bilder/write_request.pdf): PDF inclus
+ion: found PDF version <1.5>, but at most version <1.4> allowed
+<Bilder/write_request.pdf, id=769, 910.48819pt x 113.81102pt>
+File: Bilder/write_request.pdf Graphic file (type pdf)
+
+<use Bilder/write_request.pdf>
+
+pdfTeX warning: /usr/bin/pdflatex (file ./Bilder/write_requested.pdf): PDF incl
+usion: found PDF version <1.5>, but at most version <1.4> allowed
+<Bilder/write_requested.pdf, id=771, 910.48819pt x 170.71654pt>
+File: Bilder/write_requested.pdf Graphic file (type pdf)
+
+<use Bilder/write_requested.pdf>
+
+pdfTeX warning: /usr/bin/pdflatex (file ./Bilder/request_reply.pdf): PDF inclus
+ion: found PDF version <1.5>, but at most version <1.4> allowed
+<Bilder/request_reply.pdf, id=773, 910.48819pt x 170.71654pt>
+File: Bilder/request_reply.pdf Graphic file (type pdf)
+
+<use Bilder/request_reply.pdf>
+
+pdfTeX warning: /usr/bin/pdflatex (file ./Bilder/shutdown.pdf): PDF inclusion: 
+found PDF version <1.5>, but at most version <1.4> allowed
+<Bilder/shutdown.pdf, id=775, 682.86612pt x 113.81102pt>
+File: Bilder/shutdown.pdf Graphic file (type pdf)
+
+<use Bilder/shutdown.pdf>
+
+pdfTeX warning: /usr/bin/pdflatex (file ./Bilder/status_nachricht.pdf): PDF inc
+lusion: found PDF version <1.5>, but at most version <1.4> allowed
+<Bilder/status_nachricht.pdf, id=777, 910.48819pt x 227.62204pt>
+File: Bilder/status_nachricht.pdf Graphic file (type pdf)
+
+<use Bilder/status_nachricht.pdf> [10 <./Bilder/clear_board.pdf> <./Bilder/writ
+e_request.pdf> <./Bilder/write_requested.pdf> <./Bilder/request_reply.pdf> <./B
+ilder/shutdown.pdf>]
+
+pdfTeX warning: /usr/bin/pdflatex (file ./Bilder/error_message.pdf): PDF inclus
+ion: found PDF version <1.5>, but at most version <1.4> allowed
+<Bilder/error_message.pdf, id=829, 910.48819pt x 170.71654pt>
+File: Bilder/error_message.pdf Graphic file (type pdf)
+
+<use Bilder/error_message.pdf>) [11 <./Bilder/status_nachricht.pdf> <./Bilder/e
+rror_message.pdf>]
+\openout2 = `client.aux'.
+
+ (./client.tex
+
+Package hyperref Warning: Difference (2) between bookmark levels is greater 
+(hyperref)                than one, level fixed on input line 29.
+
+[12
+
+
+] [13] [14]) [15]
 \openout2 = `server.aux'.
 
+ (./server.tex
 
-(./server.tex [9
+Package hyperref Warning: Difference (2) between bookmark levels is greater 
+(hyperref)                than one, level fixed on input line 27.
+
+[16
 
 
-] [10] [11]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+] [17] [18]) [19]
+\openout2 = `logger.aux'.
 
- [12]
-[13]) [14]
+ (./logger.tex)
+\openout2 = `archivierer.aux'.
+
+ (./archivierer.tex)
+\openout2 = `clientlist.aux'.
+
+ (./clientlist.tex)
+\openout2 = `blackboard.aux'.
+
+
+(./blackboard.tex)
+\openout2 = `fazit.aux'.
+
+ (./fazit.tex)
 \openout2 = `network.aux'.
 
- (./network.tex [15
+ (./network.tex
+File: Bilder/header.pdf Graphic file (type pdf)
+ <use Bilder/header.pdf>
+[20
 
 
-] [16] [17]
-Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [18]
-Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [19]
-Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [20])
-[21] AED: lastpage setting LastPage (./docu.aux (./titlepage.aux) (./client.aux
-) (./server.aux) (./network.aux)) ) 
+
+
+
+
+
+
+
+] [21] [22] [23] [24]) [25] (./docu.aux (./titlepage.aux)
+(./komponentenentwurf.aux) (./client.aux) (./server.aux) (./logger.aux)
+(./archivierer.aux) (./clientlist.aux) (./blackboard.aux) (./fazit.aux)
+(./network.aux))
+
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
 Here is how much of TeX's memory you used:
- 10076 strings out of 493848
- 140581 string characters out of 1152823
- 535214 words of memory out of 3000000
- 12469 multiletter control sequences out of 15000+50000
- 40885 words of font info for 85 fonts, out of 3000000 for 9000
+ 10159 strings out of 493848
+ 137508 string characters out of 1152823
+ 586810 words of memory out of 3000000
+ 12146 multiletter control sequences out of 15000+50000
+ 50687 words of font info for 99 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
- 43i,13n,49p,249b,2001s stack positions out of 5000i,500n,10000p,200000b,50000s
-</usr/share/texmf-texlive/fonts/type1/public
-/amsfonts/cm/cmbx10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/c
-m/cmbx12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi10.pf
-b></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/sha
-re/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-tex
-live/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-texlive/fonts/t
-ype1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf-texlive/fonts/type1/public/a
-msfonts/cm/cmsl12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/
-cmss12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmss17.pfb>
-</usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/sha
-re/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-te
-xlive/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texmf-texlive/fonts
-/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on docu.pdf (21 pages, 417772 bytes).
+ 38i,13n,49p,249b,1887s stack positions out of 5000i,500n,10000p,200000b,50000s
+</usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/sha
+re/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-te
+xlive/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/share/texmf-texlive/fonts/
+type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-texlive/fonts/type1/publi
+c/amsfonts/cm/cmmi8.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/c
+m/cmr10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr5.pfb><
+/usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/te
+xmf-texlive/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-texlive/f
+onts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-texlive/fonts/type1/pu
+blic/amsfonts/cm/cmsl10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfon
+ts/cm/cmss10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmss1
+2.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></u
+sr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/te
+xmf-texlive/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-texlive/
+fonts/type1/public/amsfonts/cm/cmti8.pfb></usr/share/texmf-texlive/fonts/type1/
+public/amsfonts/cm/cmtt10.pfb>
+Output written on docu.pdf (26 pages, 631950 bytes).
 PDF statistics:
- 1077 PDF objects out of 1200 (max. 8388607)
- 635 named destinations out of 1000 (max. 500000)
- 374 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1730 PDF objects out of 2073 (max. 8388607)
+ 968 named destinations out of 1000 (max. 500000)
+ 648 words of extra memory for PDF output out of 10000 (max. 10000000)
 

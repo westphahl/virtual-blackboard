@@ -1,50 +1,20 @@
 \usepackage{color}
+
 \definecolor{hellgrau}{gray}{0.9}
 \definecolor{shadecolor}{gray}{0.9}
 
-\newcommand{\ia}{i.\,Allg.\ }
-\newcommand{\dht}{d.\,h.\ }
-\newcommand{\ua}{u.\,a.\ }
-\newcommand{\so}{s.\,o.\ }
-\newcommand{\zb}{z.\,B.\ }
-\newcommand{\zbdp}{z.\,B.:\ }
-\newcommand{\idr}{i.\,d.\,R.\ }
-\newcommand{\zt}{z.\,T.\ } 
-\newcommand{\zz}{z.\,Zt.\ } 
-\newcommand{\igs}{i.\,Ggs.\ } 
+\providecommand{\code}[1]{\texttt{#1}}
 
-\newcommand{\code}[1]{\texttt{#1}}
-
-\newcommand{\codeo}[2]{
-\begin{shaded}
-\vspace*{-2ex}
-\begin{program}
-\begin{leftbar}
-                \label{def:#1}
-                \rm #2
-\end{leftbar}
-\end{program}
-\vspace*{-2ex}
-\end{shaded}
+\providecommand{\myfigure}[2]{
+	\begin{figure}[H]
+		\begin{center}
+			\epsfig{file=Bilder/#2,scale=0.5}
+		\end{center}
+		\vspace{-3ex}
+		\caption{#1 \label{#1}}
+	\end{figure}
 }
 
-\newcommand{\svs}{\vspace*{0.5ex}} 
-\newcommand{\myrule}{\ \vspace{1ex} \\ \hrule} 
-\newcommand{\figref}[1]{Abb.~\ref{#1}} 
-\newcommand{\secref}[1]{Abschnitt~\ref{#1}} 
-\newcommand{\mymargin}[1]{\marginpar{\raggedright \footnotesize \sffamily #1}} 
-
-\renewcommand{\topfraction}{0.95}
-\renewcommand{\bottomfraction}{0.95}
-
-\newenvironment{trilist}{
-    \renewcommand{\labelitemi}{\(\triangleright\)}
-    \renewcommand{\labelitemii}{{\bfseries -}}
-    \setlength{\partopsep}{0ex plus .5ex minus .5ex} 
-    \setlength{\topsep}{-1ex plus .5ex minus .5ex} 
-    \setlength{\parskip}{1.2ex plus .5ex minus .5ex}
-    \setlength{\itemsep}{0pt plus .5ex minus .5ex}
-    \setlength{\parsep}{0pt plus .5ex minus .5ex} 
-    \begin{itemize}
-    }
-   {\end{itemize}}
+\providecommand{\myfig}[2]{
+	\includegraphics[scale=0.5]{Bilder/#2}
+}

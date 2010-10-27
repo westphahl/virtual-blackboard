@@ -8,6 +8,13 @@ wir (u)int8\_t, (u)int16\_t, ....\\
 Außerdem sollten immer Funktionen mit Längenbegrenzung benutzt werden, 
 um Buffer-Overflows zu vermeiden.
 
+\begin{figure}[ht!]
+ \centering
+ \includegraphics[width=\textwidth,keepaspectratio=true]{Bilder/header.pdf}
+ \caption{Header}
+ \label{Header}
+\end{figure}
+
 \subsubsection{Serialisierung}
 Alle structs werden zum senden serialisiert in ein char-Array. \\
 Der Server deserialisiert diesen String wieder.
