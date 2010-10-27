@@ -168,8 +168,7 @@ void on_text_buffer_changed (GtkTextBuffer *textbuffer, gpointer user_data)
 int main (int argc, char **argv)
 {
     /* socket variables */
-	unsigned int listen_port = DEFAULT_PORT;
-    char *listen_port_s = NULL;
+	char *listen_port = DEFAULT_PORT;
     char *server_addr = NULL;
     struct addrinfo *addr_info, *p, hints;
     int ret;
@@ -194,12 +193,13 @@ int main (int argc, char **argv)
                 fflush(stdout);
                 break;
             case 'p':
-                listen_port_s = optarg;
-                listen_port = strtol(optarg, NULL, 10);
-                if((listen_port < PORT_RANGE_MIN) || (listen_port > PORT_RANGE_MAX)) {
+                listen_port = optarg;
+                //listen_port = strtol(optarg, NULL, 10);
+                if((strtol(listen_port, NULL, 10) < PORT_RANGE_MIN) || 
+                        (strtol(listen_port, NULL, 10) > PORT_RANGE_MAX)) {
                     fprintf(stderr,
                         "Invalid port range: must be between %i and %i.\n" \
-                        "Falling back to default (%i)\n", 
+                        "Falling back to default (%s)\n", 
                         PORT_RANGE_MIN, PORT_RANGE_MAX, DEFAULT_PORT);
                     listen_port = DEFAULT_PORT;
                 }
@@ -215,7 +215,7 @@ int main (int argc, char **argv)
     hints.ai_flags = 0;
 
     /* getaddrinfo */
-    ret = getaddrinfo(server_addr, listen_port_s, &hints, &addr_info);
+    ret = getaddrinfo(server_addr, listen_port, &hints, &addr_info);
     if(ret) {
 		printf("getaddrinfo: %s\n", gai_strerror(ret));
 		exit(1);
@@ -240,7 +240,7 @@ int main (int argc, char **argv)
 			0,
 			NI_NUMERICHOST);
 
-		printf("Trying %s:%i ... ", dst, listen_port);
+		printf("Trying %s:%s ... ", dst, listen_port);
 		fflush(stdout);
 
 		/* Try to connect */
