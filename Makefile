@@ -12,9 +12,11 @@ LDSERVER	= $(LDFLAGS)
 all: client server
 
 # Build the server
-server: build/server.o build/signal_handler.o build/mq.o build/blackboard.o
+server: build/server.o build/signal_handler.o build/mq.o build/blackboard.o \
+	build/login_thread.o build/client_thread.o
 	$(CC) $(CSERVER) $(LDSERVER) -o build/server build/server.o \
-		build/signal_handler.o build/mq.o build/blackboard.o
+		build/signal_handler.o build/mq.o build/blackboard.o \
+		build/login_thread.o build/client_thread.o
 
 build/server.o:
 	$(CC) $(CSERVER) -c -o build/server.o src/server/server.c
@@ -27,6 +29,13 @@ build/mq.o:
 
 build/blackboard.o:
 	$(CC) $(CSERVER) -c -o build/blackboard.o src/server/blackboard.c
+
+build/login_thread.o: build/client_thread.o
+	$(CC) $(CSERVER) -c -o build/login_thread.o src/server/login_thread.c
+
+build/client_thread.o:
+	$(CC) $(CSERVER) -c -o build/client_thread.o src/server/client_thread.c
+
 # Build the logger
 # logger:
 

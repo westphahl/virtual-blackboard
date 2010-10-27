@@ -20,6 +20,7 @@
 #include "signal_handler.h"
 #include "mq.h"
 #include "blackboard.h"
+#include "login_thread.h"
 
 /*
  * Server for the virtual blackboard.
@@ -49,6 +50,9 @@ int main(int argc, char **argv) {
     int socket_fds[125]; // File descriptors of sockets
     int socket_count = 0; // Number of socket fds
     int ret; // Return value of getaddrinfo()
+
+    struct logint_data lt_data; // Pointer to login thread data
+    pthread_t login_tid; // Id of the login thread
 
     /*
      * Parse command line option
@@ -117,13 +121,11 @@ int main(int argc, char **argv) {
             perror("socket");
             continue;
         }
-        
-        /* 
-         * TODO WTF?
-         * if (setsockopt(sfd, SOL_SOCKET, SO_REUSEADDR, &on, sizeof(on)) < 0) {
-         *       perror("setsockopt"); // Maybe not so fatal, continue ...
-         * }
-        */
+
+        //Reuse the socket
+        if (setsockopt(sfd, SOL_SOCKET, SO_REUSEADDR, &on, sizeof(on)) < 0) {
+            perror("setsockopt"); // Maybe not so fatal, continue ...
+        }
 
         // Set IPv6 options
         if (rp->ai_family == AF_INET6) {
@@ -159,7 +161,7 @@ int main(int argc, char **argv) {
             perror("bind");
             close(sfd);
         }
-        // DEBUG
+        // TODO Debug output
         fprintf(stdout, "Socket: %i, %i\n", sfd, socket_count);
     }
 
@@ -200,9 +202,11 @@ int main(int argc, char **argv) {
     }
 
     /*
-     * TODO
-     * Create login thread accept loop
+     * Prepare and create login thread accept loop
      */
+    lt_data.fds = socket_fds;
+    lt_data.fd_count = socket_count;
+    pthread_create(&login_tid, NULL, login_handler, (void *) &lt_data);
 
     /*
      * Just wait for the logger and archiver to terminate
