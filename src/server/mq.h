@@ -1,10 +1,13 @@
 #ifndef MQ_H
 #define MQ_H
 
+#define MSGSIZE 255
+#define MSGTYPE 805
+
 struct logmessage {
-    int level;
+    long type;
     time_t time;
-    char *message;
+    char message[MSGSIZE];
 };
 typedef struct logmessage LOGMESSAGE;
 
