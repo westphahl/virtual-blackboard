@@ -22,7 +22,7 @@ int init_blackboard(key_t key) {
 
     if ((shmid = shmget(key, BLACKBOARD_BYTESIZE, IPC_CREAT | IPC_EXCL | 0600)) < 0) {
         perror("shmget");
-        exit(1);
+        exit(EXIT_FAILURE);
     }
     return shmid;
 }
@@ -37,7 +37,7 @@ int get_blackboard(key_t key) {
 
     if ((shmid = shmget(key, BLACKBOARD_BYTESIZE, 0)) < 0) {
         perror("shmget");
-        exit(1);
+        exit(EXIT_FAILURE);
     }
     return shmid;
 }
@@ -53,6 +53,6 @@ void delete_blackboard(int shmid) {
 
     if ((shmctl(shmid, IPC_RMID, &shm_ds) < 0)) {
         perror("shmctl");
-        exit(1);
+        exit(EXIT_FAILURE);
     }
 }

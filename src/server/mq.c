@@ -21,7 +21,7 @@ int create_mq(key_t key) {
 
     if ((mq_id = msgget(key, IPC_CREAT | IPC_EXCL| 0600)) < 0) {
         perror("msgget");
-        exit(1);
+        exit(EXIT_FAILURE);
     }
     return mq_id;
 }
@@ -36,7 +36,7 @@ int get_mq(key_t key) {
 
     if ((mq_id = msgget(key, 0600)) < 0) {
         perror("msgget");
-        exit(1);
+        exit(EXIT_FAILURE);
     }
     return mq_id;
 }
@@ -49,6 +49,6 @@ int get_mq(key_t key) {
 void delete_mq(int mq_id) {
     if (msgctl(mq_id, IPC_RMID, NULL) < 0) {
         perror("msgctl");
-        exit(1);
+        exit(EXIT_FAILURE);
     }
 }
