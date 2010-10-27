@@ -9,7 +9,7 @@ LDCLIENT	= $(LDFLAGS) `pkg-config --libs gtk+-2.0` -lgthread-2.0
 LDSERVER	= $(LDFLAGS)
 
 # Build everything
-all: client server
+all: client server logger
 
 # Build the server
 server: build/server.o build/signal_handler.o build/mq.o build/blackboard.o
@@ -27,8 +27,12 @@ build/mq.o:
 
 build/blackboard.o:
 	$(CC) $(CSERVER) -c -o build/blackboard.o src/server/blackboard.c
+
 # Build the logger
-# logger:
+logger: build/logger.o
+	$(CC) $(CSERVER) $(LDSERVER) -o build/logger build/logger.o build/mq.o
+build/logger.o:
+	$(CC) $(CSERVER) -c -o build/logger.o src/server/logger.c
 
 # Build the archiver
 # archiver:
@@ -45,4 +49,4 @@ build/gui.o: src/client/gui.c src/client/gui.h src/commons.h
 
 # Clean up the build directory
 clean:
-	rm -f build/*.o build/client build/server
+	rm -f build/*.o build/client build/server build/logger
