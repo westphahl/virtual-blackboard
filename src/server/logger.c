@@ -8,13 +8,6 @@
 #include "mq.h"
 #include "logger.h"
 
-struct message {
-    long mtype;
-    time_t mtime;
-    char mtext[80];
-};
-typedef struct message MESSAGE;
-
 int main(int argc, char **argv) {
     if(argc != 2) {
         fprintf(stderr, "Es wird ein Parameter benötigt");
@@ -22,7 +15,7 @@ int main(int argc, char **argv) {
     }
     key_t mq_key = atol(argv[1]);
     int mq_id;
-    MESSAGE buffer;
+    LOGMESSAGE buffer;
     FILE *file;
 
     /* Open logfile */
@@ -36,12 +29,13 @@ int main(int argc, char **argv) {
 
     /* Wait for log in message queue */
     while(1) {
-        if(msgrcv(mq_id, &buffer, sizeof(buffer), 12345, 0) < 0) {
-            perror("msgrsv");
+        if(msgrcv(mq_id, &buffer, MSGSIZE, MSGTYPE, 0) < 0) {
+            perror("msgrcv");
             exit(1);
         }
-        
-        fprintf(file, "%ld %s \n", buffer.mtime, buffer.mtext);
+        fprintf(stdout, "%ld %s \n", buffer.time, buffer.message);
+        fflush(stdout);
+        fprintf(file, "%ld %s \n", buffer.time, buffer.message);
         fflush(file);
     }
 }
