@@ -1,0 +1,205 @@
+\section{Client}
+Der Client stellt eine Verbindung zum Server her. Es werden bein starten des Client die Server- und Logindaten angegeben.
+
+\subsection{Module}
+\begin{itemize}
+	\item Login
+	\item Benutzeroberfläche (GUI)
+	\item Live-Agent
+	\item Listener-Thread
+	\item Netzwerkkommunikation
+	\begin{itemize}
+		\item Struct vor Senden Serialisieren
+		\item Nach Empfang wieder umwandeln
+	\end{itemize}
+\end{itemize}
+
+\subsection{Programmstart}
+Das Programm wird aus der Konsole gestartet. Es müssen folgende Parameter angegeben werden:
+\begin{itemize}
+	\item Servername oder IP (Servername wird in IP umgewandelt)
+	\item Port
+	\item Benutzername
+	\item Rolle
+\end{itemize}
+
+Dabei können Benutzername und Rolle frei gewählt werden. Ist der Benutzername schon vergeben, wird ... . Ist die angegebene Rolle schon belegt, wird der Benutzer automatisch als Student eingetragen.
+
+\paragraph{Beispiel:}
+\codeo{> ./client 127.0.0.1 8080 michael student}
+
+\subsection{Strukturen (intern)}
+\subsubsection{Benutzerrollen}
+\begin{lstlisting}
+enum ROLE {
+    Dozent = 1
+    Tutor = 2
+    Student = 3
+};
+\end{lstlisting}
+
+\subsubsection{Schreib- und Leserecht}
+Als Datentyp wird \code{uint8\_t} verwendet.
+\begin{itemize}
+	\item Modify 0 = nur lesend
+	\item Modify 1 = schreibzugriff (exclusiv)
+\end{itemize}
+
+\subsection{Abläufe \label{Abläufe}}
+
+\subsubsection{Programmstart}
+\begin{lstlisting}
+# Start mit Parameter (Server-IP, Port, Username, Rolle)
+# Socket für Netzwerkkommunikation öffnen
+# Logindaten (Username und gewünschte Rolle) an Server senden
+# Login erfolgreich?
+    # wenn NEIN: 
+        # Fehlermeldung ausgeben
+        # Kill: Client
+    # wenn JA:
+        # Userdaten und -rechte speichern (ID, Name, Rechte)
+# Mutex für lokalen Tafelzugriff initialisieren (gesperrt)
+# Initialisiere lokale Tafel
+# Starte Command-Thread
+# Starte Live-Agent
+# Starte GUI
+# Starte Listener-Thread
+# Starte Trigger für Live-Agent
+    # Mutex-Down für lokale Tafel
+    # Fordert aktuellen Tafelinhalt an
+    # Mutex-Up
+\end{lstlisting}
+
+\subsubsection{Command-Thread}
+\begin{lstlisting}
+> quit (Client beenden)
+    # Sende Befehl "quit" an den Server
+    # Mutex-Down für lokale Tafel
+    # Beende Trigger für Live-Agent
+    # Kill: Listener-Thread
+    # Kill: GUI
+    # Kill: Live-Agent
+    # Kill: Command-Thread
+    # Lösche lokale Tafel
+    # Lösche Mutex für Tafelzugriff
+
+> request (Schreibrecht anfordern)
+    # Ist Client Student?
+        # Wenn JA:
+            # Sende Befehl "request" an den Server
+    # Ist Client Dozent?
+        # Wenn JA:
+            # Dialog ob Benutzer schreibrecht bekommen soll
+            # Sende Antwort an Server
+    # Schreibrecht erteilt?
+        # Wenn JA:
+            # Deaktiviere Button 'Schreibrecht anfordern'
+            # Aktiviere Button 'Schreibrecht abgeben'
+            # Schreibrecht auf lokale Tafel gewähren
+        # Wenn NEIN:
+            # Hinweis das Anfrage abgeleht wurde.
+
+> shutdown (System beenden)
+    # Ist Client Dozent?
+        # Wenn JA:
+            # Sende Befehl "shutdown" an den Server
+
+> release (Schreibrecht abgeben)
+    # Ist Client Tutor?
+        # Wenn JA:
+            # Sende Befehl "release" an den Server
+
+> acquire (Schreibrecht entziehen)
+    # Ist Client Dozent?
+        # Wenn JA:
+            # Sende Befehl "acquire" an den Server
+
+> clear (Tafel löschen)
+    # Hat Client Schreibrechte?
+        # Wenn JA:
+            # Sende Befehl "clear" an den Server
+\end{lstlisting}
+
+\subsubsection{Live-Agent}
+\begin{lstlisting}
+> modify (Tafel ändern)
+    # Hat Client schreibrecht?
+        # Wenn JA:
+            # Mutex-Down für lokale Tafel
+            # Ist Tafel voll?
+                # Wenn JA:
+                    # Fehlermeldung
+                # Wenn NEIN:
+                    # Schreibe Änderung in lokale Tafel
+            # Mutex-Up
+            # Trigger für Tafel starten.
+    # Trigger für Tafel sendet dann die Daten in bestimmten Intervallen.
+    # Trigger abgelaufen?
+        # Wenn JA:
+            # Mutex-Down für lokale Tafel
+            # Sende Tafel an Server
+            # Erfolgreiche Sendung?
+                # Wenn NEIN:
+                    # Tafel nochmals senden
+            # Mutex-Up
+\end{lstlisting}
+
+\subsubsection{GUI}
+\begin{lstlisting}
+# // Tafel wird als GtkTextView gespeichert.
+# GtkTextBuffer *gtkbuf = gtk_text_view_get_buffer(textview);
+
+# GtkTextIter startIter, endIter;
+# char *mybuf;
+
+# gtk_text_buffer_get_start_iter(gtkbuf, &startIter);
+# gtk_text_buffer_get_end_iter(gtkbuf, &endIter);
+
+# // Speichern in char*
+# mybuf = gtk_text_buffer_get_text(gtkbuf, &startIter, &endIter, FALSE);
+
+# // Tafel leeren
+# gtk_text_buffer_set_text(gtkbuf, "", -1);
+
+# // Tafel wieder befüllen
+# gtk_text_buffer_set_text(gtkbuf, mybuf, -1);
+\end{lstlisting}
+
+\subsubsection{Listener-Thread}
+\begin{lstlisting}
+# Wartet auf Nachrichten vom Server (Broadcasting-Thread)
+# Aktuallisierung der lokalen Tafel und der Statusinformationen.
+
+> board_modified (Tafel-Update)
+    # Mutex-Down für lokale Tafel
+    # Tafel aktuallisieren
+    # Mutex-Up
+
+> states_changed (Statusänderung)
+    # GUI-Informationen aktuallisieren
+
+> my_state_changed (eigene Rechte bekommen/entzogen)
+    # Schreibrecht erhalten?
+        # Wenn JA:
+            # Button "Schreibrecht anfordern" deaktivieren
+            # Tafel editierbar setzten
+    # Schreibrecht abgegeben/entzogen?
+        # Wenn JA:
+            # Tafel nicht-editierbar setzten
+            # Button "Schreibrecht anfordern" aktivieren
+\end{lstlisting}
+
+\subsection{Tafel-Trigger}
+Wenn auf die Tafel geschrieben wird, dann wird ein Timeout-Signal gestartet. Wenn dieses abgelaufen ist, wird die Tafel an den Server gesendet und somit an alle Clients verteilt.
+Bei jeder Änderung wird der Timeout zurückgesetzt. Wenn der Timeout 5x zurückgesetzt wurde, dann wird die Tafel dennoch zum Server gesendet und der Timeout-Counter zurückgesetzt.
+\begin{lstlisting}
+# Tafel wird geändert
+    # Timeout (200ms) wird (neu) gestartet
+    # Timeout-Counter +1
+    # Timeout abgelaufen oder Timeout-Counter = 3?
+        # Wenn JA:
+            # Mutex-Down für lokale Tafel
+            # Tafel an Server senden
+            # Timeout-Counter = 0
+            # Mutex-Up
+\end{lstlisting}

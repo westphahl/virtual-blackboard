@@ -1,0 +1,18 @@
+\usepackage{color}
+
+\definecolor{hellgrau}{gray}{0.9}
+\definecolor{shadecolor}{gray}{0.9}
+
+\providecommand{\code}[1]{\texttt{#1}}
+
+\providecommand{\myfigure}[2]{
+	\begin{figure}[H]
+		\epsfig{file=Bilder/#2,scale=0.5}
+		\vspace{-3ex}
+		\caption{#1 \label{#1}}
+	\end{figure}
+}
+
+\providecommand{\myfig}[2]{
+	\includegraphics[scale=0.5]{Bilder/#2}
+}
