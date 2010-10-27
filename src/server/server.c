@@ -22,7 +22,7 @@
 #include "blackboard.h"
 
 /*
- * Server for the virtual blackbox.
+ * Server for the virtual blackboard.
  *
  * Takes two optional arguments:
  *      -d          Run server in debug mode
