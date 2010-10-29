@@ -16,6 +16,8 @@
 #include <getopt.h>
 #include <sys/time.h>
 #include <string.h>
+#include <sys/ipc.h>
+#include <sys/sem.h>
 
 #include <gtk/gtk.h>
 
@@ -24,6 +26,7 @@
 #include "../commons.h"
 #include "gui.h"
 #include "client.h"
+#include "shared.h"
 
 
 /* globale Variable */
@@ -110,7 +113,8 @@ gint on_application_exit(GtkWidget * widget, GdkEvent event, gpointer daten)
  \**************************************************************************************/
 void on_button_request_write_clicked (GtkButton * button, gpointer user_data)
 {
-	toggleRequestWrite = toggleRequestWrite?0:1;
+    popupMessage("Schreibrecht angefragt");
+	toggleRequestWrite = toggleRequestWrite ? 0 : 1;
 	updateGUIstate();
 }
 
@@ -139,6 +143,7 @@ void on_button_quit_clicked ( GtkButton * button, gpointer user_data )
  \**************************************************************************************/
 void on_button_log_clicked ( GtkButton * button, gpointer user_data )
 {
+    popupMessage("Tafel löschen");
 }
 
 
@@ -147,6 +152,7 @@ void on_button_log_clicked ( GtkButton * button, gpointer user_data )
  \**************************************************************************************/
 void on_button_remove_permissions_clicked ( GtkButton * button, gpointer user_data )
 {
+    popupMessage("Schreibrecht entziehen");
 }
 
 
@@ -155,7 +161,7 @@ void on_button_remove_permissions_clicked ( GtkButton * button, gpointer user_da
  \**************************************************************************************/
 void on_text_buffer_changed (GtkTextBuffer *textbuffer, gpointer user_data)
 {
-	/* popupMessage("HALLO!!!"); */
+	popupMessage("Text verändert");
 }
 
 
@@ -172,20 +178,10 @@ int main (int argc, char **argv)
     char *server_addr = NULL;
     struct addrinfo *addr_info, *p, hints;
     int ret;
-
-    /* command-line parser variables */
-    const char* short_options = "hs:p:";
-    struct option long_options[] = {
-        {"help", 0, NULL, 'h'},
-        {"server", 1, NULL, 's'},
-        {"port", 1, NULL, 'p'},
-        {NULL, 0, NULL, 0}
-    };
-    int long_index = 0;
     int opt;
 
     /* parse command-line options */
-    while ((opt = getopt_long(argc, argv, short_options, long_options, &long_index)) != -1) {
+    while ((opt = getopt(argc, argv, "hs:p:")) != -1) {
         switch (opt) {
             case 's':
                 server_addr = optarg;
@@ -194,7 +190,6 @@ int main (int argc, char **argv)
                 break;
             case 'p':
                 listen_port = optarg;
-                //listen_port = strtol(optarg, NULL, 10);
                 if((strtol(listen_port, NULL, 10) < PORT_RANGE_MIN) || 
                         (strtol(listen_port, NULL, 10) > PORT_RANGE_MAX)) {
                     fprintf(stderr,
@@ -218,7 +213,7 @@ int main (int argc, char **argv)
     ret = getaddrinfo(server_addr, listen_port, &hints, &addr_info);
     if(ret) {
 		printf("getaddrinfo: %s\n", gai_strerror(ret));
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 
 	printf("\n");
@@ -227,6 +222,9 @@ int main (int argc, char **argv)
     while (p) {
 		int sock;
 		char dst[INET6_ADDRSTRLEN];
+        
+        int sem_id;
+        struct sembuf board_sem; 
 
 		/* create socket for found family */		
         sock = socket(p->ai_family, p->ai_socktype, 0);
@@ -246,10 +244,59 @@ int main (int argc, char **argv)
 		/* Try to connect */
         if (connect(sock, p->ai_addr, p->ai_addrlen) == 0) {
             fprintf(stdout, "Connected\n");
+
+            printf("Erzeuge Semaphore\n");
+            if((sem_id = semget(BLACKBOARD_SEM_KEY, 1, IPC_CREAT | IPC_EXCL | 0666)) >= 0) {
+                board_sem.sem_num = 0;
+                board_sem.sem_flg = SEM_UNDO;
+                board_sem.sem_op = -1;
+
+                if(semop(sem_id, &board_sem, 1) == -1) {
+                    perror("semop");
+                    exit(EXIT_FAILURE);
+                }
+
+                printf("Im kritischen Bereich");
+
+                if(semop(sem_id, &board_sem, 1) == -1) {
+                    perror("semop");
+                    exit(EXIT_FAILURE);
+                }
+
+                printf("und wieder draußen");
+            } else {
+                perror("semget");
+            }
 			
-			/* Do stuff when connected*/
-			fprintf(stdout, "DO STUFF\n");
-		
+            // TODO Starte Listener-Thread
+            
+            // TODO Starte Command-Thread
+    
+            // TODO Starte Live-Agent
+
+            // Starte GUI
+			fprintf(stdout, "Start GUI\n");
+
+		    /* GTK threading aktivieren */
+	        g_thread_init(NULL);
+	        gdk_threads_init();
+
+	        /* GUI einrichten */
+	        gtk_init (&argc, &argv);
+	        create_window ();
+	        gtk_widget_show_all (GTK_WIDGET(window));
+
+	        gdk_threads_enter();
+	        updateGUIstate();
+
+	        /* GTK Hauptprogramm ausführen */
+	        gtk_main();
+	        gdk_threads_leave();
+	
+	        /* cleanup here */
+
+            // TODO Starte Trigger für Tafeländerung
+
 			close(sock);
 			break;
         } else {
@@ -261,27 +308,7 @@ int main (int argc, char **argv)
     }
 
     /* delete addressinfo */
-    freeaddrinfo(addr_info);
-
-    /* GTK threading aktivieren */
-	g_thread_init(NULL);
-	gdk_threads_init();
-
-
-	/* GUI einrichten */
-	gtk_init (&argc, &argv);
-	create_window ();
-	gtk_widget_show_all (GTK_WIDGET(window));
-
-	gdk_threads_enter();
-	updateGUIstate();
-
-	/* GTK Hauptprogramm ausführen */
-	gtk_main();
-	gdk_threads_leave();
-	
-	/* cleanup here */
-	
+    freeaddrinfo(addr_info);	
 
 	/* Hauptprogramm verlassen */
 	return 0;
