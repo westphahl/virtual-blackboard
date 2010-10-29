@@ -52,3 +52,21 @@ void delete_mq(int mq_id) {
         exit(EXIT_FAILURE);
     }
 }
+
+struct logmessage read_mq(int mq_id) {
+    struct logmessage buffer;
+
+    if(msgrcv(mq_id, &buffer, MSGSIZE, MSGTYPE, 0) < 0) {
+        perror("msgrcv");
+        exit(EXIT_FAILURE);
+    }
+
+    return buffer;
+}
+
+void write_mq(int mq_id, struct logmessage buffer) {
+    if(msgsnd(mq_id, &buffer, MSGSIZE, IPC_NOWAIT) < 0) {
+        perror("msgsnd");
+        exit(EXIT_FAILURE);
+    }
+}

@@ -8,25 +8,33 @@
 #include <string.h>
 #include <time.h>
 
+#include "shared.h"
 #include "mq.h"
 #include "utils.h"
 
-void log_message(char* message) {
+void log_message(int level, char* message) {
     int mq_id;
-    LOGMESSAGE buffer;
+    struct logmessage buffer;
 
-    mq_id = get_mq(2404);
+    mq_id = get_mq(LOGGER_MQ_KEY);
 
     buffer.type = MSGTYPE;
+    buffer.level = level;
     time(&buffer.time);
     strcpy(buffer.message, message);
 
-    if(msgsnd(mq_id, &buffer, MSGSIZE, IPC_NOWAIT) < 0) {
-        perror("msgsnd");
-        exit(1);
-    } else {
-        printf("Message \"%s\" sent\n", buffer.message);
-    }
+    write_mq(mq_id, buffer);
+    printf("Message \"%s\" sent\n", buffer.message);
+}
 
-    exit(1);
+void log_error(char* message) {
+    log_message(1, message);
+}
+
+void log_info(char* message) {
+    log_message(2, message);
+}
+
+void log_debug(char* message) {
+    log_message(3, message);
 }
