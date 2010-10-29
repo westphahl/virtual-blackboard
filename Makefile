@@ -15,7 +15,7 @@ all: client server logger
 server: build/server.o build/signal_handler.o build/mq.o build/utils.o build/blackboard.o \
 	build/login_thread.o build/client_thread.o
 	$(CC) $(CSERVER) $(LDSERVER) -o build/server build/server.o \
-		build/signal_handler.o build/mq.o build/blackboard.o \
+		build/signal_handler.o build/mq.o build/utils.o build/blackboard.o \
 		build/login_thread.o build/client_thread.o
 
 build/server.o:
