@@ -17,15 +17,15 @@
 \contentsline {subsubsection}{\numberline {1.6.1}Shared-Memory}{6}{subsubsection.1.6.1}
 \contentsline {subsubsection}{\numberline {1.6.2}Message-Queues}{6}{subsubsection.1.6.2}
 \contentsline {subsubsection}{\numberline {1.6.3}Semaphore}{6}{subsubsection.1.6.3}
-\contentsline {subsubsection}{\numberline {1.6.4}Condition-Variablen}{6}{subsubsection.1.6.4}
+\contentsline {subsubsection}{\numberline {1.6.4}Condition-Variablen}{7}{subsubsection.1.6.4}
 \contentsline {subsection}{\numberline {1.7}Netzwerkschnittstellen}{7}{subsection.1.7}
 \contentsline {subsubsection}{\numberline {1.7.1}Typen\IeC {\"u}bersicht}{7}{subsubsection.1.7.1}
 \contentsline {subsubsection}{\numberline {1.7.2}Header}{7}{subsubsection.1.7.2}
 \contentsline {subsubsection}{\numberline {1.7.3}Login}{7}{subsubsection.1.7.3}
 \contentsline {subsubsection}{\numberline {1.7.4}Tafelinhalt}{8}{subsubsection.1.7.4}
 \contentsline {subsubsection}{\numberline {1.7.5}Tafel l\IeC {\"o}schen}{8}{subsubsection.1.7.5}
-\contentsline {subsubsection}{\numberline {1.7.6}Schreibrechtanfrage}{8}{subsubsection.1.7.6}
-\contentsline {subsubsection}{\numberline {1.7.7}Beenden}{9}{subsubsection.1.7.7}
+\contentsline {subsubsection}{\numberline {1.7.6}Schreibrechtanfrage}{9}{subsubsection.1.7.6}
+\contentsline {subsubsection}{\numberline {1.7.7}Beenden}{10}{subsubsection.1.7.7}
 \contentsline {subsubsection}{\numberline {1.7.8}Status-Nachricht}{10}{subsubsection.1.7.8}
 \contentsline {subsubsection}{\numberline {1.7.9}Fehlernachricht}{10}{subsubsection.1.7.9}
 \contentsline {section}{\numberline {2}Client}{12}{section.2}

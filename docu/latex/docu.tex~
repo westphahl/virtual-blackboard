@@ -76,7 +76,7 @@
 
 	\tableofcontents
 
-	%\include{komponentenentwurf}
+	\include{komponentenentwurf}
  
 	\include{client}
 

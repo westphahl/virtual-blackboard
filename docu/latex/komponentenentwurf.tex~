@@ -122,6 +122,11 @@ Message-Queues werden an folgenden Stellen benutzt:
 \begin{itemize}
  \item Logger
 \end{itemize}
+\begin{tabular}{ll}
+1 & Fehler \\
+2 & Info \\
+3 & Debug \\
+\end{tabular}
 
 \subsubsection{Semaphore}
 Semaphore werden an folgenden Stellen benutzt:
@@ -201,18 +206,18 @@ Write-Per: & uint8\_t & | Gewünschtes Schreibrecht
 \end{tabular}
 
 \paragraph*{Der Dozent entzieht einem Client das Schreibrecht: \\}
-    Vom Dozenten Client wird eine Write-Request an den Server geschickt. Der Server entzieht dem Client mit Schreibrecht das Schreibrecht.
-
-\paragraph*{Der Dozent wünscht sich Schreibrecht: \\}
-    Vom Dozenten Client wird eine Write-Request an den Server geschickt. Der Server entzieht dem Client mit Schreibrecht das Schreibrecht und setzt dem Dozenten das Schreibrecht. 
-
-
+Vom Dozenten Client wird eine Write-Request an den Server geschickt. Der Server entzieht dem Client 
+mit Schreibrecht das Schreibrecht.
 
 \myfigure{Schreibrechtanfrage S -> D}{write_requested.pdf}
 \begin{tabular}{lll}
 Client-ID: & uint16\_t & | Die ID des Clients der Schreibrecht angefordert hat \\
 Name: & Char-Array & | nicht null-terminiert, (Lendth - 2) Bytes lang
 \end{tabular}
+
+\paragraph*{Der Dozent wünscht sich Schreibrecht: \\}
+Vom Dozenten Client wird eine Write-Request an den Server geschickt. Der Server entzieht dem Client 
+mit Schreibrecht das Schreibrecht und setzt dem Dozenten das Schreibrecht. 
 
 \myfigure{Schreibrechtanfrage D -> S}{request_reply.pdf}
 \begin{tabular}{lll}
