@@ -1,1 +1,19 @@
+\section{Client-Liste}
 
+\subsection{Datenstrukturen}
+\begin{lstlisting}
+struct CLIENTLIST {
+    int sockd;
+    char name[25];
+    enum ROLE role;
+    /*
+     * Modify 0 -> nur lesend
+     * Modify 1 -> schreibzugriff (exclusiv)
+     */
+    int modify;
+    struct CLIENTLIST *previous;
+    struct CLIENTLIST *next;
+}
+\end{lstlisting}
+
+\subsection{Exportierte Funktionen}
