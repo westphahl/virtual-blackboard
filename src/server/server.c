@@ -53,7 +53,6 @@ int main(int argc, char **argv) {
 
     struct logint_data lt_data; // Pointer to login thread data
     pthread_t login_tid; // Id of the login thread
-    pthread_mutex_t cl_mutex = PTHREAD_MUTEX_INITIALIZER; // Mutex for client list
 
     /*
      * Parse command line option
@@ -175,11 +174,6 @@ int main(int argc, char **argv) {
         exit(EXIT_FAILURE);
     }
 
-    // Initialize mutex for client list
-    if (pthread_mutex_init(cl_mutex, NULL) != 0) {
-        exit(EXIT_FAILURE);
-    }
-
     // Create message queue for logger
     lmq_id = create_mq(lmq_key);
 
@@ -212,7 +206,7 @@ int main(int argc, char **argv) {
      */
     lt_data.fds = socket_fds;
     lt_data.fd_count = socket_count;
-    pthread_create(&login_tid, NULL, login_handler, (void *) &lt_data);
+    pthread_create(&login_tid, NULL, login_thread, (void *) &lt_data);
 
     /*
      * Just wait for the logger and archiver to terminate
@@ -230,9 +224,6 @@ int main(int argc, char **argv) {
     delete_blackboard(bshm_id);
     // Delete message queue
     delete_mq(lmq_id);
-
-    // Destroy client list mutex
-    pthread_mutex_destroy(cl_mutex);
 
     exit(EXIT_SUCCESS);
 }

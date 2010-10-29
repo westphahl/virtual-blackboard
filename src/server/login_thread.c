@@ -14,7 +14,7 @@
  * For every new connection a new client thread
  * is created to handle the connection.
  */
-void* login_handler(void *data) {
+void* login_thread(void *data) {
     fd_set set; // File descriptor set
     struct logint_data *lt_data = (struct logint_data *) data;
     int *socket_fds = lt_data->fds;

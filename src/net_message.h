@@ -5,7 +5,7 @@
 #include <arpa/inet.h>
 
 enum message_types {
-    m_login = 1,
+    m_login,
     m_status,
     m_board,
     m_clear,

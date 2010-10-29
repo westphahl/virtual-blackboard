@@ -1,7 +1,7 @@
 #ifndef MESSAGE_HANDLER_H
 #define MESSAGE_HANDLER_H
 
-int handle_login(int sfd);
+int login_handler(int sfd);
 
 //int handle_board();
 
