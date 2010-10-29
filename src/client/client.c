@@ -27,6 +27,8 @@
 #include "gui.h"
 #include "client.h"
 #include "shared.h"
+#include "listener_thread.h"
+#include "utils.h"
 
 
 /* globale Variable */
@@ -180,6 +182,9 @@ int main (int argc, char **argv)
     int ret;
     int opt;
 
+    /* pthread */
+    pthread_t listener_tid;
+
     /* parse command-line options */
     while ((opt = getopt(argc, argv, "hs:p:")) != -1) {
         switch (opt) {
@@ -221,10 +226,7 @@ int main (int argc, char **argv)
     
     while (p) {
 		int sock;
-		char dst[INET6_ADDRSTRLEN];
-        
-        int sem_id;
-        struct sembuf board_sem; 
+		char dst[INET6_ADDRSTRLEN]; 
 
 		/* create socket for found family */		
         sock = socket(p->ai_family, p->ai_socktype, 0);
@@ -245,39 +247,35 @@ int main (int argc, char **argv)
         if (connect(sock, p->ai_addr, p->ai_addrlen) == 0) {
             fprintf(stdout, "Connected\n");
 
-            printf("Erzeuge Semaphore\n");
-            if((sem_id = semget(BLACKBOARD_SEM_KEY, 1, IPC_CREAT | IPC_EXCL | 0666)) >= 0) {
-                board_sem.sem_num = 0;
-                board_sem.sem_flg = SEM_UNDO;
-                board_sem.sem_op = -1;
+            // TODO Erzeuge Semaphore für Tafel
+        
+            board_sem_id = create_semaphore(BLACKBOARD_SEM_KEY);
 
-                if(semop(sem_id, &board_sem, 1) == -1) {
-                    perror("semop");
-                    exit(EXIT_FAILURE);
-                }
+            board_sem.sem_num = 0;
+            board_sem.sem_flg = SEM_UNDO;
 
-                printf("Im kritischen Bereich");
-
-                if(semop(sem_id, &board_sem, 1) == -1) {
-                    perror("semop");
-                    exit(EXIT_FAILURE);
-                }
-
-                printf("und wieder draußen");
-            } else {
-                perror("semget");
-            }
+            semaphore_up(board_sem_id, board_sem);
 			
             // TODO Starte Listener-Thread
+            if((pthread_create(&listener_tid, NULL, listener_handler, NULL)) != 0) {
+                perror("pthread_create");
+                return(EXIT_FAILURE);
+            }
+
+            semaphore_down(board_sem_id, board_sem);
             
+            getchar();
+
+            semaphore_up(board_sem_id, board_sem);
+
             // TODO Starte Command-Thread
     
             // TODO Starte Live-Agent
 
             // Starte GUI
-			fprintf(stdout, "Start GUI\n");
+	        fprintf(stdout, "Start GUI\n");
 
-		    /* GTK threading aktivieren */
+	        /* GTK threading aktivieren */
 	        g_thread_init(NULL);
 	        gdk_threads_init();
 
@@ -292,12 +290,13 @@ int main (int argc, char **argv)
 	        /* GTK Hauptprogramm ausführen */
 	        gtk_main();
 	        gdk_threads_leave();
-	
-	        /* cleanup here */
 
             // TODO Starte Trigger für Tafeländerung
-
-			close(sock);
+	
+	        // TODO Aufräumen!
+            delete_semaphore(board_sem_id);
+            
+            close(sock);
 			break;
         } else {
 			perror("FAILED");
@@ -309,6 +308,8 @@ int main (int argc, char **argv)
 
     /* delete addressinfo */
     freeaddrinfo(addr_info);	
+
+    
 
 	/* Hauptprogramm verlassen */
 	return 0;
