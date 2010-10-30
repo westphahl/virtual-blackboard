@@ -41,7 +41,6 @@ build/client_thread.o: build/net_message.o build/client_list.o \
 	build/message_handler.o
 	$(CC) $(CSERVER) -c -o build/client_thread.o src/server/client_thread.c
 
-# NEW
 build/net_message.o:
 	$(CC) $(CSERVER) -c -o build/net_message.o src/net_message.c
 
@@ -53,7 +52,6 @@ build/message_builder.o:
 
 build/message_handler.o:
 	$(CC) $(CSERVER) -c -o build/message_handler.o src/server/message_handler.c
-# NEW
 
 # Build the logger
 logger: build/logger.o

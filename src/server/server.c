@@ -184,7 +184,10 @@ int main(int argc, char **argv) {
     l_pid = fork();
     if (l_pid == 0) {
         // TODO Exec logger
-        execl("/bin/sleep", "sleep", "999", NULL);
+        if (execlp("logger", "logger", NULL) == -1) {
+            perror("execlp");
+            exit(EXIT_FAILURE);
+        }
     } else if (l_pid < 0) {
         perror("fork logger");
         exit(EXIT_FAILURE);
@@ -195,7 +198,10 @@ int main(int argc, char **argv) {
     if (a_pid == 0) {
         // TODO Exec archiver
         // Pass debug as a command line argument.
-        execl("/bin/sleep", "sleep", "999", NULL);
+        if (execlp("/bin/sleep", "sleep", "999", NULL) == -1){
+            perror("execlp");
+            exit(EXIT_FAILURE);
+        }
     } else if (a_pid < 0) {
         perror("fork archiver");
         exit(EXIT_FAILURE);
