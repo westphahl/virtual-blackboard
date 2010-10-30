@@ -22,19 +22,12 @@ int login_handler(int sfd) {
     void *rbuf = NULL; // Receive buffer
     char *cname;
 
-    // TODO Debug
-    fprintf(stdout, "Waiting for login ...\n");
     /*
      * Wait for client login
      */
     header = (struct net_header *) malloc(sizeof(struct net_header));
     ret = recv(sfd, header, sizeof(struct net_header), MSG_WAITALL);
 
-    // TODO Debug
-    fprintf(stdout, "Got message type: %i; required: %i\n", 
-            header->type, m_login);
-    fprintf(stdout, "Message size: %i; struct: %i\n", ret,
-            sizeof(struct net_header));
     // Close socket if not a login message
     if (header->type != m_login) {
         fprintf(stdout, "Wrong mtype!\b");
@@ -71,34 +64,29 @@ int login_handler(int sfd) {
         return -1;
     }
 
-    // TODO Debug
-    fprintf(stdout, "Got message of size: %i\n", ret);
-
     // Allocate memory for client login message
     cdata = (struct client_data *) malloc(sizeof(struct client_data));
-
-    // TODO DEBUG
-    fprintf(stdout, "--- OK malloc: cdata---\n");
 
     // TODO Generate CID
     cdata->cid = 123;
     cdata->sfd = sfd;
-    // Read role
-    // TODO ERROR WARNING MEMORY CORRUPTION
-    fprintf(stdout, "memcpy: pointer: %p offset: %i size: %i \nnew pointer: %p\n", 
-            cdata, (sizeof(uint16_t) + sizeof(int)), sizeof(uint8_t),
-            (cdata + sizeof(uint16_t) + sizeof(int)));
-    //memcpy(cdata + sizeof(uint16_t) + sizeof(int), rbuf, sizeof(uint8_t));
 
-    fprintf(stdout, "--- OK memcpy: cdata---\n");
+    // Copy role
+    memcpy(&cdata->role, rbuf, sizeof(uint8_t));
 
     // Read name
-    //cname = (char *) malloc(header->length - sizeof(uint8_t));
-    fprintf(stdout, "malloc size: %i\n", (header->length - sizeof(uint8_t)));
+    cname = (char *) malloc(header->length);
+    fprintf(stdout, "malloc size: %i\n", header->length);
 
+    // Terminate client name
+    cname[header->length - 1] = 0;
+    memcpy(cname, (char *) rbuf + sizeof(uint8_t), header->length - sizeof(uint8_t));
+
+    fprintf(stdout, "cname: %s\n", cname);
     //////////////
     free(header);
     free(rbuf);
+    free(cname);
     free(cdata);
     return -1;
     //////////////
