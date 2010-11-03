@@ -21,6 +21,7 @@ int main(int argc, char **argv) {
     struct logmessage buffer;
     FILE* file;
 
+    fprintf(stdout, "opened file");
     /* Open logfile */
     if((file = fopen("log.txt", "a")) == NULL) {
         perror("fopen");

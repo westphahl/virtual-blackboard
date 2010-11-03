@@ -1,7 +1,12 @@
 #ifndef MESSAGE_BUILDER_H
 #define MESSAGE_BUILDER_H
 
-//void * build_status(struct net_header *header);
+#include <stdint.h>
+
+struct net_status* build_status(uint8_t role, uint16_t cid,
+        uint8_t perm, uint8_t dcount, uint8_t tcount, uint16_t scount);
+
+struct net_board* build_board(char *content, int length);
 
 //void * build_board(struct net_header *header);
 

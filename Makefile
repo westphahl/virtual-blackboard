@@ -13,11 +13,12 @@ all: client server logger
 
 # Build the server
 server: build/server.o build/signal_handler.o build/mq.o build/utils.o \
-	build/blackboard.o build/login_thread.o
+	build/blackboard.o build/login_thread.o build/broadcasting.o
 	$(CC) $(CSERVER) $(LDSERVER) -o build/server build/server.o \
 		build/signal_handler.o build/mq.o build/blackboard.o \
 		build/login_thread.o build/client_thread.o build/net_message.o \
-		build/client_list.o build/message_handler.o build/utils.o
+		build/client_list.o build/message_handler.o build/utils.o \
+		build/broadcasting.o build/message_builder.o
 
 build/server.o:
 	$(CC) $(CSERVER) -c -o build/server.o src/server/server.c
@@ -38,7 +39,7 @@ build/login_thread.o: build/client_thread.o
 	$(CC) $(CSERVER) -c -o build/login_thread.o src/server/login_thread.c
 
 build/client_thread.o: build/net_message.o build/client_list.o \
-	build/message_handler.o
+	build/message_handler.o build/broadcasting.o
 	$(CC) $(CSERVER) -c -o build/client_thread.o src/server/client_thread.c
 
 build/net_message.o:
@@ -53,8 +54,11 @@ build/message_builder.o:
 build/message_handler.o:
 	$(CC) $(CSERVER) -c -o build/message_handler.o src/server/message_handler.c
 
+build/broadcasting.o: build/net_message.o build/message_builder.o
+	$(CC) $(CSERVER) -c -o build/broadcasting.o src/server/broadcasting.c
+
 # Build the logger
-logger: build/logger.o
+logger: build/logger.o build/mq.o
 	$(CC) $(CSERVER) $(LDSERVER) -o build/logger build/logger.o build/mq.o
 build/logger.o:
 	$(CC) $(CSERVER) -c -o build/logger.o src/server/logger.c

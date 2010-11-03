@@ -26,50 +26,50 @@ struct net_header {
 };
 
 struct net_login {
-    struct net_header *header;
+    struct net_header header;
     uint8_t role;
-    char *name[];
+    char name[];
 };
 
 struct net_status {
-    struct net_header *header;
+    struct net_header header;
     uint8_t role;
     uint16_t cid;
     uint8_t write;
     uint8_t dcount;
     uint8_t tcount;
-    uint8_t scount;
+    uint16_t scount;
 };
 
 struct net_board {
-    struct net_header *header;
-    char *content[];
+    struct net_header header;
+    char content[];
 };
 
 // Ask server for write permissions
 struct net_request {
-    struct net_header *header;
+    struct net_header header;
     uint8_t write;
 };
 
 // Query docent for write permissions
 struct net_query {
-    struct net_header *header;
+    struct net_header header;
     uint16_t cid;
-    char *name[];
+    char name[];
 };
 
 // Reply of docent
 struct net_reply {
-    struct net_header *header;
+    struct net_header header;
     uint8_t write;
     uint16_t cid;
 };
 
 struct net_error {
-    struct net_header *header;
+    struct net_header header;
     uint8_t ecode;
-    char *detail[];
+    char detail[];
 };
 #pragma pack(0)
 

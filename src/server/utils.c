@@ -14,13 +14,18 @@
 
 void log_message(int level, char* message) {
     int mq_id;
+    // TODO Initialize buffer
+    // Run valgrind to see this error.
     struct logmessage buffer;
+    // Initialize buffer
+    memset(&buffer, 0, sizeof(struct logmessage));
 
     mq_id = get_mq(LOGGER_MQ_KEY);
 
     buffer.type = MSGTYPE;
     buffer.level = level;
     time(&buffer.time);
+
     strcpy(buffer.message, message);
 
     write_mq(mq_id, buffer);
