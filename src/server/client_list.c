@@ -114,6 +114,7 @@ int remove_client(int sfd) {
     client_counter--;
     pthread_mutex_unlock(&cl_mutex);
 
+    free(old_entry->cdata);
     free(old_entry);
     return 0;
 }
@@ -150,8 +151,7 @@ struct cl_entry* get_write_user() {
 }
 
 int has_write_access(int sfd) {
-    struct cl_entry *entry;
-    int result = 0;
+    int result;
 
     pthread_mutex_lock(&cl_mutex);
     if (user_write->cdata->sfd == sfd) {

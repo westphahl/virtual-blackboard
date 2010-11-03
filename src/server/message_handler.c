@@ -36,14 +36,15 @@ int login_handler(int sfd) {
 
     // Close socket if not a login message
     if (header->type != m_login) {
+        free(header);
         log_error("login handler: got wrong message type.");
         return 1;
     }
 
     // Connection closed by client or error
     if (ret <= 0) {
-        log_error("login handler: connection closed by client");
         free(header);
+        log_error("login handler: connection closed by client");
         return -1;
     }
     
@@ -55,6 +56,7 @@ int login_handler(int sfd) {
      * (role == 1 byte; name >= 1)
      */
     if (header->length < 2) {
+        free(header);
         log_error("login handler: login message too short.");
         return 1;
     }
@@ -132,6 +134,7 @@ int board_handler(int sfd, uint16_t length) {
         log_error("board handler: user without write access");
         return -1;
     }
+
     struct net_board *board;
     int ret = 1;
 
@@ -144,7 +147,6 @@ int board_handler(int sfd, uint16_t length) {
 
     // Attach blackboard
     blackboard = blackboard_attach(bshm_id);
-
 
     lock_bb_sem(bsem_id);
     memset(blackboard, 0, BLACKBOARD_BYTESIZE);
