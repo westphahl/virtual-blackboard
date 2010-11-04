@@ -18,7 +18,7 @@
 
 static pthread_mutex_t trigger_mutex = PTHREAD_MUTEX_INITIALIZER;
 static pthread_cond_t trigger_bcast = PTHREAD_COND_INITIALIZER;
-enum broadcast_t {STATUS, BLACKBOARD};
+enum broadcast_t {STATUS, BLACKBOARD, CLEAR};
 static int broadcast_type = STATUS;
 
 /*
@@ -43,10 +43,18 @@ void trigger_status() {
 
 /*
  * Wrapper function for triggering the broadcasting agent
- * to send a board message.
+ * to send a board message to all clients WITHOUT write access..
  */
 void trigger_blackboard() {
     trigger_broadcast(BLACKBOARD);
+}
+
+/*
+ * Wrapper function for triggering the broadcasting agent
+ * to send a board message to all clients;
+ */
+void trigger_clear() {
+    trigger_broadcast(CLEAR);
 }
 
 /*
@@ -101,9 +109,12 @@ void broadcast_status() {
 
 /*
  * Send a board update message to all connected clients
- * except the client with write access to the blackboard.
+ *
+ * Excludes the user with write acces if the parameter
+ * excl_w is set to 1. If the blackbpard should be broadcasted to all
+ * connected clients, excl_w shoul be 0.
  */
-void broadcast_blackboard(char *blackboard, int bsem_id) {
+void broadcast_blackboard(char *blackboard, int bsem_id, int excl_w) {
     struct cl_entry *current;
     struct net_board *board;
     int ret;
@@ -125,7 +136,7 @@ void broadcast_blackboard(char *blackboard, int bsem_id) {
 
     while (current != NULL) {
         /* Don't broadcast to the user with write access */
-        if (current == get_write_user()) {
+        if ((current == get_write_user()) && excl_w) {
             current = iteration_next();
             continue;
         }
@@ -171,7 +182,11 @@ void* broadcasting_agent(void *arg) {
                 break;
             case BLACKBOARD:
                 log_debug("broadcasting agent: received blackboard trigger");
-                broadcast_blackboard(blackboard, bsem_id);
+                broadcast_blackboard(blackboard, bsem_id, 1);
+                break;
+            case CLEAR:
+                log_debug("broadcasting agent: received clear trigger");
+                broadcast_blackboard(blackboard, bsem_id, 0);
                 break;
         }
     }

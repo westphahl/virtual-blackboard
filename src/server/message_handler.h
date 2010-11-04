@@ -5,7 +5,7 @@
 
 int login_handler(int sfd);
 
-int board_handler(int sfd, uint16_t length);
+int board_handler(int sfd, uint16_t length, int mtype);
 
 //int handle_board();
 

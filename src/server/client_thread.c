@@ -31,9 +31,9 @@ void* client_handler(void *sfd) {
         header = (struct net_header *) malloc(sizeof(struct net_header));
         ret = recv(socket_fd, header, sizeof(struct net_header), MSG_WAITALL);
 
-        /* Connection was closed by client */
-        if (ret == 0) {
-            log_info("client thread: connection closed by client");
+        /* Connection error or closed by client */
+        if (ret <= 0) {
+            log_info("client thread: connection error or closed by client");
             break;
         }
 
@@ -41,7 +41,19 @@ void* client_handler(void *sfd) {
         ntoh_header(header);
         switch (header->type) {
             case m_board:
-                ret = board_handler(socket_fd, header->length);
+                ret = board_handler(socket_fd, header->length, header->type);
+                break;
+            case m_clear:
+                if (header->length == 0) {
+                    ret = board_handler(socket_fd, 0, header->type);
+                } else {
+                    /* Kick a non-RFC-compliant client */
+                    ret = -1;
+                }
+                break;
+            case m_request:
+                break;
+            case m_reply:
                 break;
             default:
                 // Non-RFC compliant message received

@@ -130,10 +130,11 @@ int login_handler(int sfd) {
  * Handles board update sent by client
  * Returns 0 if the board message was processed normaly,
  * otherwise -1.
+ * If the length argument is 0, the board is cleared.
  *
  * Dealing with errors is up to the caller.
  */
-int board_handler(int sfd, uint16_t length) {
+int board_handler(int sfd, uint16_t length, int mtype) {
     struct net_board *board;
     int ret = 1;
 
@@ -144,6 +145,11 @@ int board_handler(int sfd, uint16_t length) {
     if (has_write_access(sfd) < 1) {
         log_error("board handler: user without write access");
         return 0;
+    }
+
+    if (mtype == m_clear) {
+        // TODO
+        // Trigger archivierer
     }
 
     /* Get semaphore for blackboard access */
@@ -198,6 +204,12 @@ int board_handler(int sfd, uint16_t length) {
     unlock_sem(bsem_id);
     /* Detach the shared memory segment */
     blackboard_detach(blackboard);
-    trigger_blackboard();
+
+    /* Trigger broadcast of blackboard of clear */
+    if (mtype == m_board) {
+        trigger_blackboard();
+    } else if (mtype == m_clear) {
+        trigger_clear();
+    }
     return 0;
 }
