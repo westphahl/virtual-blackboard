@@ -14,12 +14,18 @@
 #include "blackboard.h"
 #include "message_builder.h"
 #include "shared.h"
+#include "semaphore.h"
 
 static pthread_mutex_t trigger_mutex = PTHREAD_MUTEX_INITIALIZER;
 static pthread_cond_t trigger_bcast = PTHREAD_COND_INITIALIZER;
 enum broadcast_t {STATUS, BLACKBOARD};
 static int broadcast_type = STATUS;
 
+/*
+ * Function that triggers the broadcasting agent
+ * via a mutex.
+ * Not intended for direct usage; use wrapper functions instead.
+ */
 void trigger_broadcast(int type) {
     pthread_mutex_lock(&trigger_mutex);
     broadcast_type = type;
@@ -27,14 +33,25 @@ void trigger_broadcast(int type) {
     pthread_mutex_unlock(&trigger_mutex);
 }
 
+/*
+ * Wrapper function for triggering the broadcasting agent
+ * to send a status message.
+ */
 void trigger_status() {
     trigger_broadcast(STATUS);
 }
 
+/*
+ * Wrapper function for triggering the broadcasting agent
+ * to send a board message.
+ */
 void trigger_blackboard() {
     trigger_broadcast(BLACKBOARD);
 }
 
+/*
+ * Send a status update to all connected clients
+ */
 void broadcast_status() {
     struct cl_entry *current;
     struct net_status *status;
@@ -44,10 +61,16 @@ void broadcast_status() {
     uint8_t permission;
     int ret;
     
+    /*
+     * Start iteration over complete client list
+     * This locks the mutex for the client list
+     */
     current = start_iteration();
+
+    /* Get number of users */
     dcount = docent_exists();
-    scount = get_client_count();
     tcount = tutor_exists();
+    scount = get_client_count() - dcount - tcount;
 
     while (current != NULL) {
         if (current == get_write_user()) {
@@ -55,6 +78,8 @@ void broadcast_status() {
         } else {
             permission = 0;
         }
+
+        /* Build the status message */
         status = build_status(current->cdata->role, current->cdata->cid,
                 permission, dcount, tcount, scount);
         ret = send(current->cdata->sfd, status, sizeof(struct net_status), 0);
@@ -62,28 +87,44 @@ void broadcast_status() {
             perror("send");
         }
         free(status);
+        /* Select next client in list */
         current = iteration_next();
     }
 
     log_debug("broadcasting agent: status sent to all connected clients");
+    /*
+     * End of iteration
+     * This unlocks the mutex of the client list
+     */
     end_iteration();
 }
 
+/*
+ * Send a board update message to all connected clients
+ * except the client with write access to the blackboard.
+ */
 void broadcast_blackboard(char *blackboard, int bsem_id) {
     struct cl_entry *current;
     struct net_board *board;
     int ret;
     int length;
 
-    // Prepare the board message
-    lock_bb_sem(bsem_id);
+    /*
+     * Prepare the blackboard message
+     */
+    lock_sem(bsem_id);
     length = strlen(blackboard);
     board = build_board(blackboard, length);
-    unlock_bb_sem(bsem_id);   
+    unlock_sem(bsem_id);
     
+    /*
+     * Iterate over the complete client list
+     * This locks the mutex of the client list
+     */
     current = start_iteration();
 
     while (current != NULL) {
+        /* Don't broadcast to the user with write access */
         if (current == get_write_user()) {
             current = iteration_next();
             continue;
@@ -92,32 +133,36 @@ void broadcast_blackboard(char *blackboard, int bsem_id) {
         if (ret < 0) {
             perror("send");
         }
+        /* Select next client in list */
         current = iteration_next();
     }
     
+    /* Unlock mutex of client list */
+    end_iteration();
     free(board);
     log_debug("broadcasting agent: blackboard sent to all connected clients");
-    end_iteration();
-   
 }
 
 void* broadcasting_agent(void *arg) {
     int bsem_id;
     key_t bsem_key = BLACKBOARD_SEM_KEY;
-
-    bsem_id = get_bb_sem(bsem_key);
+    /* Get the id of the blackboard Semaphore */
+    bsem_id = get_sem(bsem_key);
 
     int bshm_id;
     key_t bshm_key = BLACKBOARD_SHM_KEY;
 
+    /* Get the id of the blackboard shared memory segment */
     bshm_id = get_blackboard(bshm_key);
     char *blackboard;
 
+    /* Attach to the shared memory */
     blackboard = blackboard_attach(bshm_id);
 
     log_info("broadcasting agent: waiting for trigger");
     pthread_mutex_lock(&trigger_mutex);
     while(1) {
+        /* Wait for the trigger */
         pthread_cond_wait(&trigger_bcast, &trigger_mutex);
         switch (broadcast_type) {
             case STATUS:

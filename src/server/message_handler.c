@@ -11,6 +11,7 @@
 #include "client_list.h"
 #include "broadcasting.h"
 #include "blackboard.h"
+#include "semaphore.h"
 #include "shared.h"
 
 /*
@@ -127,59 +128,75 @@ int login_handler(int sfd) {
 
 /*
  * Handles board update sent by client
+ * Returns 0 if the board message was processed normaly,
+ * otherwise -1.
+ *
+ * Dealing with errors is up to the caller.
  */
 int board_handler(int sfd, uint16_t length) {
-
-    if (has_write_access(sfd) < 1) {
-        log_error("board handler: user without write access");
-        return -1;
-    }
-
     struct net_board *board;
     int ret = 1;
 
-    key_t bsem_key = BLACKBOARD_SEM_KEY;
-    int bsem_id = get_bb_sem(bsem_key);
+    /*
+     * Return if the client has not write access.
+     * This may happen from time to time due to some lag.
+     */
+    if (has_write_access(sfd) < 1) {
+        log_error("board handler: user without write access");
+        return 0;
+    }
 
+    /* Get semaphore for blackboard access */
+    key_t bsem_key = BLACKBOARD_SEM_KEY;
+    int bsem_id = get_sem(bsem_key);
+
+    /* Get id of blackboard in shared memory */
     char *blackboard;
     key_t bshm_key = BLACKBOARD_SHM_KEY;
     int bshm_id = get_blackboard(bshm_key);
 
-    // Attach blackboard
+    /* Attach blackboard in shared memory */
     blackboard = blackboard_attach(bshm_id);
 
-    lock_bb_sem(bsem_id);
+    /* Lock the blackboard semaphore */
+    lock_sem(bsem_id);
+    /*
+     * Reset the blackboard
+     * This is required since the shared memory is
+     * messed up otherwise somehow :)
+     */
     memset(blackboard, 0, BLACKBOARD_BYTESIZE);
 
-    // If not a delete message
+    /* This is only required if the length is > 0 */
     if (length > 0) {
         board = (struct net_board *) malloc(length + sizeof(struct net_header));
         if (board == NULL) {
-            unlock_bb_sem(bsem_id);
+            unlock_sem(bsem_id);
             log_error("board handler: malloc failed");
             exit(EXIT_FAILURE);
         }
+
+        /* Read the board content */
         ret = recv(sfd, board->content, length, MSG_WAITALL);
 
-        // Connection closed by client or error
-        if (ret == 0) {
-            unlock_bb_sem(bsem_id);
+        /* Check if there was an error */
+        if (ret < 0) {
+            unlock_sem(bsem_id);
             free(board);
-            log_info("board handler: connection closed by client");
-            return -1;
-        } else if (ret < 0) {
-            unlock_bb_sem(bsem_id);
-            free(board);
-            log_error("board handler: connection error");
+            log_info("board handler: connection error or closed by client");
             return -1;
         }
 
+        /* Copy the board content into the shared memory segment */
         memcpy(blackboard, board->content, length);
+        // TODO Debug output
         fprintf(stdout, "blackboard: %s\n", blackboard);
         free(board);
     }
 
-    unlock_bb_sem(bsem_id);
+    /* Unlock the blackboard semaphore */
+    unlock_sem(bsem_id);
+    /* Detach the shared memory segment */
     blackboard_detach(blackboard);
     trigger_blackboard();
     return 0;

@@ -7,6 +7,9 @@
 #include "message_builder.h"
 #include "../net_message.h"
 
+/*
+ * Built a status message
+ */
 struct net_status* build_status(uint8_t role, uint16_t cid,
         uint8_t perm, uint8_t dcount, uint8_t tcount, uint16_t scount) {
     struct net_status *status = NULL;
@@ -30,6 +33,9 @@ struct net_status* build_status(uint8_t role, uint16_t cid,
     return status;
 }
 
+/*
+ * Built a board message
+ */
 struct net_board* build_board(char *content, int length) {
     struct net_board *board = NULL;
 
@@ -41,6 +47,7 @@ struct net_board* build_board(char *content, int length) {
 
     board->header.type = m_board;
     board->header.length = htons(length);
+
     memcpy(board->content, content, length);
 
     return board;

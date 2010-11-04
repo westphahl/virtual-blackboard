@@ -22,6 +22,7 @@
 #include "blackboard.h"
 #include "login_thread.h"
 #include "utils.h"
+#include "semaphore.h"
 #include "broadcasting.h"
 
 /*
@@ -184,7 +185,7 @@ int main(int argc, char **argv) {
     lmq_id = create_mq(lmq_key);
 
     // Create semaphore for blackboard access
-    bsem_id = init_bb_sem(bsem_key);
+    bsem_id = init_sem(bsem_key);
 
     // Create blackboard in shared memory
     bshm_id = init_blackboard(bshm_key);
@@ -245,7 +246,7 @@ int main(int argc, char **argv) {
     delete_blackboard(bshm_id);
 
     // Delete blackboard semaphore
-    delete_bb_sem(bsem_id);
+    delete_sem(bsem_id);
 
     // Delete message queue
     delete_mq(lmq_id);
