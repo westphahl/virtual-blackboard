@@ -8,6 +8,8 @@ struct net_status* build_status(uint8_t role, uint16_t cid,
 
 struct net_board* build_board(char *content, int length);
 
+struct net_query* build_query(uint16_t cid, char *name, int length);
+
 //void * build_board(struct net_header *header);
 
 //void * build_query(struct net_header *header);

@@ -28,6 +28,20 @@ static pthread_mutex_t cid_mutex = PTHREAD_MUTEX_INITIALIZER;
 static int client_counter = 0;
 
 /*
+ * Small wrapper function for locking the client list
+ */
+void lock_clientlist() {
+    pthread_mutex_lock(&cl_mutex);
+}
+
+/*
+ * Small wrapper function for unlocking the client list
+ */
+void unlock_clientlist() {
+    pthread_mutex_unlock(&cl_mutex);
+}
+
+/*
  * Add a new client to the client list.
  */
 void add_client(struct client_data *cdata) {
@@ -136,7 +150,7 @@ int docent_exists() {
  * Returns 1 if there is one, otherwise 0.
  */
 int tutor_exists() {
-    if (user_docent == user_write) {
+    if ((user_write == NULL) || (user_docent == user_write)) {
         return 0;
     } else {
         return 1;
@@ -145,21 +159,76 @@ int tutor_exists() {
 
 /*
  * Get the user who has write access
+ * Make sure to lock the client list mutex if you want to access
+ * the users attributes!
  */
 struct cl_entry* get_write_user() {
     return user_write;
 }
 
-int has_write_access(int sfd) {
-    int result;
+/*
+ * Set the user who has write access
+ * Make sure to lock the client list mutex!
+ */
+void set_write_user(struct cl_entry *user) {
+    user_write = user;
+}
 
-    pthread_mutex_lock(&cl_mutex);
-    if (user_write->cdata->sfd == sfd) {
-        result = 1;
-    } else {
-        result = 0;
+/*
+ * Get docent
+ * Make sure to lock the client list mutex if you want to access
+ * the users attributes!
+ */
+struct cl_entry* get_docent() {
+    return user_docent;
+}
+
+/*
+ * Get the user specified by the socket file descriptor
+ * Make sure to lock the client list prior to calling
+ * this function!
+ *
+ * Returns NULL if there is no user with the given socket descriptor
+ */
+struct cl_entry* get_user(int sfd) {
+    struct cl_entry *current;
+
+    for (current = cl_first; current != NULL; current = current->next) {
+        if (current->cdata->sfd == sfd) {
+            break;
+        }
     }
-    pthread_mutex_unlock(&cl_mutex);
+
+    return current;
+}
+
+/*
+ * Checks if the user with the specified socket file descriptor
+ * has write acces.
+ * Make sure to lock the client list prior to calling this function!
+ */
+int has_write_access(int sfd) {
+    int result = 0;
+
+    if ((user_write != NULL) && (user_write->cdata->sfd == sfd)) {
+        result = 1;
+    }
+
+    return result;
+}
+
+/*
+ * Check if the client with the supplied socket file descriptor
+ * has write access.
+ *
+ * Make sure to lock the client list prior to calling this function!
+ */
+int is_docent(int sfd) {
+    int result = 0;
+
+    if ((user_docent != NULL) && (user_docent->cdata->sfd == sfd)) {
+        result = 1;
+    }
 
     return result;
 }

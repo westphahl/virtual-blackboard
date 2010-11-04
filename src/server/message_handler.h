@@ -7,13 +7,9 @@ int login_handler(int sfd);
 
 int board_handler(int sfd, uint16_t length, int mtype);
 
-//int handle_board();
-
-//int handle_clear();
+int request_handler(int sfd);
 
 //int handle_shutdown();
-
-//int handle_request();
 
 //int handle_reply();
 

@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+#include <stdint.h>
 
 #include "../commons.h"
 #include "../net_message.h"
@@ -13,6 +14,7 @@
 #include "blackboard.h"
 #include "semaphore.h"
 #include "shared.h"
+#include "message_builder.h"
 
 /*
  * Handles login of client
@@ -33,6 +35,9 @@ int login_handler(int sfd) {
      * Wait for client login
      */
     header = (struct net_header *) malloc(sizeof(struct net_header));
+    if (header == NULL) {
+        exit(EXIT_FAILURE);
+    }
     ret = recv(sfd, header, sizeof(struct net_header), MSG_WAITALL);
 
     // Close socket if not a login message
@@ -79,22 +84,17 @@ int login_handler(int sfd) {
         return -1;
     }
 
-
     // Allocate memory for client login message
-    cdata = (struct client_data *) malloc(sizeof(struct client_data));
+    cdata = (struct client_data *) malloc(sizeof(struct client_data) +
+            header->length);
+
+    memset(cdata, 0, sizeof(struct client_data) + header->length);
 
     cdata->cid = get_next_cid();
     cdata->sfd = sfd;
 
     // Copy role
-    memcpy(&cdata->role, rbuf, sizeof(uint8_t));
-
-    // Read name
-    cname = (char *) malloc(header->length);
-
-    // Terminate client name
-    cname[header->length - 1] = 0;
-    memcpy(cname, (char *) rbuf + sizeof(uint8_t), header->length - sizeof(uint8_t));
+    memcpy(&cdata->role, rbuf, header->length);
 
     switch (cdata->role) {
         case INDIFFERENT:
@@ -211,5 +211,77 @@ int board_handler(int sfd, uint16_t length, int mtype) {
     } else if (mtype == m_clear) {
         trigger_clear();
     }
+    return 0;
+}
+
+/*
+ * Handles a request to change privileges
+ */
+int request_handler(int sfd) {
+    struct net_request *request;
+    struct net_query *query;
+    struct cl_entry *user;
+    struct cl_entry *docent;
+    int ret;
+    int length;
+
+    request = (struct net_request *) malloc(sizeof(struct net_request));
+    if (request == NULL) {
+        exit(EXIT_FAILURE);
+    }
+    ret = recv(sfd, &request->write, sizeof(uint8_t), MSG_WAITALL);
+
+    // Connection closed by client or error
+    if (ret == 0) {
+        log_error("login handler: connection closed by client");
+        free(request);
+        return -1;
+    } else if (ret < 0) {
+        log_error("login handler: connection error");
+        free(request);
+        return -1;
+    }
+
+    lock_clientlist();
+
+    /* Check if user allready has write access */
+    if (request->write == has_write_access(sfd)) {
+        unlock_clientlist();
+        free(request);
+        return 0;
+    }
+
+    free(request);
+    docent = get_docent();
+
+    if (is_docent(sfd)) {
+        /*
+         * Docent requests write privilege
+         */
+        user = get_write_user();
+        set_write_user(docent);
+
+        // TODO
+        // Notify old client with write access
+
+        trigger_status();
+    } else {
+        /* Get requesting user */
+        user = get_user(sfd);
+        if (user == NULL) {
+            unlock_clientlist();
+            return -1;
+        }
+        length = strlen(user->cdata->name);
+        query = build_query(user->cdata->cid, user->cdata->name, length);
+        ret = send(docent->cdata->sfd, query, sizeof(struct net_query) + length, 0);
+        if (ret < 0) {
+            perror("send");
+            unlock_clientlist();
+            return -1;
+        }
+        free(query);
+    }
+    unlock_clientlist();
     return 0;
 }

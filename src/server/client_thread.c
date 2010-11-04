@@ -52,6 +52,7 @@ void* client_handler(void *sfd) {
                 }
                 break;
             case m_request:
+                ret = request_handler(socket_fd);
                 break;
             case m_reply:
                 break;
