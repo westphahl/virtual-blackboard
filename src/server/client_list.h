@@ -30,7 +30,8 @@ int tutor_exists();
 struct cl_entry* get_write_user(void);
 void set_write_user(struct cl_entry* user);
 struct cl_entry* get_docent(void);
-struct cl_entry* get_user(int sfd);
+struct cl_entry* get_user_sfd(int sfd);
+struct cl_entry* get_user_cid(uint16_t cid);
 int has_write_access(int sfd);
 int is_docent(int sfd);
 

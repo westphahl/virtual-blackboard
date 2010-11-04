@@ -190,11 +190,26 @@ struct cl_entry* get_docent() {
  *
  * Returns NULL if there is no user with the given socket descriptor
  */
-struct cl_entry* get_user(int sfd) {
+struct cl_entry* get_user_sfd(int sfd) {
     struct cl_entry *current;
 
     for (current = cl_first; current != NULL; current = current->next) {
         if (current->cdata->sfd == sfd) {
+            break;
+        }
+    }
+
+    return current;
+}
+
+/*
+ * Returns NULL if there is no user with the given client id
+ */
+struct cl_entry* get_user_cid(uint16_t cid) {
+    struct cl_entry *current;
+
+    for (current = cl_first; current != NULL; current = current->next) {
+        if (current->cdata->cid == cid) {
             break;
         }
     }
@@ -235,11 +250,20 @@ int is_docent(int sfd) {
 
 /*
  * Get the next available client id
+ * If there are too many clients this function returns 0.
  */
 uint16_t get_next_cid(void) {
     uint16_t cid;
     pthread_mutex_lock(&cid_mutex);
     cid = ++cid_counter;
+    /* 
+     * Detect if there are too many clients
+     * If the cid_counter overflows from the previous ++
+     * it mus be reset to the last possible value.
+     */
+    if (cid_counter == 0) {
+        cid_counter--;
+    }
     pthread_mutex_unlock(&cid_mutex);
     return cid;
 }

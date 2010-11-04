@@ -9,8 +9,6 @@ int board_handler(int sfd, uint16_t length, int mtype);
 
 int request_handler(int sfd);
 
-//int handle_shutdown();
-
-//int handle_reply();
+int reply_handler(int sfd);
 
 #endif

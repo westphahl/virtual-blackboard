@@ -29,7 +29,6 @@ int login_handler(int sfd) {
     ssize_t ret;
     struct client_data *cdata = NULL;
     void *rbuf = NULL; // Receive buffer
-    char *cname;
 
     /*
      * Wait for client login
@@ -233,11 +232,11 @@ int request_handler(int sfd) {
 
     // Connection closed by client or error
     if (ret == 0) {
-        log_error("login handler: connection closed by client");
+        log_error("request handler: connection closed by client");
         free(request);
         return -1;
     } else if (ret < 0) {
-        log_error("login handler: connection error");
+        log_error("request handler: connection error");
         free(request);
         return -1;
     }
@@ -251,7 +250,6 @@ int request_handler(int sfd) {
         return 0;
     }
 
-    free(request);
     docent = get_docent();
 
     if (is_docent(sfd)) {
@@ -265,10 +263,30 @@ int request_handler(int sfd) {
         // Notify old client with write access
 
         trigger_status();
+    } else if (request->write == 0) {
+        set_write_user(docent);
+        trigger_status();
     } else {
+        // Handle situation wherer no docent exists
+        fprintf(stdout, "##### THERE IS NO DOCENT #####\n");
+        if (docent_exists() == 0) {
+            if (tutor_exists()) {
+                unlock_clientlist();
+                free(request);
+                return 0;
+            } else {
+                user = get_user_sfd(sfd);
+                set_write_user(user);
+                unlock_clientlist();
+                trigger_status();
+                free(request);
+                return 0;
+            }
+        }
         /* Get requesting user */
-        user = get_user(sfd);
+        user = get_user_sfd(sfd);
         if (user == NULL) {
+            free(request);
             unlock_clientlist();
             return -1;
         }
@@ -276,12 +294,78 @@ int request_handler(int sfd) {
         query = build_query(user->cdata->cid, user->cdata->name, length);
         ret = send(docent->cdata->sfd, query, sizeof(struct net_query) + length, 0);
         if (ret < 0) {
+            free(request);
             perror("send");
             unlock_clientlist();
             return -1;
         }
         free(query);
     }
+    free(request);
     unlock_clientlist();
+    return 0;
+}
+
+int reply_handler(int sfd) {
+    struct net_reply *reply;
+    struct cl_entry *user;
+    int ret;
+
+    reply = (struct net_reply *) malloc(sizeof(struct net_reply));
+    if (reply == NULL) {
+        exit(EXIT_FAILURE);
+    }
+    ret = recv(sfd, &reply->write, sizeof(uint8_t) +
+            sizeof(uint16_t),MSG_WAITALL);
+
+    // Connection closed by client or error
+    if (ret == 0) {
+        log_error("reply handler: connection closed by client");
+        free(reply);
+        return -1;
+    } else if (ret < 0) {
+        log_error("reply handler: connection error");
+        free(reply);
+        return -1;
+    }
+
+    reply->cid = ntohs(reply->cid);
+
+    fprintf(stdout, "Got reply from docent: write=%i, cid=%i\n",
+            reply->write, reply->cid);
+
+    lock_clientlist();
+
+    if (is_docent(sfd) == 0) {
+        free(reply);
+        unlock_clientlist();
+        log_error("reply handler: non-RFC compliant client kicked");
+        return -1;
+    }
+
+    if (reply->write == 0) {
+        // TODO Sent message to client
+        free(reply);
+        unlock_clientlist();
+        log_info("reply handler: write access denied");
+        return 0;
+    }
+
+    user = get_user_cid(reply->cid);
+
+    /* Maybe the user logged out in the meantime */
+    if (user == NULL) {
+        free(reply);
+        unlock_clientlist();
+        log_error("reply handler: user not found");
+        return 0;
+    }
+    set_write_user(user);
+    unlock_clientlist();
+    log_info("reply handler: write access granted");
+
+    free(reply);
+    trigger_status();
+    
     return 0;
 }

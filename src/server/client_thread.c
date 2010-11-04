@@ -55,6 +55,7 @@ void* client_handler(void *sfd) {
                 ret = request_handler(socket_fd);
                 break;
             case m_reply:
+                ret = reply_handler(socket_fd);
                 break;
             default:
                 // Non-RFC compliant message received
