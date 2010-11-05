@@ -19,7 +19,7 @@ server: build/server.o \
 	build/login_thread.o \
 	build/broadcasting.o \
 	build/semaphore.o
-	$(CC) $(CSERVER) $(LDSERVER) -o build/server
+	$(CC) $(CSERVER) $(LDSERVER) -o build/server \
 		build/server.o \
 		build/signal_handler.o \
 		build/mq.o \
