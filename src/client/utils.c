@@ -1,9 +1,14 @@
+// System headers
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
+// User header
 #include "../net_message.h"
 
+/*
+ * Helper function to allocate disk space.
+ */
 void *alloc(size_t size) {
 	/* allocate disk space */
 	void *tmp = malloc(size);
