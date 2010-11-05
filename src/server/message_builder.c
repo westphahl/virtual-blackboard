@@ -75,3 +75,25 @@ struct net_query* build_query(uint16_t cid, char *name, int length) {
 
     return query;
 }
+
+/*
+ * Build a error message
+ * The length parameter specifies the lenght of detail.
+ */
+struct net_error* build_error(uint8_t ecode, char *detail, int length) {
+    struct net_error *error = NULL;
+
+    error = (struct net_error *) malloc(sizeof(struct net_error) + length);
+    if (error == NULL) {
+        fprintf(stderr, "message builder: malloc failed");
+        exit(EXIT_FAILURE);
+    }
+
+    error->header.type = m_error;
+    error->header.length = htons(sizeof(uint8_t) + length);
+    error->ecode = ecode;
+
+    memcpy(error->detail, detail, length);
+
+    return error;
+}

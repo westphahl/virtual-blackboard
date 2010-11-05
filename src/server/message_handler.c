@@ -26,9 +26,14 @@
  */
 int login_handler(int sfd) {
     struct net_header *header = NULL;
-    ssize_t ret;
+    struct net_board *board = NULL;
+    int ret;
+    int length;
     struct client_data *cdata = NULL;
     void *rbuf = NULL; // Receive buffer
+    char *blackboard;
+    int bshm_id = get_blackboard(BLACKBOARD_SHM_KEY);
+    int bsem_id = get_sem(BLACKBOARD_SEM_KEY);
 
     /*
      * Wait for client login
@@ -97,11 +102,13 @@ int login_handler(int sfd) {
 
     switch (cdata->role) {
         case INDIFFERENT:
+            lock_clientlist();
             if (docent_exists()) {
                 cdata->role = STUDENT;
             } else {
                 cdata->role = DOCENT;
             }
+            unlock_clientlist();
             break;
         case STUDENT:
             break;
@@ -116,6 +123,22 @@ int login_handler(int sfd) {
     }
 
     add_client(cdata);
+
+    /* Send client initial blackboard */
+    blackboard = blackboard_attach(bshm_id);
+
+    lock_sem(bsem_id);
+    length = strlen(blackboard);
+    board = build_board(blackboard, length);
+    unlock_sem(bsem_id);
+
+    blackboard_detach(blackboard);
+
+    ret = send(sfd, board, sizeof(struct net_board) + length, 0);
+    if (ret < 0) {
+        perror("send");
+    }
+
     trigger_status();
 
     log_info("login handler: client login successful");
@@ -268,7 +291,6 @@ int request_handler(int sfd) {
         trigger_status();
     } else {
         // Handle situation wherer no docent exists
-        fprintf(stdout, "##### THERE IS NO DOCENT #####\n");
         if (docent_exists() == 0) {
             if (tutor_exists()) {
                 unlock_clientlist();
@@ -343,15 +365,25 @@ int reply_handler(int sfd) {
         return -1;
     }
 
+    user = get_user_cid(reply->cid);
+
     if (reply->write == 0) {
         // TODO Sent message to client
+        struct net_error *error;
+        char message[] = "Request denied by docent\0";
+        error = build_error(e_message, message, strlen(message));
+
+        ret = send(user->cdata->sfd, error, sizeof(struct net_error) +
+                strlen(message), 0);
+        if (ret < 0) {
+            perror("send");
+        }
+        free(error);
         free(reply);
         unlock_clientlist();
         log_info("reply handler: write access denied");
         return 0;
     }
-
-    user = get_user_cid(reply->cid);
 
     /* Maybe the user logged out in the meantime */
     if (user == NULL) {

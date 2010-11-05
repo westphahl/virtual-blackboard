@@ -13,7 +13,7 @@ enum message_types {
     m_request,
     m_query,
     m_reply,
-    m_error
+    m_error = 255
 };
 
 enum error_codes {e_message, e_fatal, e_login};

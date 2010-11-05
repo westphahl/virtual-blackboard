@@ -10,10 +10,6 @@ struct net_board* build_board(char *content, int length);
 
 struct net_query* build_query(uint16_t cid, char *name, int length);
 
-//void * build_board(struct net_header *header);
-
-//void * build_query(struct net_header *header);
-
-//void * build_error(struct net_header *header);
+struct net_error* build_error(uint8_t ecode, char *detail, int length);
 
 #endif
