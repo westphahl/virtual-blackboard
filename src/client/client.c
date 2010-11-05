@@ -26,16 +26,17 @@
 
 /* User */
 #include "../commons.h"
+#include "../net_message.h"
 #include "gui.h"
 #include "client.h"
 #include "shared.h"
 #include "listener_thread.h"
 #include "liveagent_thread.h"
-#include "command_handler.h"
+#include "command_thread.h"
 #include "utils.h"
 
 /* globale Variable */
-struct CLIENT_DATA cdata;
+struct client_data cdata;
 int sock;
 static char *blackboard;
 
@@ -66,11 +67,11 @@ int updateGUIstate()
 	gtk_widget_modify_base(GTK_WIDGET(textview), GTK_STATE_NORMAL, &tmpColor);
 
 	/* Statusleiste */
-	sprintf(tmp,"Tafelrechte\n%s", cdata.write_per ? "[lesen/schreiben]" : "[lesen]");
+	sprintf(tmp,"Tafelrechte\n%s", cdata.write ? "[lesen/schreiben]" : "[lesen]");
 	gtk_label_set_text(statusWrite, tmp);
 
 	sprintf(tmp, "Name: \t[%s]\nRolle: \t[%s]\nCID:\t[%i]",
-			cdata.name, cdata.role ? "Dozent" : (cdata.write_per ? "Tutor" : "Student"), cdata.client_id);
+			cdata.name, cdata.role ? "Dozent" : (cdata.write ? "Tutor" : "Student"), cdata.cid);
 	gtk_label_set_text(statusRole, tmp);
 
 	sprintf(tmp, "Zeit der letzten Änderung\n[%li]", time(NULL));
@@ -80,7 +81,7 @@ int updateGUIstate()
 	gtk_label_set_text(statusUsers, tmp);
 
 	/* Buttons */
-	sprintf(tmp,"Schreibrecht %s", cdata.write_per ? "abgeben" : "anfragen");
+	sprintf(tmp,"Schreibrecht %s", cdata.write ? "abgeben" : "anfragen");
 	gtk_button_set_label(GTK_BUTTON(requestWrite),tmp);
 
 	/* Disable illegal buttons */
@@ -90,7 +91,7 @@ int updateGUIstate()
 	gtk_widget_set_sensitive(GTK_WIDGET(quitAll), cdata.role==2 ? 1 : 0);
 	
 	/* Textview */
-	gtk_text_view_set_editable(textview, cdata.write_per);
+	gtk_text_view_set_editable(textview, cdata.write);
 
 	return 0;
 }
@@ -138,7 +139,7 @@ gint on_application_exit(GtkWidget * widget, GdkEvent event, gpointer daten)
  \**************************************************************************************/
 void on_button_request_write_clicked (GtkButton * button, gpointer user_data)
 {
-	send_request(sock, !cdata.write_per);
+	trigger_command(m_request, NULL);
 }
 
 
@@ -148,7 +149,7 @@ void on_button_request_write_clicked (GtkButton * button, gpointer user_data)
 void on_button_quit_all_clicked (GtkButton * button, gpointer user_data)
 {
 	if(popupQuestionDialog("Sind Sie sicher?","Wollen Sie das Programm und den Server wirklich beenden?")) {
-		send_shutdown(sock);
+		trigger_command(m_shutdown, NULL);
 		gtk_main_quit();
 	}
 }
@@ -168,7 +169,7 @@ void on_button_quit_clicked ( GtkButton * button, gpointer user_data )
  \**************************************************************************************/
 void on_button_log_clicked ( GtkButton * button, gpointer user_data )
 {
-	send_board_clean(sock);
+	trigger_command(m_clear, NULL);
 }
 
 
@@ -177,7 +178,7 @@ void on_button_log_clicked ( GtkButton * button, gpointer user_data )
  \**************************************************************************************/
 void on_button_remove_permissions_clicked ( GtkButton * button, gpointer user_data )
 {
-	send_request(sock, 1);
+	trigger_command(m_request, NULL);
 }
 
 
@@ -186,7 +187,7 @@ void on_button_remove_permissions_clicked ( GtkButton * button, gpointer user_da
  \**************************************************************************************/
 void on_text_buffer_changed (GtkTextBuffer *textbuffer, gpointer user_data)
 {
-	if(cdata.write_per == 1) {
+	if(cdata.write == 1) {
 		char *buffer;
 		GtkTextIter startIter, endIter;
 		gtk_text_buffer_get_start_iter(textbuffer, &startIter);
@@ -195,8 +196,6 @@ void on_text_buffer_changed (GtkTextBuffer *textbuffer, gpointer user_data)
 		buffer = gtk_text_buffer_get_text(textbuffer, &startIter, &endIter, FALSE);
 		
 		blackboard = buffer;
-
-		//send_board_content(sock, buffer);
 
 		static char tmp[256];
 		sprintf(tmp, "Zeit der letzten Änderung\n[%li]", time(NULL));
@@ -238,13 +237,16 @@ int main (int argc, char **argv)
     pthread_t listener_tid;
 	struct listenert_data lt_data;
 	
+	pthread_t command_tid;
+	struct commandt_data cm_data;
+	
 	pthread_t liveagent_tid;
 	struct liveagentt_data la_data;
 
 	/* fill cdata with NULL */
-	cdata.client_id = 0;
+	cdata.cid = 0;
 	cdata.role = 0;
-	cdata.write_per = 0;
+	cdata.write = 0;
 	cdata.dozenten = 0;
 	cdata.tutoren = 0;
 	cdata.studenten = 0;
@@ -343,11 +345,15 @@ int main (int argc, char **argv)
             	return(EXIT_FAILURE);
             }
 
-            // TODO Starte Command-Thread ???
-            send_login(sock, cdata.name, cdata.role);
-
-			printf("Login ausgeführt.\n");
-			fflush(stdout);
+            // TODO Starte Command-Thread
+            cm_data.socket = sock;
+            cm_data.cdata = &cdata;
+            if(pthread_create(&command_tid, NULL, command_handler, (void *) &cm_data) != 0) {
+            	perror("pthread_create");
+            	return(EXIT_FAILURE);
+            }
+            
+            trigger_command(m_login, NULL);
 
             // TODO Starte Live-Agent
             la_data.socket = sock;

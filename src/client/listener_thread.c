@@ -23,11 +23,12 @@
 
 #include "client.h"
 #include "listener_thread.h"
-#include "command_handler.h"
+#include "command_thread.h"
 #include "shared.h"
 #include "utils.h"
 #include "gui.h"
 #include "../commons.h"
+#include "../net_message.h"
 
 void *listener_handler(void *data) {
 	struct listenert_data *lt_data = (struct listenert_data *)data;
@@ -37,14 +38,14 @@ void *listener_handler(void *data) {
 
 	int ret = 0;
     int sock = lt_data->socket;
-	struct CLIENT_DATA *cdata = lt_data->cdata;
-	struct NET_HEADER *hdr = alloc(sizeof(struct NET_HEADER));
+	struct client_data *cdata = lt_data->cdata;
+	struct net_header *hdr = alloc(sizeof(struct net_header));
 
     while (1) {
         ret = read(sock, hdr, sizeof(*hdr));
         
         printf("Typ: %i\n", hdr->type);
-		printf("Länge: %i\n", ntohs(hdr->lenght));
+		printf("Länge: %i\n", ntohs(hdr->length));
 		fflush(stdout);
 		
         if (ret == 0) {
@@ -60,28 +61,28 @@ void *listener_handler(void *data) {
         }
         if (ret > 0) {
 			switch(hdr->type) {
-			case NET_TYPE_STATUS_MSG: {
-					struct NET_MESSAGE_STATUS *msg = alloc(sizeof(struct NET_MESSAGE_STATUS));
+			case m_status: {
+					struct net_status *msg = alloc(sizeof(struct net_status));
 					
-					read(sock, &msg->role, ntohs(hdr->lenght));
+					read(sock, &msg->role, ntohs(hdr->length));
 
 					printf("Rolle: %i\n", msg->role);
 					cdata->role = msg->role;
 
-					printf("Client-ID: %i\n", ntohs(msg->client_id));
-					cdata->client_id = ntohs(msg->client_id);
+					printf("Client-ID: %i\n", ntohs(msg->cid));
+					cdata->cid = ntohs(msg->cid);
 
-					printf("Write-Per: %i\n", msg->write_per);
-					cdata->write_per = msg->write_per;
+					printf("Write-Per: %i\n", msg->write);
+					cdata->write = msg->write;
 
-					printf("Dozenten: %i\n", msg->dozenten);
-					cdata->dozenten = msg->dozenten;
+					printf("Dozenten: %i\n", msg->dcount);
+					cdata->dozenten = msg->dcount;
 
-					printf("Tutoren: %i\n", msg->tutoren);
-					cdata->tutoren = msg->tutoren;
+					printf("Tutoren: %i\n", msg->tcount);
+					cdata->tutoren = msg->tcount;
 
-					printf("Studenten: %i\n", ntohs(msg->studenten));
-					cdata->studenten = ntohs(msg->studenten);
+					printf("Studenten: %i\n", ntohs(msg->scount));
+					cdata->studenten = ntohs(msg->scount);
 					
 					fflush(stdout);
 
@@ -92,63 +93,55 @@ void *listener_handler(void *data) {
 					free(msg);
 					break;
 				}
-			case NET_TYPE_ERROR_MSG: {
-					struct NET_MESSAGE_ERROR *msg = alloc(sizeof(struct NET_MESSAGE_ERROR));
+			case m_error: {
+					struct net_error *msg = alloc(sizeof(struct net_error)+ntohs(hdr->length)+1);
 					
-					read(sock, &msg->error_code, sizeof(uint8_t));
+					read(sock, &msg->ecode, hdr->length);
 
-					msg->detail = alloc(ntohs(hdr->lenght)-sizeof(uint8_t)+1);
-		
-					read(sock, msg->detail, ntohs(hdr->lenght)-sizeof(uint8_t));
-
-					printf("Code: %i\n", msg->error_code);
+					printf("Code: %i\n", msg->ecode);
 					printf("Detail: %s\n", msg->detail);
 					fflush(stdout);
 
 					static char tmp[256];
-					sprintf(tmp, "Fehler %i: %s", msg->error_code, msg->detail);
+					sprintf(tmp, "Fehler %i: %s", msg->ecode, msg->detail);
 					
 					gdk_threads_enter();
 					popupMessage(tmp);
 					gdk_threads_leave();
 
-					free(msg->detail);
 					free(msg);
 					break;
 				}
-			case NET_TYPE_BOARD_CONTENT: {
-					struct NET_MESSAGE_BOARD_CONTENT *msg = alloc(sizeof(struct NET_MESSAGE_BOARD_CONTENT));
-					
-					msg->board_content = alloc(ntohs(hdr->lenght)+1);	
-		
-					read(sock, msg->board_content, ntohs(hdr->lenght));
+			case m_board: {
+					struct net_board *msg = alloc(sizeof(struct net_board)+ntohs(hdr->length)+1);
 
-					printf("Inhalt: %s\n", msg->board_content);
+					read(sock, msg->content, ntohs(hdr->length));
+
+					printf("Inhalt: %s\n", msg->content);
 					fflush(stdout);
 
 					gdk_threads_enter();
-					updateBoard(msg->board_content);
+					updateBoard(msg->content);
 					gdk_threads_leave();
 
-					free(msg->board_content);
 					free(msg);
 					break;
 				}
-			case NET_TYPE_REQUESTED: {
-					struct NET_MESSAGE_REQUESTED *msg = alloc(sizeof(struct NET_MESSAGE_REQUESTED));
+			case m_query: {
+					struct net_query *msg = alloc(sizeof(struct net_query)+ntohs(hdr->length)+1);
+					struct net_reply *rdata = alloc(sizeof(struct net_reply));
 					
-					read(sock, &msg->client_id, sizeof(uint16_t));
+					read(sock, &msg->cid, ntohs(hdr->length));
 
-					msg->name = alloc(ntohs(hdr->lenght)-sizeof(uint16_t)+1);
-					
-					read(sock, msg->name, ntohs(hdr->lenght)-sizeof(uint16_t));
-
-					printf("Client-ID: %i\n", ntohs(msg->client_id));
+					printf("Client-ID: %i\n", ntohs(msg->cid));
 					printf("Name: %s\n", msg->name);
 					fflush(stdout);
 
 					gdk_threads_enter();
-					send_reply(sock, popupQuestionDialog("Sind Sie sicher?","Wollen Sie dem Benutzer wirklich Schreibrechte geben?"), htons(msg->client_id));
+					int a = popupQuestionDialog("Sind Sie sicher?","Wollen Sie dem Benutzer wirklich Schreibrechte geben?");
+					rdata->write = a;
+					rdata->cid = msg->cid;
+					trigger_command(m_reply, rdata);
 					gdk_threads_leave();
 
 					free(msg);

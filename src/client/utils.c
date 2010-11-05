@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "../net_message.h"
+
 void *alloc(size_t size) {
 	/* allocate disk space */
 	void *tmp = malloc(size);

@@ -4,7 +4,7 @@ void hton_header(void *header, int type, int size) {
     struct net_header *nh = (struct net_header *) header;
     
     // Convert to network byte order
-    nh->type = (uint16_t) type;
+    nh->type = (uint8_t) type;
     nh->length = htons((uint16_t) size);
 }
 

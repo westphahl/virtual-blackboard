@@ -3,10 +3,10 @@
 
 #include <netinet/in.h>
 
-struct CLIENT_DATA {
-	uint16_t client_id;
+struct client_data {
+	uint16_t cid;
 	uint8_t role;
-	uint8_t write_per;
+	uint8_t write;
 	uint8_t dozenten;
 	uint8_t tutoren;
 	uint16_t studenten;

@@ -74,10 +74,10 @@ build/logger.o:
 
 # Build the client
 client: build/gui.o build/client.o build/listener_thread.o \
-		build/liveagent_thread.o build/command_handler.o build/cutils.o
+		build/liveagent_thread.o build/command_thread.o build/cutils.o
 	$(CC) $(CCLIENT) $(LDCLIENT) -o build/client build/client.o build/gui.o \
 		build/listener_thread.o build/liveagent_thread.o \
-		build/command_handler.o build/cutils.o
+		build/command_thread.o build/cutils.o
 
 build/client.o: src/client/client.c src/client/client.h src/commons.h src/client/gui.h
 	$(CC) $(CCLIENT) -c -o build/client.o src/client/client.c
@@ -91,8 +91,8 @@ build/listener_thread.o:
 build/liveagent_thread.o:
 	$(CC) $(CCLIENT) -c -o build/liveagent_thread.o src/client/liveagent_thread.c
 
-build/command_handler.o:
-	$(CC) $(CCLIENT) -c -o build/command_handler.o src/client/command_handler.c
+build/command_thread.o:
+	$(CC) $(CCLIENT) -c -o build/command_thread.o src/client/command_thread.c
 
 build/cutils.o:
 	$(CC) $(CCLIENT) -c -o build/cutils.o src/client/utils.c

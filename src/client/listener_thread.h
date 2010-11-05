@@ -3,7 +3,7 @@
 
 struct listenert_data {
     int socket;
-	struct CLIENT_DATA *cdata;
+	struct client_data *cdata;
 };
 
 void* listener_handler(void* data);
