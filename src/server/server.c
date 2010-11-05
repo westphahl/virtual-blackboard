@@ -21,6 +21,9 @@
 #include "mq.h"
 #include "blackboard.h"
 #include "login_thread.h"
+#include "utils.h"
+#include "semaphore.h"
+#include "broadcasting.h"
 
 /*
  * Server for the virtual blackboard.
@@ -44,6 +47,9 @@ int main(int argc, char **argv) {
     key_t bshm_key = BLACKBOARD_SHM_KEY; // Key for the blackboard
     int bshm_id; // Id of the shared memory segment for the blackboard
 
+    key_t bsem_key = BLACKBOARD_SEM_KEY; // Key for the blackboard semaphore
+    int bsem_id; // Id of the blackboard semaphore
+
     struct addrinfo hints; // Hints for getaddrinfo()
     struct addrinfo *result, *rp; // Holds result of getaddrinfo()
     int sfd; // Temporary socket file descriptor
@@ -53,6 +59,7 @@ int main(int argc, char **argv) {
 
     struct logint_data lt_data; // Pointer to login thread data
     pthread_t login_tid; // Id of the login thread
+    pthread_t bcasting_tid; // Id of the broadcasting agent
 
     /*
      * Parse command line option
@@ -177,6 +184,9 @@ int main(int argc, char **argv) {
     // Create message queue for logger
     lmq_id = create_mq(lmq_key);
 
+    // Create semaphore for blackboard access
+    bsem_id = init_sem(bsem_key);
+
     // Create blackboard in shared memory
     bshm_id = init_blackboard(bshm_key);
 
@@ -184,7 +194,10 @@ int main(int argc, char **argv) {
     l_pid = fork();
     if (l_pid == 0) {
         // TODO Exec logger
-        execl("/bin/sleep", "sleep", "999", NULL);
+        if (execlp("logger", "logger", NULL) == -1) {
+            perror("execlp");
+            exit(EXIT_FAILURE);
+        }
     } else if (l_pid < 0) {
         perror("fork logger");
         exit(EXIT_FAILURE);
@@ -195,19 +208,28 @@ int main(int argc, char **argv) {
     if (a_pid == 0) {
         // TODO Exec archiver
         // Pass debug as a command line argument.
-        execl("/bin/sleep", "sleep", "999", NULL);
+        if (execl("/bin/sleep", "sleep", "999", NULL) == -1){
+            perror("execlp");
+            exit(EXIT_FAILURE);
+        }
     } else if (a_pid < 0) {
         perror("fork archiver");
         exit(EXIT_FAILURE);
     }
 
     /*
+     * Create broadcasting agent (thread)
+     */
+    pthread_create(&bcasting_tid, NULL, broadcasting_agent, NULL);
+
+    /*
      * Prepare and create login thread accept loop
      */
     lt_data.fds = socket_fds;
     lt_data.fd_count = socket_count;
-    pthread_create(&login_tid, NULL, login_handler, (void *) &lt_data);
+    pthread_create(&login_tid, NULL, login_thread, (void *) &lt_data);
 
+    log_info("Startup process complete");
     /*
      * Just wait for the logger and archiver to terminate
      * We don't care about exit status
@@ -222,6 +244,10 @@ int main(int argc, char **argv) {
 
     // Delete shared memory segment
     delete_blackboard(bshm_id);
+
+    // Delete blackboard semaphore
+    delete_sem(bsem_id);
+
     // Delete message queue
     delete_mq(lmq_id);
 

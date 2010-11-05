@@ -6,26 +6,14 @@
  */
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
 #include <sys/types.h>
 #include <sys/ipc.h>
 #include <sys/shm.h>
+
 #include "blackboard.h"
 #include "../commons.h"
-
-/*
- * Function: int init_blackboard(key_t key)
- * Description: Creates a new shared memory segment for the blackboard
- * and returns the id of the segment.
- */
-int init_blackboard(key_t key) {
-    int shmid;
-
-    if ((shmid = shmget(key, BLACKBOARD_BYTESIZE, IPC_CREAT | IPC_EXCL | 0600)) < 0) {
-        perror("shmget");
-        exit(EXIT_FAILURE);
-    }
-    return shmid;
-}
 
 /*
  * Function: int get_blackboard(key_t key)
@@ -42,6 +30,55 @@ int get_blackboard(key_t key) {
     return shmid;
 }
 
+char* blackboard_attach(int shmid) {
+    char *bboard;
+
+    if ((bboard = shmat(shmid, (void *) 0, 0)) < (char *) 0) {
+        perror("shmat");
+        exit(EXIT_FAILURE);
+    }
+    return bboard;
+}
+
+void blackboard_detach(char *bboard) {
+    if (shmdt((void *) bboard) < 0) {
+        perror("shmdt");
+        exit(EXIT_FAILURE);
+    }
+}
+
+/*
+ * Function: int init_blackboard(key_t key)
+ * Description: Creates a new shared memory segment for the blackboard
+ * and returns the id of the segment.
+ */
+int init_blackboard(key_t key) {
+    int shmid;
+    char *board;
+    char welcome[] = "Welcome!\0";
+
+    if ((shmid = shmget(key, BLACKBOARD_BYTESIZE, IPC_CREAT | IPC_EXCL | 0600)) < 0) {
+        perror("shmget");
+        exit(EXIT_FAILURE);
+    }
+
+    board = blackboard_attach(shmid);
+
+    // Initialize shared memory with 0
+    memset(board, 0, BLACKBOARD_BYTESIZE);
+
+    /*
+     * Copy welcome string
+     * The last byte should be 0, so only 1199 Bytes are copied
+     */
+    strncpy(board, welcome, BLACKBOARD_BYTESIZE - 1);
+
+    fprintf(stdout, "Segment contains: %s\n", board);
+    blackboard_detach(board);
+
+    return shmid;
+}
+
 /*
  * Function: int init_blackboard(key_t key)
  * Description: Deletes the shared memory segment specified by
@@ -53,6 +90,5 @@ void delete_blackboard(int shmid) {
 
     if ((shmctl(shmid, IPC_RMID, &shm_ds) < 0)) {
         perror("shmctl");
-        exit(EXIT_FAILURE);
     }
 }

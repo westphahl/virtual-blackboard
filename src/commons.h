@@ -27,5 +27,9 @@
 #define PORT_RANGE_MIN          49152
 #define PORT_RANGE_MAX          65535
 
+#define INDIFFERENT 0
+#define STUDENT 1
+#define DOCENT 2
+
 #endif /* BLACKBOARD_COMMONS_H_ */
 

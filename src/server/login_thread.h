@@ -11,6 +11,6 @@ struct logint_data {
     int fd_count;
 };
 
-void* login_handler(void *data);
+void* login_thread(void *data);
 
 #endif
