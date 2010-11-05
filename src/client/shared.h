@@ -3,7 +3,6 @@
 
 #define BLACKBOARD_SEM_KEY 528
 
-int board_sem_id;
-struct sembuf board_sem;
+pthread_mutex_t mutex_board;
 
 #endif

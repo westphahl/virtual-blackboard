@@ -1,28 +1,20 @@
 #ifndef CLIENT_H_
 #define CLIENT_H_
 
- /****** Dipl.-Inform.(FH) Elias Drotleff / HS Ravensburg-Weingarten *******\
- *                                                                          *
- * Projekt:				Blackboard                          *
- *                                                                          *
- * Modulname:                           client                              *
- *                                                                          *
- * Modultyp:                            Funktionsbibliotek / Globale Daten  *
- *                                                                          *
- * Sprache:                             C                                   *
- *                                                                          *
- * Kurzbeschreibung:                    Hauptprogramm                       *
- *                                                                          *
- * Ersteller/Fach:      Elias Drotleff / Projektarbeit Sysop                *
- * Erstellungsdatum:	10.05.2007                                          *
- * letzte Aenderung:	11.03.2009                                          *
- *                                                                          *
- \**************************************************************************/
+#include <netinet/in.h>
 
+struct CLIENT_DATA {
+	uint16_t client_id;
+	uint8_t role;
+	uint8_t write_per;
+	uint8_t dozenten;
+	uint8_t tutoren;
+	uint16_t studenten;
+	char *name;
+};
 
-
-
-
-
+int updateGUIstate();
+void updateBoard(char *text);
+char *get_blackboard();
 
 #endif /*CLIENT_H_*/

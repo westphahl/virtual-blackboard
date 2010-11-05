@@ -9,7 +9,7 @@ LDCLIENT	= $(LDFLAGS) `pkg-config --libs gtk+-2.0` -lgthread-2.0
 LDSERVER	= $(LDFLAGS)
 
 # Build everything
-all: client server logger
+all: clean client server logger
 
 # Build the server
 server: build/server.o build/signal_handler.o build/mq.o build/utils.o \
@@ -73,14 +73,29 @@ build/logger.o:
 # archiver:
 
 # Build the client
-client: build/gui.o build/client.o
-	$(CC) $(CCLIENT) $(LDCLIENT) -o build/client build/client.o build/gui.o
+client: build/gui.o build/client.o build/listener_thread.o \
+		build/liveagent_thread.o build/command_handler.o build/cutils.o
+	$(CC) $(CCLIENT) $(LDCLIENT) -o build/client build/client.o build/gui.o \
+		build/listener_thread.o build/liveagent_thread.o \
+		build/command_handler.o build/cutils.o
 
 build/client.o: src/client/client.c src/client/client.h src/commons.h src/client/gui.h
 	$(CC) $(CCLIENT) -c -o build/client.o src/client/client.c
 
 build/gui.o: src/client/gui.c src/client/gui.h src/commons.h
 	$(CC) $(CCLIENT) -c -o build/gui.o src/client/gui.c
+
+build/listener_thread.o:
+	$(CC) $(CCLIENT) -c -o build/listener_thread.o src/client/listener_thread.c
+	
+build/liveagent_thread.o:
+	$(CC) $(CCLIENT) -c -o build/liveagent_thread.o src/client/liveagent_thread.c
+
+build/command_handler.o:
+	$(CC) $(CCLIENT) -c -o build/command_handler.o src/client/command_handler.c
+
+build/cutils.o:
+	$(CC) $(CCLIENT) -c -o build/cutils.o src/client/utils.c
 
 # Clean up the build directory
 clean:

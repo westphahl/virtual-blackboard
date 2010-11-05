@@ -1,6 +1,26 @@
 #ifndef BLACKBOARD_COMMONS_H_
 #define BLACKBOARD_COMMONS_H_
 
+#include <pthread.h>
+#include <stdio.h>
+#include <sys/signal.h>
+#include <errno.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <netdb.h>
+#include <arpa/inet.h>
+#include <limits.h>
+#include <string.h>
+#include <getopt.h>
+#include <sys/time.h>
+#include <string.h>
+#include <sys/ipc.h>
+#include <sys/sem.h>
+#include <sys/wait.h>
+#include <sys/types.h>
+
  /****** Dipl.-Inform.(FH) Elias Drotleff / HS Ravensburg-Weingarten *******\
  *                                                                          *
  * Projekt:                    Blackboard                                   *
