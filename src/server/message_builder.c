@@ -35,6 +35,7 @@ struct net_status* build_status(uint8_t role, uint16_t cid,
 
 /*
  * Build a board message
+ * The length parameter specifies the length of content.
  */
 struct net_board* build_board(char *content, int length) {
     struct net_board *board = NULL;
@@ -79,6 +80,8 @@ struct net_query* build_query(uint16_t cid, char *name, int length) {
 /*
  * Build a error message
  * The length parameter specifies the lenght of detail.
+ *
+ * See net_header.h for available error codes.
  */
 struct net_error* build_error(uint8_t ecode, char *detail, int length) {
     struct net_error *error = NULL;

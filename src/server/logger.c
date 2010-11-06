@@ -8,36 +8,44 @@
 #include "shared.h"
 #include "mq.h"
 
+/*
+ * Logger process
+ *
+ * Reads incoming log message from a message queue and
+ * logs them to a file.
+ * It takes the loglevel as a optional argument. By default
+ * only error and info messages are logged.
+ *
+ * Loglevel:    1 = debug, info, error
+ *              0 = info, error (default)
+ */
 int main(int argc, char **argv) {
-    /*
-    if(argc != 1) {
-        fprintf(stderr, "Es wird ein Parameter benötigt");
-        exit(1);
-    }
-    */
-
     int mq_id;
     struct logmessage buffer;
     FILE* file;
+    int debug = 0;
 
-    fprintf(stdout, "opened file");
+    if (argc > 1) {
+        debug = *argv[1];
+    }
+
     /* Open logfile */
-    if((file = fopen("log.txt", "a")) == NULL) {
+    if ((file = fopen("server.log", "w")) == NULL) {
         perror("fopen");
         exit(1);
     }
 
-    /* Open message queue */
+    /* Open the message queue */
     mq_id = get_mq(LOGGER_MQ_KEY);
 
-    /* Wait for log in message queue */
+    fprintf(stdout, "Logger: process started and waiting for log messages\n");
+
+    /* Wait for new messages to arrive */
     while(1) {
-        //if(msgrcv(mq_id, &buffer, MSGSIZE, MSGTYPE_INFO, 0) < 0) {
-        //    perror("msgrcv");
-        //    exit(1);
-        //}
+        /* Get a new log message */
         buffer = read_mq(mq_id);
 
+        /* Write log message to file */
         switch(buffer.level) {
         case 1:
             fprintf(file, "[ERROR] %ld %s \n", buffer.time, buffer.message);
@@ -46,7 +54,9 @@ int main(int argc, char **argv) {
             fprintf(file, "[INFO] %ld %s \n", buffer.time, buffer.message);
             break;
         case 3:
-            fprintf(file, "[DEBUG] %ld %s \n", buffer.time, buffer.message);
+            if (debug) {
+                fprintf(file, "[DEBUG] %ld %s \n", buffer.time, buffer.message);
+            }
             break;
         }
 

@@ -40,25 +40,26 @@ int login_handler(int sfd) {
      */
     header = (struct net_header *) malloc(sizeof(struct net_header));
     if (header == NULL) {
+        log_error("login handler: malloc failed");
         exit(EXIT_FAILURE);
     }
     ret = recv(sfd, header, sizeof(struct net_header), MSG_WAITALL);
 
-    // Close socket if not a login message
+    /* Close socket if not a login message */
     if (header->type != m_login) {
         free(header);
         log_error("login handler: got wrong message type.");
         return 1;
     }
 
-    // Connection closed by client or error
+    /* Connection closed by client or error */
     if (ret <= 0) {
         free(header);
         log_error("login handler: connection closed by client");
         return -1;
     }
     
-    // Convert to host byte order
+    /* Convert header to host byte order */
     ntoh_header(header);
 
     /* 
@@ -68,15 +69,19 @@ int login_handler(int sfd) {
     if (header->length < 2) {
         free(header);
         log_error("login handler: login message too short.");
-        return 1;
+        return -1;
     }
 
-    // Allocate memory for receive buffer
+    /* Allocate memory for receive buffer */
     rbuf = malloc(header->length);
-    // Receive login message
+    if (rbuf == NULL) {
+        free(header);
+        log_error("login handler: malloc failed");
+    }
+    /* Receive login message */
     ret = recv(sfd, rbuf, header->length, MSG_WAITALL);
 
-    //Connection closed by client or error
+    /* Connection closed by client or error */
     if (ret == 0) {
         log_error("login handler: connection closed by client");
         free(header);
@@ -85,25 +90,59 @@ int login_handler(int sfd) {
     } else if (ret < 0) {
         log_error("login handler: connection error");
         free(header);
+        free(rbuf);
         return -1;
     }
 
-    // Allocate memory for client login message
+    /* Allocate memory for client login message */
     cdata = (struct client_data *) malloc(sizeof(struct client_data) +
             header->length);
+    if (cdata == NULL) {
+        log_error("login handler: malloc failed");
+        exit(EXIT_FAILURE);
+    }
 
+    /* Initialize cdata with 0 */
     memset(cdata, 0, sizeof(struct client_data) + header->length);
 
+    /*
+     * Get the next available client id
+     * get_next_cid() returns 0 if the max number
+     * of clients is exceeded
+     */
     cdata->cid = get_next_cid();
     if (cdata->cid == 0) {
-        // TODO Sent error message
-        // Too many clients
+        struct net_error *error;
+        char message[] = "There are too many clients. Sorry!\0";
+
+        log_error("login handler: too many clients");
+        error = build_error(e_login, message, strlen(message));
+
+        ret = send(cdata->sfd, error, sizeof(struct net_error) +
+                strlen(message), 0);
+        if (ret < 0) {
+            perror("send");
+        }
+
+        free(header);
+        free(rbuf);
+        free(cdata);
+        return -1;
     }
     cdata->sfd = sfd;
 
-    // Copy role
+    /* Copy role */
     memcpy(&cdata->role, rbuf, header->length);
 
+    /*
+     * See if the requested role is available
+     *
+     * If the role is INDIFFERENT make the client
+     * docent if there is no docent, else make student.
+     *
+     * If the requested role is DOCENT and there is
+     * allready a docent make student.
+     */
     switch (cdata->role) {
         case INDIFFERENT:
             lock_clientlist();
@@ -126,26 +165,32 @@ int login_handler(int sfd) {
             cdata->role = STUDENT;
     }
 
+    /* Add the client to client list */
     add_client(cdata);
 
     /* Send client initial blackboard */
     blackboard = blackboard_attach(bshm_id);
 
+    /* Get the current board content */
     lock_sem(bsem_id);
     length = strlen(blackboard);
     board = build_board(blackboard, length);
     unlock_sem(bsem_id);
 
+    /* Detach from the shared memory segment */
     blackboard_detach(blackboard);
 
+    /* Send the initial board */
     ret = send(sfd, board, sizeof(struct net_board) + length, 0);
     if (ret < 0) {
         perror("send");
     }
 
+    /* Trigger a status update */
     trigger_status();
 
     log_info("login handler: client login successful");
+    free(board);
     free(header);
     free(rbuf);
 
@@ -188,6 +233,7 @@ int board_handler(int sfd, uint16_t length, int mtype) {
     /* Attach blackboard in shared memory */
     blackboard = blackboard_attach(bshm_id);
 
+    /* Check if this is a clear message */
     if (mtype == m_clear) {
         /* Trigger archiver */
         lock_sem(asem_id);
@@ -226,8 +272,7 @@ int board_handler(int sfd, uint16_t length, int mtype) {
 
         /* Copy the board content into the shared memory segment */
         memcpy(blackboard, board->content, length);
-        // TODO Debug output
-        fprintf(stdout, "blackboard: %s\n", blackboard);
+        fprintf(stdout, "BLACKBOARD CONTENT>>> \n%s\n", blackboard);
         free(board);
     }
 
@@ -236,7 +281,7 @@ int board_handler(int sfd, uint16_t length, int mtype) {
     /* Detach the shared memory segment */
     blackboard_detach(blackboard);
 
-    /* Trigger broadcast of blackboard of clear */
+    /* Trigger broadcast of blackboard */
     if (mtype == m_board) {
         trigger_blackboard();
     } else if (mtype == m_clear) {
@@ -246,7 +291,10 @@ int board_handler(int sfd, uint16_t length, int mtype) {
 }
 
 /*
- * Handles a request to change privileges
+ * Handles requests to change privileges
+ * Returns -1 on error.
+ *
+ * Dealing with errors is up to the caller.
  */
 int request_handler(int sfd) {
     struct net_request *request;
@@ -258,11 +306,12 @@ int request_handler(int sfd) {
 
     request = (struct net_request *) malloc(sizeof(struct net_request));
     if (request == NULL) {
+        log_error("request handler: malloc failed");
         exit(EXIT_FAILURE);
     }
     ret = recv(sfd, &request->write, sizeof(uint8_t), MSG_WAITALL);
 
-    // Connection closed by client or error
+    /* Connection closed by client or error */
     if (ret == 0) {
         log_error("request handler: connection closed by client");
         free(request);
@@ -273,6 +322,7 @@ int request_handler(int sfd) {
         return -1;
     }
 
+    /* Lock the client list */
     lock_clientlist();
 
     /* Check if user allready has write access */
@@ -291,15 +341,32 @@ int request_handler(int sfd) {
         user = get_write_user();
         set_write_user(docent);
 
-        // TODO
-        // Notify old client with write access
+        struct net_error *error;
+        char message[] = "Your write acces was revoked by the docent.\0";
+
+        log_error("request handler: write access revoked");
+        error = build_error(e_message, message, strlen(message));
+
+        ret = send(sfd, error, sizeof(struct net_error) +
+                strlen(message), 0);
+        if (ret < 0) {
+            perror("send");
+        }
 
         trigger_status();
     } else if (request->write == 0) {
+        /*
+         * Give back write access
+         */
         set_write_user(docent);
         trigger_status();
     } else {
-        // Handle situation wherer no docent exists
+        /*
+         * Handle situation wherer no docent exists.
+         *
+         * A client can gain write access if there is noone with
+         * write privileges.
+         */
         if (docent_exists() == 0) {
             if (tutor_exists()) {
                 unlock_clientlist();
@@ -314,6 +381,7 @@ int request_handler(int sfd) {
                 return 0;
             }
         }
+
         /* Get requesting user */
         user = get_user_sfd(sfd);
         if (user == NULL) {
@@ -321,6 +389,7 @@ int request_handler(int sfd) {
             unlock_clientlist();
             return -1;
         }
+
         length = strlen(user->cdata->name);
         query = build_query(user->cdata->cid, user->cdata->name, length);
         ret = send(docent->cdata->sfd, query, sizeof(struct net_query) + length, 0);
@@ -337,6 +406,10 @@ int request_handler(int sfd) {
     return 0;
 }
 
+/*
+ * Handle reply of docent in response to a request by a client
+ *
+ */
 int reply_handler(int sfd) {
     struct net_reply *reply;
     struct cl_entry *user;
@@ -349,7 +422,7 @@ int reply_handler(int sfd) {
     ret = recv(sfd, &reply->write, sizeof(uint8_t) +
             sizeof(uint16_t),MSG_WAITALL);
 
-    // Connection closed by client or error
+    /* Connection closed by client or error */
     if (ret == 0) {
         log_error("reply handler: connection closed by client");
         free(reply);
@@ -360,11 +433,10 @@ int reply_handler(int sfd) {
         return -1;
     }
 
+    /* Convert to host byte order */
     reply->cid = ntohs(reply->cid);
 
-    fprintf(stdout, "Got reply from docent: write=%i, cid=%i\n",
-            reply->write, reply->cid);
-
+    log_debug("reply handler: got reply from docent");
     lock_clientlist();
 
     if (is_docent(sfd) == 0) {
@@ -377,7 +449,9 @@ int reply_handler(int sfd) {
     user = get_user_cid(reply->cid);
 
     if (reply->write == 0) {
-        // TODO Sent message to client
+        /*
+         * Notify the client if the request was denied
+         */
         struct net_error *error;
         char message[] = "Request denied by docent\0";
         error = build_error(e_message, message, strlen(message));
@@ -390,7 +464,7 @@ int reply_handler(int sfd) {
         free(error);
         free(reply);
         unlock_clientlist();
-        log_info("reply handler: write access denied");
+        log_debug("reply handler: write access denied");
         return 0;
     }
 
@@ -401,9 +475,11 @@ int reply_handler(int sfd) {
         log_error("reply handler: user not found");
         return 0;
     }
+
+    /* Set the new write user */
     set_write_user(user);
     unlock_clientlist();
-    log_info("reply handler: write access granted");
+    log_debug("reply handler: write access granted");
 
     free(reply);
     trigger_status();

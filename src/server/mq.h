@@ -14,6 +14,7 @@ struct logmessage {
 int create_mq(key_t key);
 int get_mq(key_t key);
 void delete_mq(int mq_id);
+
 struct logmessage read_mq(int mq_id);
 void write_mq(int mq_id, struct logmessage buffer);
 

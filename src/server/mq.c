@@ -19,7 +19,7 @@
 int create_mq(key_t key) {
     int mq_id;
 
-    if ((mq_id = msgget(key, IPC_CREAT | IPC_EXCL| 0666)) < 0) {
+    if ((mq_id = msgget(key, IPC_CREAT | IPC_EXCL| 0600)) < 0) {
         perror("msgget");
         exit(EXIT_FAILURE);
     }
@@ -34,7 +34,7 @@ int create_mq(key_t key) {
 int get_mq(key_t key) {
     int mq_id;
 
-    if ((mq_id = msgget(key, 0666)) < 0) {
+    if ((mq_id = msgget(key, 0600)) < 0) {
         perror("msgget");
         exit(EXIT_FAILURE);
     }
@@ -53,6 +53,11 @@ void delete_mq(int mq_id) {
     }
 }
 
+/*
+ * Function: struct logmessage read_mq(int mq_id)
+ * Description: Reads a log message from the message queue
+ * specified by id.
+ */
 struct logmessage read_mq(int mq_id) {
     struct logmessage buffer;
 
@@ -64,6 +69,11 @@ struct logmessage read_mq(int mq_id) {
     return buffer;
 }
 
+/*
+ * Function: void write_mq(int mq_id, struct logmessage buffer)
+ * Description: Writes a log message from the message queue
+ * specified by id.
+ */
 void write_mq(int mq_id, struct logmessage buffer) {
     if(msgsnd(mq_id, &buffer, MSGSIZE, IPC_NOWAIT) < 0) {
         perror("msgsnd");

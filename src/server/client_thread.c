@@ -9,6 +9,11 @@
 #include "client_list.h"
 #include "broadcasting.h"
 
+
+/*
+ * Client thread that is created by the login thread
+ * for every incomming connection.
+ */
 void* client_handler(void *sfd) {
     int socket_fd = * (int *) sfd;
     int ret;
@@ -17,7 +22,7 @@ void* client_handler(void *sfd) {
     log_info("client thread: handle a new login");
 
     if ((ret = login_handler(socket_fd)) != 0) {
-        log_error("client thread: connection closed by client");
+        log_error("client thread: login failed");
         close(socket_fd);
         pthread_exit(NULL);
     }
@@ -58,9 +63,9 @@ void* client_handler(void *sfd) {
                 ret = reply_handler(socket_fd);
                 break;
             default:
-                // Non-RFC compliant message received
-                // TODO Set to -1
-                ret = 0;
+                /* Non-RFC compliant message received */
+                log_error("client thread: message type unknown");
+                ret = -1;
         }
         free(header);
 

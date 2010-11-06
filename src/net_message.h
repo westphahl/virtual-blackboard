@@ -18,7 +18,7 @@ enum message_types {
 
 enum error_codes {e_message, e_fatal, e_login};
 
-// Avoid padding problems
+/* Avoid padding problems */
 #pragma pack(1)
 struct net_header {
     uint8_t type;
@@ -46,20 +46,20 @@ struct net_board {
     char content[];
 };
 
-// Ask server for write permissions
+/* Ask server for write permissions */
 struct net_request {
     struct net_header header;
     uint8_t write;
 };
 
-// Query docent for write permissions
+/* Query docent for write permissions */
 struct net_query {
     struct net_header header;
     uint16_t cid;
     char name[];
 };
 
-// Reply of docent
+/* Reply of docent */
 struct net_reply {
     struct net_header header;
     uint8_t write;
@@ -74,7 +74,6 @@ struct net_error {
 #pragma pack(0)
 
 void hton_header(void *header, int type, int size);
-
 void ntoh_header(void *header);
 
 #endif

@@ -37,20 +37,15 @@ int main(int argc, char **argv) {
     char *listen_port = DEFAULT_PORT; // Server TCP port as string
     int debug = 0; // Debug mode; default off
     int opt;
+    char dst[INET6_ADDRSTRLEN]; //  Host buffer for genameinfo()
+    char service[INET6_ADDRSTRLEN]; // Service buffer for getnameinf()
 
     pid_t l_pid; // Holds the pid of the logger
     pid_t a_pid; // Holds the pid of the archiver
 
-    key_t lmq_key = LOGGER_MQ_KEY; // Key for logger message queue
     int lmq_id; // Id of the message queue for loggin
-
-    key_t bshm_key = BLACKBOARD_SHM_KEY; // Key for the blackboard
     int bshm_id; // Id of the shared memory segment for the blackboard
-
-    key_t bsem_key = BLACKBOARD_SEM_KEY; // Key for the blackboard semaphore
     int bsem_id; // Id of the blackboard semaphore
-
-    key_t asem_key = ARCHIVER_SEM_KEY; // Key for the archiver semaphore
     int asem_id; // Id of the archiver semaphore
 
     struct addrinfo hints; // Hints for getaddrinfo()
@@ -72,7 +67,7 @@ int main(int argc, char **argv) {
     while ((opt = getopt(argc, argv, "dp:")) != -1) {
         switch(opt) {
             case 'd':
-                // Run server in debug mode
+                /* Run server in debug mode */
                 debug = 1;
                 break;
             case 'p':
@@ -103,14 +98,14 @@ int main(int argc, char **argv) {
      * Bind to all available sockets IPv4 + IPv6
      */
 
-    // Set all bits of hint to 0
+    /* Set all bits of hint to 0 */
     memset(&hints, 0, sizeof(struct addrinfo));
 
-    // Prepare hints for getaddrinfo()
+    /* Prepare hints for getaddrinfo() */
     hints.ai_family = AF_UNSPEC; // Allow IPv4 or IPv6
     hints.ai_socktype = SOCK_STREAM; // Stream socket
     hints.ai_protocol = IPPROTO_TCP; // Use TCP
-    hints.ai_flags = AI_PASSIVE;// | AI_V4MAPPED;
+    hints.ai_flags = AI_PASSIVE; // Get sockets we can bind() to
 
     ret = getaddrinfo(NULL, listen_port, &hints, &result);
     if (ret != 0) {
@@ -126,27 +121,28 @@ int main(int argc, char **argv) {
     for (rp = result; rp != NULL; rp = rp->ai_next) {
         int on = 1;
 
+        // Get the socket
         sfd = socket(rp->ai_family, rp->ai_socktype, rp->ai_protocol);
         if (sfd == -1) {
             perror("socket");
             continue;
         }
 
-        //Reuse the socket
+        /*
+         * Try to reuse the port even if it is busy (in TIME_WAIT state)
+         * This may fail but continue anyway
+         */
         if (setsockopt(sfd, SOL_SOCKET, SO_REUSEADDR, &on, sizeof(on)) < 0) {
-            perror("setsockopt"); // Maybe not so fatal, continue ...
+            perror("setsockopt");
         }
 
-        // Set IPv6 options
+        /* Set IPv6 options if this is a IPv6 socket */
         if (rp->ai_family == AF_INET6) {
             if (setsockopt(sfd, IPPROTO_IPV6, IPV6_V6ONLY, &on, sizeof(on)) < 0) {
                 perror("setsockopt");
             }
         }
 
-        // TODO Debug output
-        char dst[INET6_ADDRSTRLEN];
-        char service[INET6_ADDRSTRLEN];
         getnameinfo(rp->ai_addr,
                 rp->ai_addrlen,
                 dst,
@@ -157,50 +153,43 @@ int main(int argc, char **argv) {
 
         fprintf(stdout, "Trying %s:%s ...\n", dst, service),
         fflush(stdout);
-        // TODO END
 
         if (bind(sfd, rp->ai_addr, rp->ai_addrlen) == 0) {
             if (listen(sfd, 5) == -1) {
                 perror("listen");
                 close(sfd);
             } else {
-                // Add to valid sockets
+                /* Add to valid sockets */
                 socket_fds[socket_count++] = sfd;
             }
         } else {
             perror("bind");
             close(sfd);
         }
-        // TODO Debug output
-        fprintf(stdout, "Socket: %i, %i\n", sfd, socket_count);
     }
 
-    // We no longer need all the address structures
+    /* We no longer need all the address structures */
     freeaddrinfo(result);
     
-    // Exit if there are no sockets to bind to
+    /* Exit if there are no sockets to bind to */
     if (socket_count == 0) {
-        fprintf(stderr, "No sockets to bind to!\n");
+        fprintf(stderr, "Server: no sockets to bind to!\n");
         exit(EXIT_FAILURE);
     }
 
-    // Create message queue for logger
-    lmq_id = create_mq(lmq_key);
+    /* Create message queue for logger */
+    lmq_id = create_mq(LOGGER_MQ_KEY);
+    /* Create semaphore for blackboard access */
+    bsem_id = init_sem(BLACKBOARD_SEM_KEY);
+    /* Create blackboard in shared memory */
+    bshm_id = init_blackboard(BLACKBOARD_SHM_KEY);
+    /* Create semaphore for archiver (trigger) */
+    asem_id = init_sem(ARCHIVER_SEM_KEY);
 
-    // Create semaphore for blackboard access
-    bsem_id = init_sem(bsem_key);
-
-    // Create blackboard in shared memory
-    bshm_id = init_blackboard(bshm_key);
-
-    // Create semaphore for archiver (trigger)
-    asem_id = init_sem(asem_key);
-
-    // Fork Logger
+    /* Fork the logger */
     l_pid = fork();
     if (l_pid == 0) {
-        // TODO Exec logger
-        if (execlp("logger", "logger", NULL) == -1) {
+        if (execlp("logger", "logger", debug, NULL) == -1) {
             perror("execlp");
             exit(EXIT_FAILURE);
         }
@@ -209,12 +198,10 @@ int main(int argc, char **argv) {
         exit(EXIT_FAILURE);
     }
     
-    // Fork Archiver
+    /* Fork archiver */
     a_pid = fork();
     if (a_pid == 0) {
-        // TODO Exec archiver
-        // Pass debug as a command line argument.
-        if (execlp("archiver", "archiver", NULL) == -1){
+        if (execlp("archiver", "archiver", debug, NULL) == -1){
             perror("execlp");
             exit(EXIT_FAILURE);
         }
@@ -235,30 +222,30 @@ int main(int argc, char **argv) {
     lt_data.fd_count = socket_count;
     pthread_create(&login_tid, NULL, login_thread, (void *) &lt_data);
 
-    log_info("Startup process complete");
+    log_info("server: startup process complete");
+    fprintf(stdout, "Server: startup process complete.\n");
+
     /*
      * Just wait for the logger and archiver to terminate
      * We don't care about exit status
      */
     waitpid(l_pid, NULL, 0);
     waitpid(a_pid, NULL, 0);
-    fprintf(stdout, "Child processes terminated.\n");
+    fprintf(stdout, "Server: shuting down ...\n");
 
-    // Close all sockets
+    /* Close all sockets */
     for (int i = 0; i < socket_count; i++)
         close(socket_fds[i]);
 
-    // Delete archiver semaphore
+    /* Delete archiver semaphore */
     delete_sem(asem_id);
-
-    // Delete shared memory segment
+    /* Delete shared memory segment */
     delete_blackboard(bshm_id);
-
-    // Delete blackboard semaphore
+    /* Delete blackboard semaphore */
     delete_sem(bsem_id);
-
-    // Delete message queue
+    /* Delete message queue */
     delete_mq(lmq_id);
 
+    fprintf(stdout, "Done.\n");
     exit(EXIT_SUCCESS);
 }

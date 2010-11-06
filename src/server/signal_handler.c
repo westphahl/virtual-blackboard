@@ -13,7 +13,7 @@
  * in the server process is executed.
  */
 void sigint() {
-    // Reset signal
+    /* Reset signal */
     signal(SIGINT, sigint);
     fprintf(stdout, "\nWaiting for child processes to terminate ...\n");
 }

@@ -30,6 +30,9 @@ int get_blackboard(key_t key) {
     return shmid;
 }
 
+/*
+ * Attach to the shared memory segment
+ */
 char* blackboard_attach(int shmid) {
     char *bboard;
 
@@ -40,6 +43,9 @@ char* blackboard_attach(int shmid) {
     return bboard;
 }
 
+/*
+ * Detach from the shared memory segment
+ */
 void blackboard_detach(char *bboard) {
     if (shmdt((void *) bboard) < 0) {
         perror("shmdt");
@@ -64,7 +70,7 @@ int init_blackboard(key_t key) {
 
     board = blackboard_attach(shmid);
 
-    // Initialize shared memory with 0
+    /* Initialize shared memory with 0 */
     memset(board, 0, BLACKBOARD_BYTESIZE);
 
     /*
@@ -73,7 +79,6 @@ int init_blackboard(key_t key) {
      */
     strncpy(board, welcome, BLACKBOARD_BYTESIZE - 1);
 
-    fprintf(stdout, "Segment contains: %s\n", board);
     blackboard_detach(board);
 
     return shmid;
@@ -85,7 +90,7 @@ int init_blackboard(key_t key) {
  * the shared memory id.
  */
 void delete_blackboard(int shmid) {
-    // Shared memory data structure to hold results
+    /* Shared memory data structure to hold results */
     struct shmid_ds shm_ds; 
 
     if ((shmctl(shmid, IPC_RMID, &shm_ds) < 0)) {

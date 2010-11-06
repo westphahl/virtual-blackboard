@@ -16,6 +16,7 @@
 #include "shared.h"
 #include "semaphore.h"
 
+/* Mutex that protects the condition variable and broadcast type */
 static pthread_mutex_t trigger_mutex = PTHREAD_MUTEX_INITIALIZER;
 static pthread_cond_t trigger_bcast = PTHREAD_COND_INITIALIZER;
 enum broadcast_t {STATUS, BLACKBOARD, CLEAR};
@@ -191,6 +192,8 @@ void* broadcasting_agent(void *arg) {
         }
     }
     pthread_mutex_unlock(&trigger_mutex);
+    /* Detach from the shared memory */
+    blackboard_detach(blackboard);
 
     pthread_exit(NULL);
 }

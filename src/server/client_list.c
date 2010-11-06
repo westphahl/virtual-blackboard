@@ -9,12 +9,12 @@
 
 static struct cl_entry *cl_first = NULL;
 static struct cl_entry *cl_last = NULL;
-// Points to the user that is docent, if not available NULL
+/* Points to the user that is docent, if not available NULL */
 static struct cl_entry *user_docent = NULL;
-// Points to the user who has write access
+/* Points to the user who has write access */
 static struct cl_entry *user_write = NULL;
 
-// Holds the current position of the iteration
+/* Holds the current position of the iteration */
 static struct cl_entry *iterator = NULL;
 
 /* Mutex for access to client list */
@@ -47,7 +47,7 @@ void unlock_clientlist() {
 void add_client(struct client_data *cdata) {
     struct cl_entry *new_entry;
 
-    // Allocate memory for new client list entry
+    /* Allocate memory for new client list entry */
     new_entry = (struct cl_entry *) malloc(sizeof(struct cl_entry));
     if (new_entry == NULL) {
         fprintf(stderr, "malloc: failed in client_list.c\n");
@@ -56,21 +56,21 @@ void add_client(struct client_data *cdata) {
 
     new_entry->cdata = cdata;
     
-    // Lock the client list
+    /* Lock the client list */
     pthread_mutex_lock(&cl_mutex);
 
-    // See if list is empty
+    /* Check if list is empty */
     if (cl_first == NULL) {
         cl_first = new_entry;
     } else {
         cl_last->next = new_entry;
     }
     
-    // Set pointers appropriately
+    /* Set pointers appropriately */
     new_entry->previous = cl_last;
     new_entry->next = NULL;
 
-    // Set new last element
+    /* Set new last element */
     cl_last = new_entry;
 
     if (new_entry->cdata->role == DOCENT) {
@@ -90,7 +90,7 @@ void add_client(struct client_data *cdata) {
 int remove_client(int sfd) {
     struct cl_entry *old_entry;
 
-    // Lock client list
+    /* Lock client list */
     pthread_mutex_lock(&cl_mutex);
 
     for (old_entry = cl_first;
@@ -99,20 +99,21 @@ int remove_client(int sfd) {
 
     if (old_entry == NULL) return 1;
     
-    // First element of client list?
+    /* First element of client list? */
     if (old_entry->previous == NULL) {
         cl_first = old_entry->next;
     } else {
         old_entry->previous->next = old_entry->next;
     }
 
-    // Last element of client list?
+    /* Last element of client list? */
     if (old_entry->next == NULL) {
         cl_last = old_entry->previous;
     } else {
         old_entry->next->previous = old_entry->previous;
     }
 
+    /* User with write access? */
     if (old_entry == user_write) {
         if (old_entry == user_docent) {
             user_write = NULL;
@@ -121,6 +122,7 @@ int remove_client(int sfd) {
         }
     }
 
+    /* User is docent? */
     if (old_entry == user_docent) {
         user_docent = NULL;
     }
@@ -136,6 +138,8 @@ int remove_client(int sfd) {
 /*
  * Searches the client list for a docent.
  * Returns 1 if a docent was found, otherwise 0.
+ *
+ * Make sure to lock the client list mutex!
  */
 int docent_exists() {
     if (user_docent != NULL) {
@@ -148,6 +152,8 @@ int docent_exists() {
 /*
  * Check if there is a tutor
  * Returns 1 if there is one, otherwise 0.
+ *
+ * Make sure to lock the client list mutex!
  */
 int tutor_exists() {
     if ((user_write == NULL) || (user_docent == user_write)) {
@@ -204,6 +210,8 @@ struct cl_entry* get_user_sfd(int sfd) {
 
 /*
  * Returns NULL if there is no user with the given client id
+ *
+ * Make sure to lock the client list mutex!
  */
 struct cl_entry* get_user_cid(uint16_t cid) {
     struct cl_entry *current;
@@ -298,6 +306,7 @@ struct cl_entry* iteration_next() {
 
 /*
  * End iteration
+ * This unlocks the client list mutex
  */
 void end_iteration() {
     iterator = NULL;

@@ -27,18 +27,12 @@ int main(int argc, char **argv) {
     // TODO
     // Create a thread if in debug mode
 
-    fprintf(stdout, "Archiver startup complete.\n");
+    fprintf(stdout, "Archiver: process started and waiting for trigger\n");
     fflush(stdout);
 
     while(1) {
         /* Wait for trigger */
-
-        fprintf(stdout, "ARCHIVER: WAITING FOR TRIGGER ...\n");
-        fflush(stdout);
-
         wait_sem(asem_id);
-        fprintf(stdout, "ARCHIVER: Got trigger.\n");
-        fflush(stdout);
 
         /* Lock blackboard */
         lock_sem(bsem_id);
