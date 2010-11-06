@@ -1,14 +1,16 @@
+#define _POSIX_SOURCE
 #include <pthread.h>
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys/types.h>
+#include <signal.h>
 
 #include "../net_message.h"
 #include "message_handler.h"
 #include "utils.h"
 #include "client_list.h"
 #include "broadcasting.h"
-
 
 /*
  * Client thread that is created by the login thread
@@ -61,6 +63,13 @@ void* client_handler(void *sfd) {
                 break;
             case m_reply:
                 ret = reply_handler(socket_fd);
+                break;
+            case m_shutdown:
+                ret = kill(0, SIGINT);
+                if (ret < 0) {
+                    perror("kill");
+                    fprintf(stdout, "client thread: error sending signal SIGINT");
+                }
                 break;
             default:
                 /* Non-RFC compliant message received */
