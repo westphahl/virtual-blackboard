@@ -25,7 +25,6 @@ struct liveagentt_data {
     int socket;
 };
 
-static pthread_mutex_t board_mutex;
-static pthread_mutex_t cdata_mutex;
+static int pipefd[2];
 
 #endif

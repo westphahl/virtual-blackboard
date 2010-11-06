@@ -20,6 +20,8 @@
 // User headers
 #include "command_thread.h"
 #include "client.h"
+#include "gui.h"
+#include "listener_thread.h"
 #include "utils.h"
 #include "shared.h"
 #include "../commons.h"
@@ -184,10 +186,9 @@ void send_shutdown(int socket) {
 /*
  * Trigger to call commands.
  */
-void trigger_command(int type, struct net_reply *reply) {
+void trigger_command(int type) {
     pthread_mutex_lock(&trigger_cmd_mutex); // Lock cmd mutex
     command_type = type; // Set command type
-    rdata = reply; // Set reply-data
     pthread_cond_signal(&trigger_cmd); // Send condition signal
     pthread_mutex_unlock(&trigger_cmd_mutex); // Unlock cmd mutex
 }
@@ -212,7 +213,9 @@ void *command_handler(void *data) {
             	// Send login
             	printf("Login senden ...\n");
             	fflush(stdout);
+            	cdata_lock();
                 send_login(socket, cdata->role, cdata->name);
+                cdata_unlock();
                 break;
             case m_clear:
             	// Send clean board
@@ -223,7 +226,7 @@ void *command_handler(void *data) {
             case m_request:
             	// Send request
             	printf("Request senden ...\n");
-            	fflush(stdout);
+            	fflush(stdout);            	
             	if(cdata->role == 2) {
             		send_request(socket, 1);
             	} else {
@@ -234,7 +237,17 @@ void *command_handler(void *data) {
             	// Send reply
             	printf("Reply senden ...\n");
             	fflush(stdout);
-            	send_reply(socket, rdata->write, rdata->cid);
+            	
+            	uint8_t write = 0;        
+            	uint16_t cid = 0;    	
+            	gdk_threads_enter();
+				write = (uint8_t)popupQuestionDialog("Sind Sie sicher?","Wollen Sie dem Benutzer wirklich Schreibrechte geben?");
+				gdk_threads_leave();
+				
+				// Read client-id from pipe
+				read(pipefd[0], &cid, sizeof(uint16_t));
+
+            	send_reply(socket, write, cid);
             	rdata =  NULL;
                 break;
             case m_shutdown:

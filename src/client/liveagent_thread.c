@@ -38,8 +38,12 @@ struct liveagentt_data *la_data;
  */
 void send_board_content() {
     int ret = 0;
+    pthread_mutex_lock(&la_data_mutex); // Lock la_data mutex
     int socket = la_data->socket;
+    pthread_mutex_unlock(&la_data_mutex); // Unlock la_data mutex
+    
     // Get blackboard from client
+    board_lock();
 	char *buffer = get_blackboard();
 
 	// Allocate disk space for board message
@@ -59,6 +63,8 @@ void send_board_content() {
         perror("send");
         fflush(stdout);
     }
+    
+    board_unlock();
 
     // Release allocated disk space
 	free(msg);

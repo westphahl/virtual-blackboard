@@ -36,8 +36,6 @@
 #include "../commons.h"
 #include "../net_message.h"
 
-static pthread_mutex_t cdata_mutex = PTHREAD_MUTEX_INITIALIZER;
-static pthread_mutex_t board_mutex = PTHREAD_MUTEX_INITIALIZER;
 // Global variables
 static struct client_data cdata;
 static int sock;
@@ -47,7 +45,7 @@ static char *blackboard;
  * Update gui labels with role, name, client-id, ...
  */
 int updateGUIstate() {
-	pthread_mutex_lock(&cdata_mutex); // Lock cdata mutex	
+	cdata_lock();
 	
 	// Temporary char buffer
 	static char tmp[256];
@@ -58,7 +56,7 @@ int updateGUIstate() {
 	gtk_widget_modify_base(GTK_WIDGET(textview), GTK_STATE_NORMAL, &tmpColor);
 
 	// Update user-data labels
-	sprintf(tmp,"Tafelrechte\n%s", cdata.write ? "[lesen/schreiben]" : "[lesen]");
+	sprintf(tmp,"Tafelrechte\n%s", cdata.write ? "[schreiben]" : "[lesen]");
 	gtk_label_set_text(statusWrite, tmp);
 
 	sprintf(tmp, "Name: \t[%s]\nRolle: \t[%s]\nCID:\t[%i]",
@@ -78,13 +76,13 @@ int updateGUIstate() {
 	// Disable illegal buttons
 	gtk_widget_set_sensitive(GTK_WIDGET(requestWrite), cdata.role==2 ? 0 : 1);
 	gtk_widget_set_sensitive(GTK_WIDGET(removePermissions), cdata.role==2 ? 1 : 0);
-	gtk_widget_set_sensitive(GTK_WIDGET(logBlackboard), cdata.role==2 ? 1 : 0);
+	gtk_widget_set_sensitive(GTK_WIDGET(logBlackboard), cdata.write ? 1 : 0);
 	gtk_widget_set_sensitive(GTK_WIDGET(quitAll), cdata.role==2 ? 1 : 0);
 	
 	// Enable/Disable textview
 	gtk_text_view_set_editable(textview, cdata.write);
 	
-	pthread_mutex_unlock(&cdata_mutex); // Unlock cdata mutex
+	cdata_unlock();
 
 	return 0;
 }
@@ -124,7 +122,7 @@ gint on_application_exit(GtkWidget * widget, GdkEvent event, gpointer daten) {
  */
 void on_button_request_write_clicked(GtkButton * button, gpointer user_data) {
 	// Trigger request for write permisson
-	trigger_command(m_request, NULL);
+	trigger_command(m_request);
 }
 
 /*
@@ -134,7 +132,7 @@ void on_button_quit_all_clicked(GtkButton * button, gpointer user_data) {
 	// Call popup question
 	if(popupQuestionDialog("Sind Sie sicher?","Wollen Sie das Programm und den Server wirklich beenden?")) {
 		// Trigger shutdown
-		trigger_command(m_shutdown, NULL);
+		trigger_command(m_shutdown);
 		// Quit programm
 		gtk_main_quit();
 	}
@@ -155,7 +153,7 @@ void on_button_quit_clicked(GtkButton * button, gpointer user_data) {
  */
 void on_button_log_clicked(GtkButton * button, gpointer user_data) {
 	// Trigger clean board
-	trigger_command(m_clear, NULL);
+	trigger_command(m_clear);
 }
 
 /*
@@ -163,7 +161,7 @@ void on_button_log_clicked(GtkButton * button, gpointer user_data) {
  */
 void on_button_remove_permissions_clicked(GtkButton * button, gpointer user_data) {
 	// Trigger request
-	trigger_command(m_request, NULL);
+	trigger_command(m_request);
 }
 
 /*
@@ -183,7 +181,9 @@ void on_text_buffer_changed(GtkTextBuffer *textbuffer, gpointer user_data) {
 		buffer = gtk_text_buffer_get_text(textbuffer, &startIter, &endIter, FALSE);
 		
 		// Assign buffer to blackboard
+		board_lock();
 		blackboard = buffer;
+		board_unlock();
 
 		// Update timestamp
 		static char tmp[256];
@@ -230,6 +230,17 @@ char *get_blackboard() {
  *      -r <ROLE>   Set user-role
  */
 int main(int argc, char **argv) {
+	if(argc < 1) {
+		printf("Must at least specify a server.\n\n");
+		printf("Usage: client [OPTIONS] ...\n");
+		printf("   -s  --server    Server ip or name (default localhost)\n");
+		printf("   -p  --port      Specify a port (default 50000)\n");
+		printf("   -n  --name      Name (default Guest)\n");
+		printf("   -1  --student   Login as student\n");
+		printf("   -2  --docent    Login as docent\n\n");
+		printf("   -h  --help      Show this help message\n");
+		return 0; // Close program
+	}
     // Socket variables
 	char *listen_port = DEFAULT_PORT;
     char *server_addr = NULL;
@@ -240,12 +251,14 @@ int main(int argc, char **argv) {
     
     // Parser options
     int opt;
-    const char* short_options = "s:p:u:r:";
+    const char* short_options = "s:p:n:12h";
 	struct option long_options[] = {
 		{"server", 1, NULL, 's'},
 		{"port", 1, NULL, 'p'},
-		{"username", 1, NULL, 'u'},
-		{"role", 1, NULL, 'r'},
+		{"name", 1, NULL, 'n'},
+		{"student", 0, NULL, '1'},
+		{"docent", 0, NULL, '2'},
+		{"help", 0, NULL, 'h'},
 		{NULL, 0, NULL, 0}
 	};
 	int long_index = 0;
@@ -269,7 +282,7 @@ int main(int argc, char **argv) {
 	cdata.dozenten = 0;
 	cdata.tutoren = 0;
 	cdata.studenten = 0;
-	cdata.name = "Nobody";
+	cdata.name = "Guest";
 
     // Parser for command-line options
     while ((opt = getopt_long(argc, argv, short_options, long_options, &long_index)) != -1) {
@@ -291,15 +304,31 @@ int main(int argc, char **argv) {
                 	listen_port = DEFAULT_PORT;
             	}
             	break;
-			case 'u':
+			case 'n':
 				// Set username
-				printf("  --username %s\n", optarg);
+				printf("  --name %s\n", optarg);
 				cdata.name = optarg;
 				break;
-			case 'r':
-				// Set user-role
-				printf("  --role %i\n", atoi(optarg));
-				cdata.role = atoi(optarg);
+			case '1':
+				// Set user-role student
+				printf("  --role 1\n");
+				cdata.role = 1;
+				break;
+			case '2':
+				// Set user-role docent
+				printf("  --role 2\n");
+				cdata.role = 2;
+				break;
+			case 'h':
+				// Show help message
+				printf("Usage: client [OPTIONS] ...\n");
+				printf("   -s  --server    Server ip or name (default localhost)\n");
+				printf("   -p  --port      Specify a port (default 50000)\n");
+				printf("   -n  --name      Name (default Guest)\n");
+				printf("   -1  --student   Login as student\n");
+				printf("   -2  --docent    Login as docent\n\n");
+				printf("   -h  --help      Show this help message\n");
+				return 0;
 				break;
         }
     }
@@ -343,6 +372,11 @@ int main(int argc, char **argv) {
         if (connect(sock, p->ai_addr, p->ai_addrlen) == 0) {
 			printf("Connected\n");
 			fflush(stdout);
+			
+			// Open pipe
+			if(pipe(pipefd) == -1) {
+				perror("pipe");
+			}
 
 			// Activate gtk threading
 	        g_thread_init(NULL);
@@ -376,10 +410,11 @@ int main(int argc, char **argv) {
             	return(EXIT_FAILURE);
             }
             
+            sleep(1);
+            
             // Login to server
-			pthread_mutex_lock(&cdata_mutex); // Lock cdata mutex
-			send_login(sock, cdata.role, cdata.name);
-			pthread_mutex_unlock(&cdata_mutex); // Unlock cdata mutex
+			//send_login(sock, cdata.role, cdata.name);
+			trigger_command(m_login);
             
 			// Start gui
 	        gdk_threads_enter();
@@ -387,7 +422,10 @@ int main(int argc, char **argv) {
 	        gdk_threads_leave();
 
 	        // TODO Clean up
-			pthread_mutex_destroy(&board_mutex); // Destroy board mutex
+			board_destroy(); // Destroy board mutex
+			cdata_destroy(); // Destroy cdata mutex
+			close(pipefd[0]); // Close pipe fd's
+			close(pipefd[1]);
 
             close(sock); // Close connection
 			break;
@@ -400,10 +438,7 @@ int main(int argc, char **argv) {
 		p = p->ai_next;
     }
 
-	// Wait for threads
-	//pthread_join(listener_tid, NULL);
-    //pthread_join(command_tid, NULL);
-    //pthread_join(liveagent_tid, NULL);
+	// Wait for threads ???
 
     // Delete addressinfo
     freeaddrinfo(addr_info);

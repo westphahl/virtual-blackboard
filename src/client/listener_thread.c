@@ -46,11 +46,11 @@ void *listener_handler(void *data) {
 	fflush(stdout);
 
 	// Allocate disk space for message-head    
-	struct net_header *hdr = alloc(sizeof(struct net_header));
+	struct net_header *hdr = (struct net_header *)alloc(sizeof(struct net_header));
 
     while(1) {
     	// Read message-head
-        ret = read(socket, hdr, sizeof(*hdr));
+        ret = recv(socket, hdr, sizeof(*hdr), MSG_WAITALL);
         
         /*
         printf("Typ: %i\n", hdr->type);
@@ -79,7 +79,7 @@ void *listener_handler(void *data) {
 					struct net_status *msg = alloc(sizeof(struct net_status));
 					
 					// Read socket and save data
-					read(socket, &msg->role, ntohs(hdr->length));
+					recv(socket, &msg->role, ntohs(hdr->length), MSG_WAITALL);
 
 					printf("Rolle: %i\n", msg->role);
 					printf("Client-ID: %i\n", ntohs(msg->cid));
@@ -90,13 +90,15 @@ void *listener_handler(void *data) {
 					fflush(stdout);
 					
 					// Write result in client-data
+					cdata_lock();
 					cdata->role = msg->role;
 					cdata->cid = ntohs(msg->cid);
 					cdata->write = msg->write;
 					cdata->dozenten = msg->dcount;
 					cdata->tutoren = msg->tcount;
 					cdata->studenten = ntohs(msg->scount);
-
+					cdata_unlock();
+		
 					// Send command to gui thread
 					gdk_threads_enter();
 					updateGUIstate();	
@@ -112,7 +114,7 @@ void *listener_handler(void *data) {
 					struct net_error *msg = alloc(sizeof(struct net_error)+ntohs(hdr->length)+1);
 					
 					// Read socket and save data
-					read(socket, &msg->ecode, hdr->length);
+					recv(socket, &msg->ecode, ntohs(hdr->length), MSG_WAITALL);
 
 					printf("Code: %i\n", msg->ecode);
 					printf("Detail: %s\n", msg->detail);
@@ -133,11 +135,17 @@ void *listener_handler(void *data) {
 				}
 				// Receive blackboard
 				case m_board: {
+					printf("Type: %i, Length: %i\n", hdr->type, ntohs(hdr->length));
+					fflush(stdout);
 					// Allocate disk space for blackboard
 					struct net_board *msg = alloc(sizeof(struct net_board)+ntohs(hdr->length)+1);
 
 					// Read socket and save data
-					read(socket, msg->content, ntohs(hdr->length));
+					if(ntohs(hdr->length) == 0) {
+						read(socket, msg->content, ntohs(hdr->length));
+					} else {
+						recv(socket, msg->content, ntohs(hdr->length), MSG_WAITALL);
+					}
 
 					printf("Inhalt: %s\n", msg->content);
 					fflush(stdout);
@@ -158,19 +166,17 @@ void *listener_handler(void *data) {
 					struct net_reply *rdata = alloc(sizeof(struct net_reply));
 					
 					// Read socket and save data
-					read(socket, &msg->cid, ntohs(hdr->length));
+					recv(socket, &msg->cid, ntohs(hdr->length), MSG_WAITALL);
 
 					printf("Client-ID: %i\n", ntohs(msg->cid));
 					printf("Name: %s\n", msg->name);
 					fflush(stdout);
-	
-					// Send reply to server
-					gdk_threads_enter();
-					int a = popupQuestionDialog("Sind Sie sicher?","Wollen Sie dem Benutzer wirklich Schreibrechte geben?");
-					rdata->write = a;
-					rdata->cid = ntohs(msg->cid);
-					trigger_command(m_reply, rdata);
-					gdk_threads_leave();
+					
+					// Write client-id into pipe
+					uint16_t cid = ntohs(msg->cid);
+					write(pipefd[1], &cid, sizeof(uint16_t));
+						
+					trigger_command(m_reply); // send reply
 
 					// Release allocated disk space
 					free(rdata);
