@@ -79,6 +79,21 @@ void unlock_sem(int semid) {
 }
 
 /*
+ * Function: void wait_sem(int semid)
+ * Description: Wait for the specified semaphore to become zero
+ */
+void wait_sem(int semid) {
+    struct sembuf wait_buf;
+    wait_buf.sem_num = 0;
+    wait_buf.sem_op = 0;
+    wait_buf.sem_flg = 0;
+    if (semop(semid, &wait_buf, 1) < 0) {
+        perror("semop");
+        exit(EXIT_FAILURE);
+    }
+}
+
+/*
  * Function: void delete_sem(int semid)
  * Description: Removes the specified semaphore
  */

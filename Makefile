@@ -87,7 +87,15 @@ build/logger.o:
 	$(CC) $(CSERVER) -c -o build/logger.o src/server/logger.c
 
 # Build the archiver
-# archiver:
+archiver: build/archiver.o \
+	build/semaphore.o \
+	build/blackboard.o
+	$(CC) $(CSERVER) $(LDSERVER) -o build/archiver build/archiver.o \
+		build/semaphore.o \
+		build/blackboard.o
+
+build/archiver.o:
+	$(CC) $(CSERVER) -c -o build/archiver.o src/server/archiver.c
 
 # Build the client
 client: build/gui.o \

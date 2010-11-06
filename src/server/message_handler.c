@@ -95,6 +95,10 @@ int login_handler(int sfd) {
     memset(cdata, 0, sizeof(struct client_data) + header->length);
 
     cdata->cid = get_next_cid();
+    if (cdata->cid == 0) {
+        // TODO Sent error message
+        // Too many clients
+    }
     cdata->sfd = sfd;
 
     // Copy role
@@ -169,10 +173,8 @@ int board_handler(int sfd, uint16_t length, int mtype) {
         return 0;
     }
 
-    if (mtype == m_clear) {
-        // TODO
-        // Trigger archivierer
-    }
+    /* Get trigger semaphore for archiver */
+    int asem_id = get_sem(ARCHIVER_SEM_KEY);
 
     /* Get semaphore for blackboard access */
     key_t bsem_key = BLACKBOARD_SEM_KEY;
@@ -185,6 +187,13 @@ int board_handler(int sfd, uint16_t length, int mtype) {
 
     /* Attach blackboard in shared memory */
     blackboard = blackboard_attach(bshm_id);
+
+    if (mtype == m_clear) {
+        /* Trigger archiver */
+        lock_sem(asem_id);
+        /* Wait for the archiver to finish */
+        lock_sem(asem_id);
+    }
 
     /* Lock the blackboard semaphore */
     lock_sem(bsem_id);

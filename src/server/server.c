@@ -50,6 +50,9 @@ int main(int argc, char **argv) {
     key_t bsem_key = BLACKBOARD_SEM_KEY; // Key for the blackboard semaphore
     int bsem_id; // Id of the blackboard semaphore
 
+    key_t asem_key = ARCHIVER_SEM_KEY; // Key for the archiver semaphore
+    int asem_id; // Id of the archiver semaphore
+
     struct addrinfo hints; // Hints for getaddrinfo()
     struct addrinfo *result, *rp; // Holds result of getaddrinfo()
     int sfd; // Temporary socket file descriptor
@@ -190,6 +193,9 @@ int main(int argc, char **argv) {
     // Create blackboard in shared memory
     bshm_id = init_blackboard(bshm_key);
 
+    // Create semaphore for archiver (trigger)
+    asem_id = init_sem(asem_key);
+
     // Fork Logger
     l_pid = fork();
     if (l_pid == 0) {
@@ -208,7 +214,7 @@ int main(int argc, char **argv) {
     if (a_pid == 0) {
         // TODO Exec archiver
         // Pass debug as a command line argument.
-        if (execl("/bin/sleep", "sleep", "999", NULL) == -1){
+        if (execlp("archiver", "archiver", NULL) == -1){
             perror("execlp");
             exit(EXIT_FAILURE);
         }
@@ -241,6 +247,9 @@ int main(int argc, char **argv) {
     // Close all sockets
     for (int i = 0; i < socket_count; i++)
         close(socket_fds[i]);
+
+    // Delete archiver semaphore
+    delete_sem(asem_id);
 
     // Delete shared memory segment
     delete_blackboard(bshm_id);
