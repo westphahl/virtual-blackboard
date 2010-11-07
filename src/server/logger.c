@@ -25,6 +25,7 @@ int main(int argc, char **argv) {
     FILE* file;
     int debug = 0;
 
+	/* Set debug mode */
     if (argc > 1) {
         debug = *argv[1];
     }
@@ -48,19 +49,22 @@ int main(int argc, char **argv) {
         /* Write log message to file */
         switch(buffer.level) {
         case 1:
+        	/* Log error message */
             fprintf(file, "[ERROR] %ld %s \n", buffer.time, buffer.message);
             break;
         case 2:
+        	/* Log info message */
             fprintf(file, "[INFO] %ld %s \n", buffer.time, buffer.message);
             break;
         case 3:
-            if (debug) {
+        	/* Log debug message */
+            if(debug) {
                 fprintf(file, "[DEBUG] %ld %s \n", buffer.time, buffer.message);
             }
             break;
         }
-
-        fflush(file);
+        
+        fflush(file); // Flush logfile
     }
-    fclose(file);
+    fclose(file); // Close logfile
 }
