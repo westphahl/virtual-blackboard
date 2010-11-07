@@ -1,10 +1,5 @@
-#ifndef LISTENER_THREAD_H
-#define LISTENER_THREAD_H
-
-struct listenert_data {
-    int socket;
-	struct client_data *cdata;
-};
+#ifndef LISTENER_THREAD_H_
+#define LISTENER_THREAD_H_
 
 void* listener_handler(void* data);
 

@@ -1,11 +1,7 @@
-#ifndef LIVEAGENT_THREAD_H
-#define LIVEAGENT_THREAD_H
+#ifndef LIVEAGENT_THREAD_H_
+#define LIVEAGENT_THREAD_H_
 
-struct liveagentt_data {
-    int socket;
-};
-
-void handler(int signum);
+void trigger_liveagent();
 void* liveagent_handler(void* data);
 
 #endif
