@@ -270,6 +270,11 @@ int board_handler(int sfd, uint16_t length, int mtype) {
             return -1;
         }
 
+        /* Truncate board if necessary */
+        if (length > 1199) {
+            log_error("board handler: board too long");
+            length = 1199;
+        }
         /* Copy the board content into the shared memory segment */
         memcpy(blackboard, board->content, length);
         fprintf(stdout, "BLACKBOARD CONTENT>>> \n%s\n", blackboard);
