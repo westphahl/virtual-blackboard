@@ -123,6 +123,7 @@ gint on_application_exit(GtkWidget * widget, GdkEvent event, gpointer daten) {
 void on_button_request_write_clicked(GtkButton * button, gpointer user_data) {
 	// Trigger request for write permisson
 	trigger_command(m_request);
+	gtk_widget_set_sensitive(GTK_WIDGET(requestWrite), 0);
 }
 
 /*
