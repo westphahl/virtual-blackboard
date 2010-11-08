@@ -1,6 +1,6 @@
 CC      	= gcc
 
-CFLAGS  	= -g -pthread -ansi -std=c99 -D_SVID_SOURCE -pedantic-errors -Wall
+CFLAGS  	= -g -pthread -ansi -std=c99 -D_SVID_SOURCE -pedantic-errors -Wall -pg
 CCLIENT 	= $(CFLAGS) `pkg-config --cflags gtk+-2.0`
 CSERVER 	= $(CFLAGS)
 
