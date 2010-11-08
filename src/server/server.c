@@ -35,7 +35,7 @@
 int main(int argc, char **argv) {
     unsigned int lport = strtol(DEFAULT_PORT, NULL , 10); // Server TCP port
     char *listen_port = DEFAULT_PORT; // Server TCP port as string
-    int debug = 0; // Debug mode; default off
+    char debug = 0; // Debug mode; default off
     int opt;
     char dst[INET6_ADDRSTRLEN]; //  Host buffer for genameinfo()
     char service[INET6_ADDRSTRLEN]; // Service buffer for getnameinf()
@@ -189,7 +189,7 @@ int main(int argc, char **argv) {
     /* Fork the logger */
     l_pid = fork();
     if (l_pid == 0) {
-        if (execlp("logger", "logger", debug, NULL) == -1) {
+        if (execlp("logger", "logger", &debug, NULL) == -1) {
             perror("execlp");
             exit(EXIT_FAILURE);
         }
@@ -201,7 +201,7 @@ int main(int argc, char **argv) {
     /* Fork archiver */
     a_pid = fork();
     if (a_pid == 0) {
-        if (execlp("archiver", "archiver", debug, NULL) == -1){
+        if (execlp("archiver", "archiver", &debug, NULL) == -1){
             perror("execlp");
             exit(EXIT_FAILURE);
         }
