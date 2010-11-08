@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
+#include <errno.h>
 
 #include "login_thread.h"
 #include "client_thread.h"
@@ -47,11 +48,19 @@ void* login_thread(void *data) {
          * Wait for one or more socket fds to become "ready"
          * select() returns the number of file descriptors 
          * contained in the descriptor set
+         *
+         * If select() was interrupted by a signal the select loop
+         * is restarted.
          */
         ready = select(highest_fd+1, &set, NULL, NULL, NULL);
         if (ready == -1) {
-            perror("select");
-            return NULL;
+            if (errno != EINTR) {
+                perror("select");
+                return NULL;
+            } else {
+                /* select() was interrupted by a signal */
+                continue;
+            }
         }
 
         for (int i = 0; i < socket_count; i++) {
