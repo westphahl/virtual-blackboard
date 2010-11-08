@@ -128,6 +128,7 @@ void *listener_handler(void *data) {
 					// Call popup in gui-thread
 					gdk_threads_enter();
 					popupMessage(tmp);
+					gtk_widget_set_sensitive(GTK_WIDGET(requestWrite), 1);
 					gdk_threads_leave();
 
 					// Release allocated disk space
@@ -176,7 +177,7 @@ void *listener_handler(void *data) {
 					uint16_t cid = ntohs(msg->cid);
 					
 					static char tmp[1024];
-					sprintf(tmp, "Wollen Sie dem Benutzer '%s' wirklich Schreibrechte geben?", msg->name);
+					sprintf(tmp, "Wollen Sie dem Benutzer '%s' (ID:%i) wirklich Schreibrechte geben?", msg->name, msg->cid);
 					
 					gdk_threads_enter();
 					write = (uint8_t)popupQuestionDialog("Schreibrechtanfrage", tmp);
