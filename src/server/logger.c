@@ -25,9 +25,12 @@ int main(int argc, char **argv) {
     FILE* file;
     int debug = 0;
 
-	/* Set debug mode */
-    if (argc > 1) {
-        debug = *argv[1];
+	/* 
+     * Set debug mode
+     * (49 is the ASCII representation of 1)
+     */
+    if ((argc > 1) && (argv[1][0] == 49)) {
+        debug = 1;
     }
 
     /* Open logfile */

@@ -35,7 +35,7 @@
 int main(int argc, char **argv) {
     unsigned int lport = strtol(DEFAULT_PORT, NULL , 10); // Server TCP port
     char *listen_port = DEFAULT_PORT; // Server TCP port as string
-    char debug = 0; // Debug mode; default off
+    char debug[2] = "0\0"; // Debug mode; default off
     int opt;
     char dst[INET6_ADDRSTRLEN]; //  Host buffer for genameinfo()
     char service[INET6_ADDRSTRLEN]; // Service buffer for getnameinf()
@@ -68,7 +68,7 @@ int main(int argc, char **argv) {
         switch(opt) {
             case 'd':
                 /* Run server in debug mode */
-                debug = 1;
+                debug[0] = '1';
                 break;
             case 'p':
                 /* 
