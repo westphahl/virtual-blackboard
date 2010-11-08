@@ -9,7 +9,7 @@ LDCLIENT	= $(LDFLAGS) `pkg-config --libs gtk+-2.0` -lgthread-2.0
 LDSERVER	= $(LDFLAGS)
 
 # Build everything
-all: clean client server logger
+all: clean client server logger archiver
 
 # Build the server
 server: build/server.o \
