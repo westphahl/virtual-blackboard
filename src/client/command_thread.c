@@ -13,6 +13,7 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <sys/wait.h>
+#include <sys/msg.h>
 
 // GTK header
 #include <gtk/gtk.h>
@@ -33,7 +34,6 @@ static pthread_mutex_t trigger_cmd_mutex = PTHREAD_MUTEX_INITIALIZER;
 static pthread_cond_t trigger_cmd = PTHREAD_COND_INITIALIZER;
 static int command_type = m_login;
 // Various data structs
-static struct net_reply *rdata;
 static struct commandt_data *cm_data;
 
 /*
@@ -200,7 +200,7 @@ void *command_handler(void *data) {
 	cm_data = (struct commandt_data *)data;
 	int socket = cm_data->socket;
 	struct client_data *cdata = cm_data->cdata;
-	
+
     printf("Command-Thread gestartet\n");
 	fflush(stdout);
 	
@@ -232,23 +232,6 @@ void *command_handler(void *data) {
             	} else {
             		send_request(socket, !cdata->write);
             	}
-                break;
-            case m_reply:
-            	// Send reply
-            	printf("Reply senden ...\n");
-            	fflush(stdout);
-            	
-            	uint8_t write = 0;        
-            	uint16_t cid = 0;    	
-            	gdk_threads_enter();
-				write = (uint8_t)popupQuestionDialog("Sind Sie sicher?","Wollen Sie dem Benutzer wirklich Schreibrechte geben?");
-				gdk_threads_leave();
-				
-				// Read client-id from pipe
-				read(pipefd[0], &cid, sizeof(uint16_t));
-
-            	send_reply(socket, write, cid);
-            	rdata =  NULL;
                 break;
             case m_shutdown:
             	// Send reply

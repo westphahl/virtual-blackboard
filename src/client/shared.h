@@ -25,6 +25,4 @@ struct liveagentt_data {
     int socket;
 };
 
-static int pipefd[2];
-
 #endif

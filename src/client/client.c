@@ -60,7 +60,7 @@ int updateGUIstate() {
 	gtk_label_set_text(statusWrite, tmp);
 
 	sprintf(tmp, "Name: \t[%s]\nRolle: \t[%s]\nCID:\t[%i]",
-			cdata.name, cdata.role ? "Dozent" : (cdata.write ? "Tutor" : "Student"), cdata.cid);
+			cdata.name, cdata.role==2 ? "Dozent" : (cdata.write ? "Tutor" : "Student"), cdata.cid);
 	gtk_label_set_text(statusRole, tmp);
 
 	sprintf(tmp, "Zeit der letzten Änderung\n[%li]", time(NULL));
@@ -195,10 +195,10 @@ void on_text_buffer_changed(GtkTextBuffer *textbuffer, gpointer user_data) {
 		static struct itimerval itimer;
 
 		// Setup timer
-		itimer.it_interval.tv_sec= 500/1000;
+		itimer.it_interval.tv_sec= 250/1000;
 		itimer.it_interval.tv_usec= 0;
-		itimer.it_value.tv_sec= 500/1000;
-		itimer.it_value.tv_usec= 500*1000;
+		itimer.it_value.tv_sec= 250/1000;
+		itimer.it_value.tv_usec= 250*1000;
 		
 		// Check timer state
 		if(counter < 6) {
@@ -372,11 +372,6 @@ int main(int argc, char **argv) {
         if (connect(sock, p->ai_addr, p->ai_addrlen) == 0) {
 			printf("Connected\n");
 			fflush(stdout);
-			
-			// Open pipe
-			if(pipe(pipefd) == -1) {
-				perror("pipe");
-			}
 
 			// Activate gtk threading
 	        g_thread_init(NULL);
@@ -424,8 +419,6 @@ int main(int argc, char **argv) {
 	        // TODO Clean up
 			board_destroy(); // Destroy board mutex
 			cdata_destroy(); // Destroy cdata mutex
-			close(pipefd[0]); // Close pipe fd's
-			close(pipefd[1]);
 
             close(sock); // Close connection
 			break;

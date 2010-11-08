@@ -19,6 +19,7 @@
 #include <sys/wait.h>
 #include <sys/types.h>
 #include <signal.h>
+#include <sys/msg.h>
 
 // GTK header
 #include <gtk/gtk.h>
@@ -163,23 +164,27 @@ void *listener_handler(void *data) {
 				case m_query: {
 					// Allocated disk space for query and return data
 					struct net_query *msg = alloc(sizeof(struct net_query)+ntohs(hdr->length)+1);
-					struct net_reply *rdata = alloc(sizeof(struct net_reply));
 					
 					// Read socket and save data
 					recv(socket, &msg->cid, ntohs(hdr->length), MSG_WAITALL);
 
-					printf("Client-ID: %i\n", ntohs(msg->cid));
-					printf("Name: %s\n", msg->name);
-					fflush(stdout);
+					//printf("Client-ID: %i\n", ntohs(msg->cid));
+					//printf("Name: %s\n", msg->name);
+					//fflush(stdout);
 					
-					// Write client-id into pipe
+					uint8_t write = 0;
 					uint16_t cid = ntohs(msg->cid);
-					write(pipefd[1], &cid, sizeof(uint16_t));
-						
-					trigger_command(m_reply); // send reply
+					
+					static char tmp[1024];
+					sprintf(tmp, "Wollen Sie dem Benutzer '%s' wirklich Schreibrechte geben?", msg->name);
+					
+					gdk_threads_enter();
+					write = (uint8_t)popupQuestionDialog("Schreibrechtanfrage", tmp);
+					gdk_threads_leave();
+					
+					send_reply(socket, write, cid);
 
 					// Release allocated disk space
-					free(rdata);
 					free(msg);
 					break;
 				}
