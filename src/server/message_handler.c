@@ -94,7 +94,7 @@ int login_handler(int sfd) {
         return -1;
     }
 
-    /* Allocate memory for client login message */
+    /* Allocate memory for client data */
     cdata = (struct client_data *) malloc(sizeof(struct client_data) +
             header->length);
     if (cdata == NULL) {
@@ -342,12 +342,12 @@ int request_handler(int sfd) {
         set_write_user(docent);
 
         struct net_error *error;
-        char message[] = "Your write acces was revoked by the docent.\0";
+        char message[] = "Your write access was revoked by the docent.\0";
 
-        log_error("request handler: write access revoked");
+        log_info("request handler: write access revoked");
         error = build_error(e_message, message, strlen(message));
 
-        ret = send(sfd, error, sizeof(struct net_error) +
+        ret = send(user->cdata->sfd, error, sizeof(struct net_error) +
                 strlen(message), 0);
         if (ret < 0) {
             perror("send");
@@ -399,6 +399,8 @@ int request_handler(int sfd) {
             unlock_clientlist();
             return -1;
         }
+
+        log_info("request handler: write access requested");
         free(query);
     }
     free(request);
