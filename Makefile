@@ -112,15 +112,10 @@ client: build/gui.o \
 		build/command_thread.o \
 		build/cutils.o
 
-build/client.o: src/client/client.c \
-	src/client/client.h \
-	src/commons.h \
-	src/client/gui.h
+build/client.o: src/client/client.c
 	$(CC) $(CCLIENT) -c -o build/client.o src/client/client.c
 
-build/gui.o: src/client/gui.c \
-	src/client/gui.h \
-	src/commons.h
+build/gui.o: src/client/gui.c
 	$(CC) $(CCLIENT) -c -o build/gui.o src/client/gui.c
 
 build/listener_thread.o:
