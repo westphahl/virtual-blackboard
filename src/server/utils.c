@@ -18,13 +18,14 @@
  * Use a wrapper function instead.
  */
 void log_message(int level, char* message) {
+    key_t lmq_key = ftok(FTOK_PATH, LMQ_ID);
     int mq_id;
     struct logmessage buffer;
     /* Initialize buffer with 0 */
     memset(&buffer, 0, sizeof(struct logmessage));
 
     /* Get the message queue */
-    mq_id = get_mq(LOGGER_MQ_KEY);
+    mq_id = get_mq(lmq_key);
 
     buffer.type = MSGTYPE;
     buffer.level = level;

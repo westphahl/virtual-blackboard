@@ -58,11 +58,14 @@ int main(int argc, char **argv) {
     /* Id of the thread in debug mode */
     pthread_t debug_tid;
     /* Get the semaphore id for the trigger */
-    int asem_id = get_sem(ARCHIVER_SEM_KEY);
+    key_t asem_key = ftok(FTOK_PATH, ASEM_ID);
+    int asem_id = get_sem(asem_key);
     /* Get the semaphore id for blackboard access */
-    int bsem_id = get_sem(BLACKBOARD_SEM_KEY);
+    key_t bsem_key = ftok(FTOK_PATH, BSEM_ID);
+    int bsem_id = get_sem(bsem_key);
     /* Get id of the shared memory segment */
-    int bshm_id = get_blackboard(BLACKBOARD_SHM_KEY);
+    key_t bshm_key = ftok(FTOK_PATH, BSHM_ID);
+    int bshm_id = get_blackboard(bshm_key);
     /* Attach to the shared memory segment */
     char *blackboard = blackboard_attach(bshm_id);
 

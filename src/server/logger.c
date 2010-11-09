@@ -20,6 +20,7 @@
  *              0 = info, error (default)
  */
 int main(int argc, char **argv) {
+    key_t lmq_key = ftok(FTOK_PATH, LMQ_ID);
     int mq_id;
     struct logmessage buffer;
     FILE* file;
@@ -40,7 +41,7 @@ int main(int argc, char **argv) {
     }
 
     /* Open the message queue */
-    mq_id = get_mq(LOGGER_MQ_KEY);
+    mq_id = get_mq(lmq_key);
 
     fprintf(stdout, "Logger: process started and waiting for log messages\n");
 

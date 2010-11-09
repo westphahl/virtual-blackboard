@@ -43,7 +43,12 @@ int main(int argc, char **argv) {
     pid_t l_pid; // Holds the pid of the logger
     pid_t a_pid; // Holds the pid of the archiver
 
-    int lmq_id; // Id of the message queue for loggin
+    key_t lmq_key = ftok(FTOK_PATH, LMQ_ID); // Key for message queue
+    key_t bshm_key = ftok(FTOK_PATH, BSHM_ID); // Key for shared memory
+    key_t bsem_key = ftok(FTOK_PATH, BSEM_ID); // Key for blackboard semaphore
+    key_t asem_key = ftok(FTOK_PATH, ASEM_ID); // Key for archiver semaphore
+
+    int lmq_id; // Id of the message queue for logging
     int bshm_id; // Id of the shared memory segment for the blackboard
     int bsem_id; // Id of the blackboard semaphore
     int asem_id; // Id of the archiver semaphore
@@ -178,13 +183,13 @@ int main(int argc, char **argv) {
     }
 
     /* Create message queue for logger */
-    lmq_id = create_mq(LOGGER_MQ_KEY);
+    lmq_id = create_mq(lmq_key);
     /* Create semaphore for blackboard access */
-    bsem_id = init_sem(BLACKBOARD_SEM_KEY);
+    bsem_id = init_sem(bsem_key);
     /* Create blackboard in shared memory */
-    bshm_id = init_blackboard(BLACKBOARD_SHM_KEY);
+    bshm_id = init_blackboard(bshm_key);
     /* Create semaphore for archiver (trigger) */
-    asem_id = init_sem(ARCHIVER_SEM_KEY);
+    asem_id = init_sem(asem_key);
 
     /* Fork the logger */
     l_pid = fork();

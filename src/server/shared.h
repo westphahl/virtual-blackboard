@@ -5,9 +5,17 @@
  * Data shared between server, logger and archiver.
  */
 
-#define LOGGER_MQ_KEY 123
-#define BLACKBOARD_SHM_KEY 456
-#define BLACKBOARD_SEM_KEY 789
-#define ARCHIVER_SEM_KEY 147
+/* Pathr for ftok() */
+#define FTOK_PATH "/dev/null"
+
+/* Message queue: id for ftok() */
+#define LMQ_ID 1
+
+/* Shared memory: id for ftok() */
+#define BSHM_ID 1
+
+/* Semaphores: ids for ftok() */
+#define BSEM_ID 1
+#define ASEM_ID 2
 
 #endif

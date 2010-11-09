@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/types.h>
+#include <sys/ipc.h>
 #include <sys/socket.h>
 #include <string.h>
 
@@ -157,13 +158,12 @@ void broadcast_blackboard(char *blackboard, int bsem_id, int excl_w) {
 
 void* broadcasting_agent(void *arg) {
     int bsem_id;
-    key_t bsem_key = BLACKBOARD_SEM_KEY;
+    key_t bsem_key = ftok(FTOK_PATH, BSEM_ID);
     /* Get the id of the blackboard Semaphore */
     bsem_id = get_sem(bsem_key);
 
     int bshm_id;
-    key_t bshm_key = BLACKBOARD_SHM_KEY;
-
+    key_t bshm_key = ftok(FTOK_PATH, BSHM_ID);
     /* Get the id of the blackboard shared memory segment */
     bshm_id = get_blackboard(bshm_key);
     char *blackboard;

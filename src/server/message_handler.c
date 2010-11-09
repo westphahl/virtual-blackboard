@@ -32,8 +32,10 @@ int login_handler(int sfd) {
     struct client_data *cdata = NULL;
     void *rbuf = NULL; // Receive buffer
     char *blackboard;
-    int bshm_id = get_blackboard(BLACKBOARD_SHM_KEY);
-    int bsem_id = get_sem(BLACKBOARD_SEM_KEY);
+    key_t bshm_key = ftok(FTOK_PATH, BSHM_ID);
+    int bshm_id = get_blackboard(bshm_key);
+    key_t bsem_key = ftok(FTOK_PATH, BSEM_ID);
+    int bsem_id = get_sem(bsem_key);
 
     /*
      * Wait for client login
@@ -219,15 +221,16 @@ int board_handler(int sfd, uint16_t length, int mtype) {
     }
 
     /* Get trigger semaphore for archiver */
-    int asem_id = get_sem(ARCHIVER_SEM_KEY);
+    key_t asem_key = ftok(FTOK_PATH, ASEM_ID);
+    int asem_id = get_sem(asem_key);
 
     /* Get semaphore for blackboard access */
-    key_t bsem_key = BLACKBOARD_SEM_KEY;
+    key_t bsem_key = ftok(FTOK_PATH, BSEM_ID);
     int bsem_id = get_sem(bsem_key);
 
     /* Get id of blackboard in shared memory */
     char *blackboard;
-    key_t bshm_key = BLACKBOARD_SHM_KEY;
+    key_t bshm_key = ftok(FTOK_PATH, BSHM_ID);
     int bshm_id = get_blackboard(bshm_key);
 
     /* Attach blackboard in shared memory */
