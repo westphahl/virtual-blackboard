@@ -19,7 +19,8 @@ server: build/server.o \
 	build/blackboard.o \
 	build/login_thread.o \
 	build/broadcasting.o \
-	build/semaphore.o
+	build/semaphore.o \
+	build/singelton.o
 	$(CC) $(CSERVER) $(LDSERVER) -o build/server \
 		build/server.o \
 		build/signal_handler.o \
@@ -33,7 +34,8 @@ server: build/server.o \
 		build/utils.o \
 		build/broadcasting.o \
 		build/message_builder.o \
-		build/semaphore.o
+		build/semaphore.o \
+		build/singelton.o
 
 build/server.o:
 	$(CC) $(CSERVER) -c -o build/server.o src/server/server.c
@@ -78,6 +80,9 @@ build/broadcasting.o: build/net_message.o \
 
 build/semaphore.o:
 	$(CC) $(CSERVER) -c -o build/semaphore.o src/server/semaphore.c
+
+build/singelton.o:
+	$(CC) $(CSERVER) -c -o build/singelton.o src/server/singelton.c
 
 # Build the logger
 logger: build/logger.o \
