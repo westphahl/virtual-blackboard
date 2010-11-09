@@ -14,7 +14,8 @@ all: clean client server logger archiver
 # Build the server
 server: build/server.o \
 	build/signal_handler.o \
-	build/mq.o build/utils.o \
+	build/mq.o \
+	build/utils.o \
 	build/blackboard.o \
 	build/login_thread.o \
 	build/broadcasting.o \
