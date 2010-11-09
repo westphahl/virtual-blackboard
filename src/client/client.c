@@ -1,6 +1,6 @@
 #define _POSIX_SOURCE 1
 
-// System headers
+/* System headers */
 #include <pthread.h>
 #include <stdio.h>
 #include <sys/signal.h>
@@ -22,10 +22,10 @@
 #include <sys/types.h>
 #include <signal.h>
 
-// GTK header
+/* GTK header */
 #include <gtk/gtk.h>
 
-// User headers
+/* User headers */
 #include "client.h"
 #include "gui.h"
 #include "command_thread.h"
@@ -36,7 +36,7 @@
 #include "../commons.h"
 #include "../net_message.h"
 
-// Global variables
+/* Global variables */
 static struct client_data cdata;
 static int sock;
 static char *blackboard;
@@ -47,15 +47,15 @@ static char *blackboard;
 int updateGUIstate() {
 	cdata_lock();
 	
-	// Temporary char buffer
+	/* Temporary char buffer */
 	static char tmp[256];
 	
-	// Set blackboard background color
+	/* Set blackboard background color */
 	GdkColor tmpColor;
 	gdk_color_parse ("#386038", &tmpColor); 
 	gtk_widget_modify_base(GTK_WIDGET(textview), GTK_STATE_NORMAL, &tmpColor);
 
-	// Update user-data labels
+	/* Update user-data labels */
 	sprintf(tmp,"Tafelrechte\n%s", cdata.write ? "[schreiben]" : "[lesen]");
 	gtk_label_set_text(statusWrite, tmp);
 
@@ -69,17 +69,17 @@ int updateGUIstate() {
 	sprintf(tmp, "Dozenten: \t[%i]\nTutoren: \t[%i]\nStudenten: \t[%i]", cdata.dozenten, cdata.tutoren, cdata.studenten);
 	gtk_label_set_text(statusUsers, tmp);
 
-	// Update button text
+	/* Update button text */
 	sprintf(tmp,"Schreibrecht %s", cdata.write ? "abgeben" : "anfragen");
 	gtk_button_set_label(GTK_BUTTON(requestWrite),tmp);
 
-	// Disable illegal buttons
+	/* Disable illegal buttons */
 	gtk_widget_set_sensitive(GTK_WIDGET(requestWrite), cdata.role==2 ? 0 : 1);
 	gtk_widget_set_sensitive(GTK_WIDGET(removePermissions), cdata.role==2 ? 1 : 0);
 	gtk_widget_set_sensitive(GTK_WIDGET(logBlackboard), cdata.write ? 1 : 0);
 	gtk_widget_set_sensitive(GTK_WIDGET(quitAll), cdata.role==2 ? 1 : 0);
 	
-	// Enable/Disable textview
+	/* Enable/Disable textview */
 	gtk_text_view_set_editable(textview, cdata.write);
 	
 	cdata_unlock();
@@ -91,14 +91,14 @@ int updateGUIstate() {
  * Update board content.
  */
 void updateBoard(char* text) {
-	// Temporary char buffer
+	/* Temporary char buffer */
 	static char tmp[256];
 	
-	// Update label text
+	/* Update label text */
 	sprintf(tmp, "Zeit der letzten Änderung\n[%li]", time(NULL));
 	gtk_label_set_text(statusVersion, tmp);
 
-	// Copy buffer-text to blackboard
+	/* Copy buffer-text to blackboard */
 	GtkTextBuffer *gtkbuf = gtk_text_view_get_buffer(textview);
 	gtk_text_buffer_set_text(gtkbuf, text, strlen(text));
 }
@@ -107,12 +107,9 @@ void updateBoard(char* text) {
  * Event: quit client.
  */
 gint on_application_exit(GtkWidget * widget, GdkEvent event, gpointer daten) {
-	// Call popup question
 	if(popupQuestionDialog("Sind Sie sicher?","Wollen Sie das Programm wirklich beenden?")) {
-		// Quit programm
-		gtk_main_quit();
-		// Trigger event 'destroy'
-		return FALSE;
+		gtk_main_quit(); // Quit programm
+		return FALSE; // Trigger event 'destroy'
 	}
 	return TRUE;
 }
@@ -121,8 +118,7 @@ gint on_application_exit(GtkWidget * widget, GdkEvent event, gpointer daten) {
  * Event: request write permission.
  */
 void on_button_request_write_clicked(GtkButton * button, gpointer user_data) {
-	// Trigger request for write permisson
-	trigger_command(m_request);
+	trigger_command(m_request); // Trigger request for write permisson
 	gtk_widget_set_sensitive(GTK_WIDGET(requestWrite), 0);
 }
 
@@ -130,12 +126,9 @@ void on_button_request_write_clicked(GtkButton * button, gpointer user_data) {
  * Event: shutdown system.
  */
 void on_button_quit_all_clicked(GtkButton * button, gpointer user_data) {
-	// Call popup question
 	if(popupQuestionDialog("Sind Sie sicher?","Wollen Sie das Programm und den Server wirklich beenden?")) {
-		// Trigger shutdown
-		trigger_command(m_shutdown);
-		// Quit programm
-		gtk_main_quit();
+		trigger_command(m_shutdown); // Trigger shutdown
+		gtk_main_quit(); // Quit programm
 	}
 }
 
@@ -145,69 +138,66 @@ void on_button_quit_all_clicked(GtkButton * button, gpointer user_data) {
 void on_button_quit_clicked(GtkButton * button, gpointer user_data) {
 	// Call popup question
 	if(popupQuestionDialog("Sind Sie sicher?","Wollen Sie das Programm wirklich beenden?"))
-		// Quit programm
-		gtk_main_quit();
+		gtk_main_quit(); // Quit programm
 }
 
 /*
  * Event: clear board.
  */
 void on_button_log_clicked(GtkButton * button, gpointer user_data) {
-	// Trigger clean board
-	trigger_command(m_clear);
+	trigger_command(m_clear); // Trigger clean boards
 }
 
 /*
  * Event: remove permission.
  */
 void on_button_remove_permissions_clicked(GtkButton * button, gpointer user_data) {
-	// Trigger request
-	trigger_command(m_request);
+	trigger_command(m_request); // Trigger request
 }
 
 /*
  * Event: text buffer changed.
  */
 void on_text_buffer_changed(GtkTextBuffer *textbuffer, gpointer user_data) {
-	// Check if user has write permissions.
+	/* Check if user has write permissions */
 	if(cdata.write == 1) {
 		char *buffer;
 		
-		// Get gtk textbuffer range
+		/* Get gtk textbuffer range */
 		GtkTextIter startIter, endIter;
 		gtk_text_buffer_get_start_iter(textbuffer, &startIter);
 		gtk_text_buffer_get_end_iter(textbuffer, &endIter);
 
-		// Copy gtk textbuffer in temporary buffer
+		/* Copy gtk textbuffer in temporary buffer */
 		buffer = gtk_text_buffer_get_text(textbuffer, &startIter, &endIter, FALSE);
 		
-		// Assign buffer to blackboard
+		/* Assign buffer to blackboard */
 		board_lock();
 		blackboard = buffer;
 		board_unlock();
 
-		// Update timestamp
+		/* Update timestamp */
 		static char tmp[256];
 		sprintf(tmp, "Zeit der letzten Änderung\n[%li]", time(NULL));
 		gtk_label_set_text(statusVersion, tmp);
 		
-		// Trigger live-agent
+		/* Trigger live-agent */
 		static int counter = 0;
 		static struct itimerval itimer;
 
-		// Setup timer
+		/* Setup timer */
 		itimer.it_interval.tv_sec= 250/1000;
 		itimer.it_interval.tv_usec= 0;
 		itimer.it_value.tv_sec= 250/1000;
 		itimer.it_value.tv_usec= 250*1000;
 		
-		// Check timer state
+		/* Check timer state */
 		if(counter < 6) {
-			// Start/restart timeruninitialized
+			/* Start/restart timeruninitialized */
 			setitimer(ITIMER_REAL, &itimer, NULL);
 			counter++; // Raise counter
 		} else {
-			// Start alternative trigger
+			/* Start alternative trigger */
 			trigger_liveagent();
 			counter = 0;	
 		}
@@ -242,7 +232,7 @@ int main(int argc, char **argv) {
 		printf("   -h  --help      Show this help message\n");
 		return 0; // Close program
 	}
-    // Socket variables
+    /* Socket variables */
 	char *listen_port = DEFAULT_PORT;
     char *server_addr = NULL;
     struct addrinfo *addr_info;
@@ -250,7 +240,7 @@ int main(int argc, char **argv) {
     struct addrinfo hints;
     int ret;
     
-    // Parser options
+    /* Parser options */
     int opt;
     const char* short_options = "s:p:n:12h";
 	struct option long_options[] = {
@@ -264,19 +254,19 @@ int main(int argc, char **argv) {
 	};
 	int long_index = 0;
 
-    // Variables for listener-thread
+    /* Variables for listener-thread */
     pthread_t listener_tid;
 	struct listenert_data lt_data;
 	
-	// Variables for command-thread
+	/* Variables for command-thread */
 	pthread_t command_tid;
 	struct commandt_data cm_data;
 	
-	// Variables for live-agent
+	/* Variables for live-agent */
 	pthread_t liveagent_tid;
 	struct liveagentt_data la_data;
 
-	// Initialize cdata with 0
+	/* Initialize cdata with 0 */
 	cdata.cid = 0;
 	cdata.role = 0;
 	cdata.write = 0;
@@ -285,16 +275,16 @@ int main(int argc, char **argv) {
 	cdata.studenten = 0;
 	cdata.name = "Guest";
 
-    // Parser for command-line options
+    /* Parser for command-line options */
     while ((opt = getopt_long(argc, argv, short_options, long_options, &long_index)) != -1) {
         switch (opt) {
         	case 's':
-        		// Set server-address
+        		/* Set server-address */
         		printf("  --server %s\n", optarg);
 	            server_addr = optarg;
 	            break;
         	case 'p': 
-        		// Set server-port
+        		/* Set server-port */
         		printf("  --port %s\n", optarg);
             	listen_port = optarg;
             	if((strtol(listen_port, NULL, 10) < PORT_RANGE_MIN) || 
@@ -306,22 +296,22 @@ int main(int argc, char **argv) {
             	}
             	break;
 			case 'n':
-				// Set username
+				/* Set username */
 				printf("  --name %s\n", optarg);
 				cdata.name = optarg;
 				break;
 			case '1':
-				// Set user-role student
+				/* Set user-role student */
 				printf("  --role 1\n");
 				cdata.role = 1;
 				break;
 			case '2':
-				// Set user-role docent
+				/* Set user-role docent */
 				printf("  --role 2\n");
 				cdata.role = 2;
 				break;
 			case 'h':
-				// Show help message
+				/* Show help message */
 				printf("Usage: client [OPTIONS] ...\n");
 				printf("   -s  --server    Server ip or name (default localhost)\n");
 				printf("   -p  --port      Specify a port (default 50000)\n");
@@ -334,30 +324,30 @@ int main(int argc, char **argv) {
         }
     }
 
-    // clear addr-struct
+    /* clear addr-struct */
     memset(&hints, 0, sizeof(hints));
     hints.ai_family = AF_UNSPEC;
     hints.ai_socktype = SOCK_STREAM;
     hints.ai_protocol = IPPROTO_TCP;
     hints.ai_flags = 0;
 
-    // solving server address
+    /* solving server address */
     ret = getaddrinfo(server_addr, listen_port, &hints, &addr_info);
     if(ret) {
 		printf("getaddrinfo: %s\n", gai_strerror(ret));
 		exit(EXIT_FAILURE);
 	}
 	
-	// Save addresses in p
+	/* Save addresses in p */
     p = addr_info;
     
     while (p) {
 		char dst[INET6_ADDRSTRLEN]; 
 
-		// Create socket for found family
+		/* Create socket for found family */
         sock = socket(p->ai_family, p->ai_socktype, 0);
 
-		// getnameinfo
+		/* getnameinfo */
 		getnameinfo(p->ai_addr,
 			p->ai_addrlen,
 			dst,
@@ -369,21 +359,21 @@ int main(int argc, char **argv) {
 		printf("Trying %s:%s ... ", dst, listen_port);
 		fflush(stdout);
 
-		// Try to connect
+		/* Try to connect */
         if (connect(sock, p->ai_addr, p->ai_addrlen) == 0) {
 			printf("Connected\n");
 			fflush(stdout);
 
-			// Activate gtk threading
+			/* Activate gtk threading */
 	        g_thread_init(NULL);
 	        gdk_threads_init();            
 
-	        // Setup gui 
+	        /* Setup gui */
 	        gtk_init (&argc, &argv);
 	        create_window ();
 	        gtk_widget_show_all(GTK_WIDGET(window));
 			
-            // Start listener-thread
+            /* Start listener-thread */
 			lt_data.socket = sock;
 			lt_data.cdata = &cdata;
             if(pthread_create(&listener_tid, NULL, listener_handler, (void *) &lt_data) != 0) {
@@ -391,7 +381,7 @@ int main(int argc, char **argv) {
             	return(EXIT_FAILURE);
             }
 
-            // Start command-thread
+            /* Start command-thread */
             cm_data.socket = sock;
             cm_data.cdata = &cdata;
             if(pthread_create(&command_tid, NULL, command_handler, (void *) &cm_data) != 0) {
@@ -399,27 +389,48 @@ int main(int argc, char **argv) {
             	return(EXIT_FAILURE);
             }
 
-            // start live-agent
+            /* start live-agent */
             la_data.socket = sock;
             if(pthread_create(&liveagent_tid, NULL, liveagent_handler, (void *) &la_data) != 0) {
             	perror("pthread_create");
             	return(EXIT_FAILURE);
             }
             
-            sleep(1);
+            sleep(1); // Time to start the threads
             
-            // Login to server
-			//send_login(sock, cdata.role, cdata.name);
+            /* Login to server */
 			trigger_command(m_login);
             
-			// Start gui
+			/* Start gui */
 	        gdk_threads_enter();
 	        gtk_main();
 	        gdk_threads_leave();
 
-	        // TODO Clean up
+	        /* Clean up */
 			board_destroy(); // Destroy board mutex
 			cdata_destroy(); // Destroy cdata mutex
+			
+			/* Cancel all threads */
+			if(pthread_cancel(listener_tid) != 0) {
+				perror("pthread_cancel");
+			}
+			if(pthread_cancel(liveagent_tid) != 0) {
+				perror("pthread_cancel");
+			}
+			if(pthread_cancel(command_tid) != 0) {
+				perror("pthread_cancel");
+			}
+			
+			/* Wait for the threads */
+			if(pthread_join(listener_tid, NULL) != 0) {
+				perror("pthread_join");
+			}
+			if(pthread_join(liveagent_tid, NULL) != 0) {
+				perror("pthread_join");
+			}
+			if(pthread_join(command_tid, NULL) != 0) {
+				perror("pthread_join");
+			}
 
             close(sock); // Close connection
 			break;
@@ -428,15 +439,13 @@ int main(int argc, char **argv) {
 		}
 		close(sock);
 
-		// Get next addressinfo
+		/* Get next addressinfo */
 		p = p->ai_next;
     }
 
-	// Wait for threads ???
-
-    // Delete addressinfo
+    /* Delete addressinfo */
     freeaddrinfo(addr_info);
 
-	// Close main programm
+	/* Close main programm */
 	return 0;
 }
