@@ -143,12 +143,10 @@ void *listener_handler(void *data) {
 					struct net_board *msg = alloc(sizeof(struct net_board)+ntohs(hdr->length)+1);
 
 					// Read socket and save data
-					if(ntohs(hdr->length) == 0) {
-						read(socket, msg->content, ntohs(hdr->length));
-					} else {
+					if(ntohs(hdr->length) != 0) {
 						recv(socket, msg->content, ntohs(hdr->length), MSG_WAITALL);
 					}
-
+					
 					printf("Inhalt: %s\n", msg->content);
 					fflush(stdout);
 
@@ -177,7 +175,7 @@ void *listener_handler(void *data) {
 					uint16_t cid = ntohs(msg->cid);
 					
 					static char tmp[1024];
-					sprintf(tmp, "Wollen Sie dem Benutzer '%s' (ID:%i) wirklich Schreibrechte geben?", msg->name, msg->cid);
+					sprintf(tmp, "Wollen Sie dem Benutzer '%s' (ID:%i) wirklich Schreibrechte geben?", msg->name, ntohs(msg->cid));
 					
 					gdk_threads_enter();
 					write = (uint8_t)popupQuestionDialog("Schreibrechtanfrage", tmp);
