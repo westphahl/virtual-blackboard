@@ -24,6 +24,7 @@
 #include "utils.h"
 #include "semaphore.h"
 #include "broadcasting.h"
+#include "singelton.h"
 
 /*
  * Server for the virtual blackboard.
@@ -33,6 +34,8 @@
  *      -p <PORT>   Use a user-defined port
  */
 int main(int argc, char **argv) {
+    int lockfile = create_lock();
+
     unsigned int lport = strtol(DEFAULT_PORT, NULL , 10); // Server TCP port
     char *listen_port = DEFAULT_PORT; // Server TCP port as string
     char debug[2] = "0\0"; // Debug mode; default off
@@ -251,6 +254,7 @@ int main(int argc, char **argv) {
     /* Delete message queue */
     delete_mq(lmq_id);
 
+    delete_lock(lockfile);
     fprintf(stdout, "Done.\n");
     exit(EXIT_SUCCESS);
 }
