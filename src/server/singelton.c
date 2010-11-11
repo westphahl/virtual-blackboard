@@ -53,6 +53,8 @@ int create_lock() {
         perror("fsync");
         exit(EXIT_FAILURE);
     }
+    
+    return file;
 }
 
 /*
