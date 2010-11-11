@@ -41,6 +41,14 @@ static struct client_data cdata;
 static int sock;
 static char *blackboard;
 
+/* Dynamic Intelligent Live-Agent Trigger */
+static time_t dilat_now;
+static time_t dilat_start;
+static time_t dilat_last;
+static long int dilat_counter;
+static long int dilat_interval = 250;
+static long int dilat_max_reset = 6;
+
 /* 
  * Update gui labels with role, name, client-id, ...
  */
@@ -57,6 +65,11 @@ int updateGUIstate() {
 
 	/* Update user-data labels */
 	sprintf(tmp,"Tafelrechte\n%s", cdata.write ? "[schreiben]" : "[lesen]");
+	if(cdata.write == 1) {
+		dilat_start = time(NULL);
+		dilat_last = time(NULL);
+		dilat_counter = 0;
+	}
 	gtk_label_set_text(statusWrite, tmp);
 
 	sprintf(tmp, "Name: \t[%s]\nRolle: \t[%s]\nCID:\t[%i]",
@@ -163,6 +176,23 @@ void on_text_buffer_changed(GtkTextBuffer *textbuffer, gpointer user_data) {
 	if(cdata.write == 1) {
 		char *buffer;
 		
+		/* Setup DILAT */
+		dilat_now = time(NULL); // Get current time
+		if((dilat_now - dilat_last) > 10) {
+			printf("Start: %li, Last: %li, Now: %li\n", dilat_start, dilat_last, dilat_now);
+			dilat_start = time(NULL);
+			dilat_counter = 0;
+		}		
+		dilat_counter++; // Increase dilat-counter
+		if((dilat_now - dilat_start)) {
+			dilat_max_reset = dilat_counter / (dilat_now - dilat_start); // Set new max value
+		} else {
+			dilat_max_reset = 5;
+		}
+		if(dilat_max_reset <= 4) {
+			dilat_max_reset = 5; // Minimum max value
+		}
+
 		/* Get gtk textbuffer range */
 		GtkTextIter startIter, endIter;
 		gtk_text_buffer_get_start_iter(textbuffer, &startIter);
@@ -186,14 +216,14 @@ void on_text_buffer_changed(GtkTextBuffer *textbuffer, gpointer user_data) {
 		static struct itimerval itimer;
 
 		/* Setup timer */
-		itimer.it_interval.tv_sec= 250/1000;
+		itimer.it_interval.tv_sec= dilat_interval/1000;
 		itimer.it_interval.tv_usec= 0;
-		itimer.it_value.tv_sec= 250/1000;
-		itimer.it_value.tv_usec= 250*1000;
+		itimer.it_value.tv_sec= dilat_interval/1000;
+		itimer.it_value.tv_usec= dilat_interval*1000;
 		
 		/* Check timer state */
-		if(counter < 6) {
-			/* Start/restart timeruninitialized */
+		if(counter < dilat_max_reset) {
+			/* Start/restart timer */
 			setitimer(ITIMER_REAL, &itimer, NULL);
 			counter++; // Raise counter
 		} else {
@@ -201,6 +231,8 @@ void on_text_buffer_changed(GtkTextBuffer *textbuffer, gpointer user_data) {
 			trigger_liveagent();
 			counter = 0;	
 		}
+		
+		dilat_last = time(NULL); // save last function call
 	}
 }
 
@@ -232,6 +264,7 @@ int main(int argc, char **argv) {
 		printf("   -h  --help      Show this help message\n");
 		return 0; // Close program
 	}
+	
     /* Socket variables */
 	char *listen_port = DEFAULT_PORT;
     char *server_addr = NULL;
