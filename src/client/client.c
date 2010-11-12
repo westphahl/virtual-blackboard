@@ -409,7 +409,7 @@ int main(int argc, char **argv) {
             /* Start listener-thread */
 			lt_data.socket = sock;
 			lt_data.cdata = &cdata;
-            if(pthread_create(&listener_tid, NULL, listener_handler, (void *) &lt_data) != 0) {
+            if(pthread_create(&listener_tid, PTHREAD_CREATE_JOINABLE, listener_handler, (void *) &lt_data) != 0) {
             	perror("pthread_create");
             	return(EXIT_FAILURE);
             }
@@ -428,11 +428,6 @@ int main(int argc, char **argv) {
             	perror("pthread_create");
             	return(EXIT_FAILURE);
             }
-            
-            sleep(1); // Time to start the threads
-            
-            /* Login to server */
-			trigger_command(m_login);
             
 			/* Start gui */
 	        gdk_threads_enter();
