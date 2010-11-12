@@ -204,6 +204,10 @@ void *command_handler(void *data) {
     printf("Command-Thread gestartet\n");
 	fflush(stdout);
 	
+	cdata_lock();
+    send_login(socket, cdata->role, cdata->name);
+    cdata_unlock();
+	
 	pthread_mutex_lock(&trigger_cmd_mutex); // Lock cmd mutex
     while(1) {
         // Wait for trigger
