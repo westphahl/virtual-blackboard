@@ -16,7 +16,7 @@ enum message_types {
     m_error = 255
 };
 
-enum error_codes {e_message, e_fatal, e_login};
+enum error_codes {e_message=0, e_fatal=1, e_login=10};
 
 /* Avoid padding problems */
 #pragma pack(1)

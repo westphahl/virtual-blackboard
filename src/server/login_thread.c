@@ -76,6 +76,7 @@ void* login_thread(void *data) {
                      */
                     pthread_create(&client_tid, NULL, 
                             client_handler, (void *) (&accept_fd));
+                    pthread_detach(client_tid);
                     log_info("Created client thread for a new connection");
                 }
             }
