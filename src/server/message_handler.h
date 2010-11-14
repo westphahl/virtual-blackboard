@@ -11,4 +11,6 @@ int request_handler(int sfd);
 
 int reply_handler(int sfd);
 
+int shutdown_handler(int sfd);
+
 #endif

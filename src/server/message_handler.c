@@ -1,8 +1,10 @@
+#define _POSIX_SOURCE
 #include <sys/types.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
 #include <stdint.h>
+#include <signal.h>
 
 #include "../commons.h"
 #include "../net_message.h"
@@ -418,7 +420,6 @@ int request_handler(int sfd) {
 
 /*
  * Handle reply of docent in response to a request by a client
- *
  */
 int reply_handler(int sfd) {
     struct net_reply *reply;
@@ -494,5 +495,31 @@ int reply_handler(int sfd) {
     free(reply);
     trigger_status();
     
+    return 0;
+}
+
+
+/*
+ * Handle shutdown request
+ */
+int shutdown_handler(int sfd) {
+    int ret;
+    
+    log_debug("shutdown handler: got shutdown request");
+    lock_clientlist();
+
+    if (is_docent(sfd) == 0) {
+        unlock_clientlist();
+        log_error("shutdown handler: non-RFC compliant client kicked");
+        return -1;
+    }
+    unlock_clientlist();
+
+    ret = kill(0, SIGINT);
+    if (ret < 0) {
+        perror("kill");
+        fprintf(stdout, "shutdown handler: error sending signal SIGINT");
+    }
+
     return 0;
 }

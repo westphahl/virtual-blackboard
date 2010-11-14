@@ -1,10 +1,8 @@
-#define _POSIX_SOURCE
 #include <pthread.h>
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/types.h>
-#include <signal.h>
 
 #include "../net_message.h"
 #include "message_handler.h"
@@ -65,11 +63,7 @@ void* client_handler(void *sfd) {
                 ret = reply_handler(socket_fd);
                 break;
             case m_shutdown:
-                ret = kill(0, SIGINT);
-                if (ret < 0) {
-                    perror("kill");
-                    fprintf(stdout, "client thread: error sending signal SIGINT");
-                }
+                ret = shutdown_handler(socket_fd);
                 break;
             default:
                 /* Non-RFC compliant message received */
