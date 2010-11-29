@@ -139,3 +139,7 @@ build/cutils.o:
 # Clean up the build directory
 clean:
 	rm -f build/*.o build/client build/server build/logger
+
+# Create a tar package
+package:
+	git archive --format tar -o vita_source.tar HEAD
