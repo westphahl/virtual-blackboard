@@ -1,66 +1,67 @@
 \select@language {ngerman}
-\contentsline {section}{\numberline {1}Entwurf der Softwarekomponenten}{3}{section.1}
-\contentsline {subsection}{\numberline {1.1}Funktionalit\IeC {\"a}t Client}{3}{subsection.1.1}
-\contentsline {subsubsection}{\numberline {1.1.1}Command-Thread}{3}{subsubsection.1.1.1}
-\contentsline {subsubsection}{\numberline {1.1.2}Live-Agent}{3}{subsubsection.1.1.2}
-\contentsline {subsubsection}{\numberline {1.1.3}Listener-Thread}{3}{subsubsection.1.1.3}
-\contentsline {subsubsection}{\numberline {1.1.4}GUI}{4}{subsubsection.1.1.4}
-\contentsline {subsubsection}{\numberline {1.1.5}Tafel-Trigger}{4}{subsubsection.1.1.5}
-\contentsline {subsection}{\numberline {1.2}Funktionalit\IeC {\"a}t Server}{4}{subsection.1.2}
-\contentsline {subsubsection}{\numberline {1.2.1}Login-Thread}{5}{subsubsection.1.2.1}
-\contentsline {subsubsection}{\numberline {1.2.2}Client-Thread}{5}{subsubsection.1.2.2}
-\contentsline {subsubsection}{\numberline {1.2.3}Broadcasting-Agent}{5}{subsubsection.1.2.3}
-\contentsline {subsection}{\numberline {1.3}Funktionalit\IeC {\"a}t Logger}{5}{subsection.1.3}
-\contentsline {subsection}{\numberline {1.4}Funktionalit\IeC {\"a}t Archivierer}{5}{subsection.1.4}
-\contentsline {subsection}{\numberline {1.5}Synchronisationsprotokoll}{6}{subsection.1.5}
-\contentsline {subsection}{\numberline {1.6}IPC-Schnittstellen}{6}{subsection.1.6}
-\contentsline {subsubsection}{\numberline {1.6.1}Shared-Memory}{6}{subsubsection.1.6.1}
-\contentsline {subsubsection}{\numberline {1.6.2}Message-Queues}{6}{subsubsection.1.6.2}
-\contentsline {subsubsection}{\numberline {1.6.3}Semaphore}{6}{subsubsection.1.6.3}
-\contentsline {subsubsection}{\numberline {1.6.4}Condition-Variablen}{7}{subsubsection.1.6.4}
-\contentsline {subsection}{\numberline {1.7}Netzwerkschnittstellen}{7}{subsection.1.7}
-\contentsline {subsubsection}{\numberline {1.7.1}Typen\IeC {\"u}bersicht}{7}{subsubsection.1.7.1}
-\contentsline {subsubsection}{\numberline {1.7.2}Header}{7}{subsubsection.1.7.2}
-\contentsline {subsubsection}{\numberline {1.7.3}Login}{7}{subsubsection.1.7.3}
-\contentsline {subsubsection}{\numberline {1.7.4}Tafelinhalt}{8}{subsubsection.1.7.4}
-\contentsline {subsubsection}{\numberline {1.7.5}Tafel l\IeC {\"o}schen}{8}{subsubsection.1.7.5}
-\contentsline {subsubsection}{\numberline {1.7.6}Schreibrechtanfrage}{9}{subsubsection.1.7.6}
-\contentsline {subsubsection}{\numberline {1.7.7}Beenden}{10}{subsubsection.1.7.7}
-\contentsline {subsubsection}{\numberline {1.7.8}Status-Nachricht}{10}{subsubsection.1.7.8}
-\contentsline {subsubsection}{\numberline {1.7.9}Fehlernachricht}{10}{subsubsection.1.7.9}
-\contentsline {section}{\numberline {2}Client}{12}{section.2}
-\contentsline {subsection}{\numberline {2.1}Programmabl\IeC {\"a}ufe}{12}{subsection.2.1}
-\contentsline {subsubsection}{\numberline {2.1.1}Hauptprogramm}{12}{subsubsection.2.1.1}
-\contentsline {subsubsection}{\numberline {2.1.2}Command-Thread}{12}{subsubsection.2.1.2}
-\contentsline {subsubsection}{\numberline {2.1.3}Live-Agent}{13}{subsubsection.2.1.3}
-\contentsline {subsubsection}{\numberline {2.1.4}Listener-Thread}{14}{subsubsection.2.1.4}
-\contentsline {subsubsection}{\numberline {2.1.5}Tafel-Trigger}{14}{subsubsection.2.1.5}
-\contentsline {subsection}{\numberline {2.2}Funktionshierarchie}{14}{subsection.2.2}
-\contentsline {subsection}{\numberline {2.3}Modulhierarchie}{14}{subsection.2.3}
-\contentsline {subsection}{\numberline {2.4}Quellcode}{14}{subsection.2.4}
-\contentsline {section}{\numberline {3}Server}{15}{section.3}
-\contentsline {subsection}{\numberline {3.1}Programmabl\IeC {\"a}ufe}{15}{subsection.3.1}
-\contentsline {subsubsection}{\numberline {3.1.1}Hauptprogramm}{15}{subsubsection.3.1.1}
-\contentsline {subsubsection}{\numberline {3.1.2}Signal System beenden}{15}{subsubsection.3.1.2}
-\contentsline {subsubsection}{\numberline {3.1.3}Login-Thread}{15}{subsubsection.3.1.3}
-\contentsline {subsubsection}{\numberline {3.1.4}Client-Thread}{16}{subsubsection.3.1.4}
-\contentsline {subsubsection}{\numberline {3.1.5}Broadcasting-Agent}{18}{subsubsection.3.1.5}
-\contentsline {subsection}{\numberline {3.2}Funktionshierarchie}{18}{subsection.3.2}
+\contentsline {section}{\numberline {1}Aufgabenverteilung}{3}{section.1}
+\contentsline {section}{\numberline {2}Entwurf der Softwarekomponenten}{4}{section.2}
+\contentsline {subsection}{\numberline {2.1}Funktionalit\IeC {\"a}t Client}{4}{subsection.2.1}
+\contentsline {subsubsection}{\numberline {2.1.1}Command-Thread}{4}{subsubsection.2.1.1}
+\contentsline {subsubsection}{\numberline {2.1.2}Live-Agent}{4}{subsubsection.2.1.2}
+\contentsline {subsubsection}{\numberline {2.1.3}Listener-Thread}{4}{subsubsection.2.1.3}
+\contentsline {subsubsection}{\numberline {2.1.4}GUI}{5}{subsubsection.2.1.4}
+\contentsline {subsubsection}{\numberline {2.1.5}Tafel-Trigger}{5}{subsubsection.2.1.5}
+\contentsline {subsection}{\numberline {2.2}Funktionalit\IeC {\"a}t Server}{5}{subsection.2.2}
+\contentsline {subsubsection}{\numberline {2.2.1}Login-Thread}{6}{subsubsection.2.2.1}
+\contentsline {subsubsection}{\numberline {2.2.2}Client-Thread}{6}{subsubsection.2.2.2}
+\contentsline {subsubsection}{\numberline {2.2.3}Broadcasting-Agent}{6}{subsubsection.2.2.3}
+\contentsline {subsection}{\numberline {2.3}Funktionalit\IeC {\"a}t Logger}{6}{subsection.2.3}
+\contentsline {subsection}{\numberline {2.4}Funktionalit\IeC {\"a}t Archivierer}{6}{subsection.2.4}
+\contentsline {subsection}{\numberline {2.5}Synchronisationsprotokoll}{7}{subsection.2.5}
+\contentsline {subsection}{\numberline {2.6}IPC-Schnittstellen}{7}{subsection.2.6}
+\contentsline {subsubsection}{\numberline {2.6.1}Shared-Memory}{7}{subsubsection.2.6.1}
+\contentsline {subsubsection}{\numberline {2.6.2}Message-Queues}{7}{subsubsection.2.6.2}
+\contentsline {subsubsection}{\numberline {2.6.3}Semaphore}{7}{subsubsection.2.6.3}
+\contentsline {subsubsection}{\numberline {2.6.4}Condition-Variablen}{7}{subsubsection.2.6.4}
+\contentsline {subsection}{\numberline {2.7}Netzwerkschnittstellen}{8}{subsection.2.7}
+\contentsline {subsubsection}{\numberline {2.7.1}Typen\IeC {\"u}bersicht}{8}{subsubsection.2.7.1}
+\contentsline {subsubsection}{\numberline {2.7.2}Header}{8}{subsubsection.2.7.2}
+\contentsline {subsubsection}{\numberline {2.7.3}Login}{8}{subsubsection.2.7.3}
+\contentsline {subsubsection}{\numberline {2.7.4}Tafelinhalt}{9}{subsubsection.2.7.4}
+\contentsline {subsubsection}{\numberline {2.7.5}Tafel l\IeC {\"o}schen}{9}{subsubsection.2.7.5}
+\contentsline {subsubsection}{\numberline {2.7.6}Schreibrechtanfrage}{9}{subsubsection.2.7.6}
+\contentsline {subsubsection}{\numberline {2.7.7}Beenden}{10}{subsubsection.2.7.7}
+\contentsline {subsubsection}{\numberline {2.7.8}Status-Nachricht}{11}{subsubsection.2.7.8}
+\contentsline {subsubsection}{\numberline {2.7.9}Fehlernachricht}{11}{subsubsection.2.7.9}
+\contentsline {section}{\numberline {3}Client}{13}{section.3}
+\contentsline {subsection}{\numberline {3.1}Programmabl\IeC {\"a}ufe}{13}{subsection.3.1}
+\contentsline {subsubsection}{\numberline {3.1.1}Hauptprogramm}{13}{subsubsection.3.1.1}
+\contentsline {subsubsection}{\numberline {3.1.2}Command-Thread}{14}{subsubsection.3.1.2}
+\contentsline {subsubsection}{\numberline {3.1.3}Live-Agent}{15}{subsubsection.3.1.3}
+\contentsline {subsubsection}{\numberline {3.1.4}Listener-Thread}{16}{subsubsection.3.1.4}
+\contentsline {subsection}{\numberline {3.2}Funktionshierarchie}{17}{subsection.3.2}
 \contentsline {subsection}{\numberline {3.3}Modulhierarchie}{18}{subsection.3.3}
 \contentsline {subsection}{\numberline {3.4}Quellcode}{18}{subsection.3.4}
-\contentsline {section}{\numberline {4}Logger}{19}{section.4}
-\contentsline {subsection}{\numberline {4.1}Programmablauf}{19}{subsection.4.1}
-\contentsline {subsection}{\numberline {4.2}Funktionshierarchie}{19}{subsection.4.2}
-\contentsline {subsection}{\numberline {4.3}Modulhierarchie}{19}{subsection.4.3}
-\contentsline {subsection}{\numberline {4.4}Quellcode}{19}{subsection.4.4}
-\contentsline {section}{\numberline {5}Archivierer}{20}{section.5}
-\contentsline {subsection}{\numberline {5.1}Programmablauf}{20}{subsection.5.1}
-\contentsline {subsection}{\numberline {5.2}Funktionshierarchie}{20}{subsection.5.2}
-\contentsline {subsection}{\numberline {5.3}Modulhierarchie}{20}{subsection.5.3}
-\contentsline {subsection}{\numberline {5.4}Quellcode}{20}{subsection.5.4}
-\contentsline {section}{\numberline {6}Client-Liste}{21}{section.6}
-\contentsline {subsection}{\numberline {6.1}Datenstrukturen}{21}{subsection.6.1}
-\contentsline {subsection}{\numberline {6.2}Exportierte Funktionen}{21}{subsection.6.2}
-\contentsline {section}{\numberline {7}Tafel}{22}{section.7}
-\contentsline {subsection}{\numberline {7.1}Datenstrukturen}{22}{subsection.7.1}
-\contentsline {subsection}{\numberline {7.2}Exportierte Funktionen}{22}{subsection.7.2}
+\contentsline {section}{\numberline {4}Server}{19}{section.4}
+\contentsline {subsection}{\numberline {4.1}Programmabl\IeC {\"a}ufe}{19}{subsection.4.1}
+\contentsline {subsubsection}{\numberline {4.1.1}Hauptprogramm}{19}{subsubsection.4.1.1}
+\contentsline {subsubsection}{\numberline {4.1.2}Login-Thread}{20}{subsubsection.4.1.2}
+\contentsline {subsubsection}{\numberline {4.1.3}Client-Thread}{21}{subsubsection.4.1.3}
+\contentsline {subsubsection}{\numberline {4.1.4}Broadcasting-Agent}{22}{subsubsection.4.1.4}
+\contentsline {subsection}{\numberline {4.2}Funktionshierarchie}{23}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}Modulhierarchie}{24}{subsection.4.3}
+\contentsline {subsection}{\numberline {4.4}Quellcode}{25}{subsection.4.4}
+\contentsline {section}{\numberline {5}Logger}{26}{section.5}
+\contentsline {subsection}{\numberline {5.1}Programmablauf}{26}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}Funktionshierarchie}{26}{subsection.5.2}
+\contentsline {subsection}{\numberline {5.3}Modulhierarchie}{27}{subsection.5.3}
+\contentsline {subsection}{\numberline {5.4}Quellcode}{27}{subsection.5.4}
+\contentsline {section}{\numberline {6}Archivierer}{28}{section.6}
+\contentsline {subsection}{\numberline {6.1}Programmablauf}{28}{subsection.6.1}
+\contentsline {subsection}{\numberline {6.2}Funktionshierarchie}{29}{subsection.6.2}
+\contentsline {subsection}{\numberline {6.3}Modulhierarchie}{30}{subsection.6.3}
+\contentsline {subsection}{\numberline {6.4}Quellcode}{30}{subsection.6.4}
+\contentsline {section}{\numberline {7}Client-Liste}{31}{section.7}
+\contentsline {subsection}{\numberline {7.1}Datenstrukturen}{31}{subsection.7.1}
+\contentsline {subsection}{\numberline {7.2}Exportierte Funktionen}{31}{subsection.7.2}
+\contentsline {section}{\numberline {8}Tafel}{32}{section.8}
+\contentsline {subsection}{\numberline {8.1}Datenstrukturen}{32}{subsection.8.1}
+\contentsline {subsection}{\numberline {8.2}Exportierte Funktionen}{32}{subsection.8.2}
+\contentsline {section}{\numberline {9}Zusammenfassung und Fazit}{33}{section.9}
+\contentsline {section}{\numberline {A}Petrinetz}{34}{appendix.A}

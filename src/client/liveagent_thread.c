@@ -18,7 +18,6 @@
 // User headers
 #include "liveagent_thread.h"
 #include "client.h"
-#include "gui.h"
 #include "command_thread.h"
 #include "shared.h"
 #include "utils.h"

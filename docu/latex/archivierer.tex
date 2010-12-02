@@ -1,24 +1,13 @@
 \section{Archivierer}
 
 \subsection{Programmablauf}
-\begin{lstlisting}
-# Öffne Logfile (schreibbar)
-# Warte auf Trigger bzw. Ablauf von Timer (Debug-Modus)
-# Ausgelöst durch Timer?
-    # wenn Ja: Mutex
-    *** Vor dem Auslesen der Tafel ist nur ein Mutex-Down notwendig, wenn
-    *** der Auslöser für die Archivierung durch den Timer erfolgt ist.
-    *** Andernfalls ist dies bereits durch den Client-Thread geschehen um
-    *** sicherzustellen, dass der Tafelinhalt erst nach dem Archivieren
-    *** gelöscht wird.
-# Tafel auslesen
-# Mutex-Up
-# Zeitstempel + Tafelinhalt in Datei schreiben (blockweise)
-\end{lstlisting}
+\myfigure{Programmablauf Archivierer}{ablaeufe/server/archiver_ablauf.pdf}{0.5}
 
 \subsection{Funktionshierarchie}
+\myfigure{Funktionshierarchie Archivierer}{hierarchie/archiver.pdf}{1.0}
 
 \subsection{Modulhierarchie}
+\myfigure{Modulhierarchie Archivierer}{module/server/archivierer_module.pdf}{0.5}
 
 \subsection{Quellcode}
 Der Quellcode ist auf der CD zu finden.

@@ -21,8 +21,6 @@
 // User headers
 #include "command_thread.h"
 #include "client.h"
-#include "gui.h"
-#include "listener_thread.h"
 #include "utils.h"
 #include "shared.h"
 #include "../commons.h"

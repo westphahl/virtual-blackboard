@@ -1,0 +1,24 @@
+\section{Server}
+
+\subsection{Programmabläufe}
+
+\subsubsection{Hauptprogramm}
+\myfigure{Ablauf Hauptprogramm}{ablaeufe/server/server_ablauf.pdf}{0.5}
+
+\subsubsection{Login-Thread}
+\myfigure{Ablauf Login-Thread}{ablaeufe/server/login_thread_ablauf.pdf}{0.5}
+
+\subsubsection{Client-Thread}
+\myfigure{Ablauf Client-Thread}{ablaeufe/server/client_thread_ablauf.pdf}{0.35}
+
+\subsubsection{Broadcasting-Agent}
+\myfigure{Ablauf Broadcasting-Agent}{ablaeufe/server/broadcasting_thread_ablauf.pdf}{0.5}
+
+\subsection{Funktionshierarchie}
+\myfigure{Funktionshierarchie Server}{hierarchie/server.pdf}{0.45}
+
+\subsection{Modulhierarchie}
+\myfigure{Modulhierarchie Server}{module/server/server_module.pdf}{0.69}
+
+\subsection{Quellcode}
+Der Quellcode ist auf der CD zu finden.

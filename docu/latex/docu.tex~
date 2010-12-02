@@ -14,6 +14,7 @@
 \usepackage{url}
 \usepackage{version}
 \usepackage{wrapfig}
+\usepackage{pdfpages}
 
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
@@ -62,9 +63,8 @@
 	citecolor=black
 ]{hyperref}
 
-\pagestyle{fancy}
+%\pagestyle{fancy}
 \cfoot{}
-\setlength{\topskip}{10mm}
 
 \setcounter{tocdepth}{4}
 
@@ -75,6 +75,8 @@
 	\include{titlepage}
 
 	\tableofcontents
+
+	\aufgabenverteilung
 
 	\include{komponentenentwurf}
  
@@ -92,6 +94,13 @@
 
 	\include{fazit}
 
-	%\include{network}
+	\begin{appendix}
+		\section{Petrinetz}
+		\label{sec:petrinetz}
+		\myfigure{Petrinetz}{petrinetz.pdf}{0.5}
+	\end{appendix}
+
+	%\includepdf[fitpaper=true]{client.pdf}
+	%\includepdf[fitpaper=true]{server.pdf}
 
 \end{document} 

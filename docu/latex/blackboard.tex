@@ -1,13 +1,13 @@
 \section{Tafel}
 
 \subsection{Datenstrukturen}
-\begin{lstlisting}
-/* 
- * 14 * 79 Zeichen + /n
- * 1 * 79 Zeichen + /0
- * >>> als Shared Memory anlegen
- */
-char blackboard[15][80];
-\end{lstlisting}
+Die Tafel wird als Char-Buffer mit 1200 Zeichen im Shared-Memory angelegt.
 
 \subsection{Exportierte Funktionen}
+\begin{lstlisting}
+int get_blackboard (key_t key)
+char *blackboard_attach (int shmid)
+void blackboard_detach (char *bboard)
+int init_blackboard (key_t key)
+void delete_blackboard (int shmid)
+\end{lstlisting}

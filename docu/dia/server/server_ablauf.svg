@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/PR-SVG-20010719/DTD/svg10.dtd">
+<svg width="13cm" height="29cm" viewBox="38 -301 244 563" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <g>
+    <path style="fill: #ffffff" d="M 115.812 -300 L 199.162,-300 C 210.671,-300 220,-291.046 220,-280 C 220,-268.954 210.671,-260 199.162,-260 L 115.812,-260 C 104.304,-260 94.975,-268.954 94.975,-280 C 94.975,-291.046 104.304,-300 115.812,-300z"/>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 115.812 -300 L 199.162,-300 C 210.671,-300 220,-291.046 220,-280 C 220,-268.954 210.671,-260 199.162,-260 L 115.812,-260 C 104.304,-260 94.975,-268.954 94.975,-280 C 94.975,-291.046 104.304,-300 115.812,-300"/>
+    <text style="fill: #000000;text-anchor:middle;font-size:11.2889;font-family:sanserif;font-style:normal;font-weight:normal" x="157.487" y="-276.472">
+      <tspan x="157.487" y="-276.472">Server Start</tspan>
+    </text>
+  </g>
+  <g>
+    <path style="fill: #ffffff" d="M 74.34 -240 L 246.04,-240 L 280.38,-210 L 246.04,-180 L 74.34,-180 L 40,-210 L 74.34,-240z"/>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 74.34 -240 L 246.04,-240 L 280.38,-210 L 246.04,-180 L 74.34,-180 L 40,-210 L 74.34,-240"/>
+    <text style="fill: #000000;text-anchor:middle;font-size:11.2889;font-family:sanserif;font-style:normal;font-weight:normal" x="160.19" y="-213.528">
+      <tspan x="160.19" y="-213.528">Initialisierung gemeinsam</tspan>
+      <tspan x="160.19" y="-199.417">genutzter Ressourcen</tspan>
+    </text>
+  </g>
+  <g>
+    <path style="fill: #ffffff" d="M 74.2857 -160 L 245.714,-160 L 280,-130 L 245.714,-100 L 74.2857,-100 L 40,-130 L 74.2857,-160z"/>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 74.2857 -160 L 245.714,-160 L 280,-130 L 245.714,-100 L 74.2857,-100 L 40,-130 L 74.2857,-160"/>
+    <text style="fill: #000000;text-anchor:middle;font-size:11.2889;font-family:sanserif;font-style:normal;font-weight:normal" x="160" y="-133.528">
+      <tspan x="160" y="-133.528">Binden an verfügbare</tspan>
+      <tspan x="160" y="-119.417">Sockets</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="40" y="-80" width="240" height="40"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="40" y="-80" width="240" height="40"/>
+    <text style="fill: #000000;text-anchor:middle;font-size:11.2889;font-family:sanserif;font-style:normal;font-weight:normal" x="160" y="-56.5556">
+      <tspan x="160" y="-56.5556">Fork Logger</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="40" y="-20" width="240" height="41"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="40" y="-20" width="240" height="41"/>
+    <text style="fill: #000000;text-anchor:middle;font-size:11.2889;font-family:sanserif;font-style:normal;font-weight:normal" x="160" y="3.94444">
+      <tspan x="160" y="3.94444">Fork Archiver</tspan>
+    </text>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="157.488" y1="-260" x2="158.886" y2="-249.648"/>
+    <polygon style="fill: #000000" points="159.891,-242.216 153.597,-251.456 158.886,-249.648 163.507,-252.795 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="159.891,-242.216 153.597,-251.456 158.886,-249.648 163.507,-252.795 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="160.19" y1="-180" x2="160.092" y2="-169.736"/>
+    <polygon style="fill: #000000" points="160.021,-162.236 155.116,-172.283 160.092,-169.736 165.116,-172.188 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="160.021,-162.236 155.116,-172.283 160.092,-169.736 165.116,-172.188 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="160" y1="-100" x2="160" y2="-90.7126"/>
+    <polygon style="fill: #000000" points="160,-83.2126 155,-93.2126 160,-90.7126 165,-93.2126 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="160,-83.2126 155,-93.2126 160,-90.7126 165,-93.2126 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="160" y1="-40" x2="160" y2="-29.7361"/>
+    <polygon style="fill: #000000" points="160,-22.2361 155,-32.2361 160,-29.7361 165,-32.2361 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="160,-22.2361 155,-32.2361 160,-29.7361 165,-32.2361 "/>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="40" y="40" width="240" height="40"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="40" y="40" width="240" height="40"/>
+    <text style="fill: #000000;text-anchor:middle;font-size:11.2889;font-family:sanserif;font-style:normal;font-weight:normal" x="160" y="56.3889">
+      <tspan x="160" y="56.3889">Starte Broadcasting</tspan>
+      <tspan x="160" y="70.5">Agent</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="40" y="100" width="240" height="40"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="40" y="100" width="240" height="40"/>
+    <text style="fill: #000000;text-anchor:middle;font-size:11.2889;font-family:sanserif;font-style:normal;font-weight:normal" x="160" y="123.444">
+      <tspan x="160" y="123.444">Starte Login Thread</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="40" y="160" width="240" height="40"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="40" y="160" width="240" height="40"/>
+    <text style="fill: #000000;text-anchor:middle;font-size:11.2889;font-family:sanserif;font-style:normal;font-weight:normal" x="160" y="183.444">
+      <tspan x="160" y="183.444">Warte auf Shutdown</tspan>
+    </text>
+  </g>
+  <g>
+    <path style="fill: #ffffff" d="M 106.667 220 L 213.333,220 C 228.061,220 240,228.954 240,240 C 240,251.046 228.061,260 213.333,260 L 106.667,260 C 91.9391,260 80,251.046 80,240 C 80,228.954 91.9391,220 106.667,220z"/>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 106.667 220 L 213.333,220 C 228.061,220 240,228.954 240,240 C 240,251.046 228.061,260 213.333,260 L 106.667,260 C 91.9391,260 80,251.046 80,240 C 80,228.954 91.9391,220 106.667,220"/>
+    <text style="fill: #000000;text-anchor:middle;font-size:11.2889;font-family:sanserif;font-style:normal;font-weight:normal" x="160" y="243.528">
+      <tspan x="160" y="243.528">Server beendet</tspan>
+    </text>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="160" y1="21" x2="160" y2="29.2691"/>
+    <polygon style="fill: #000000" points="160,36.7691 155,26.7691 160,29.2691 165,26.7691 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="160,36.7691 155,26.7691 160,29.2691 165,26.7691 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="160" y1="80" x2="160" y2="90.2639"/>
+    <polygon style="fill: #000000" points="160,97.7639 155,87.7639 160,90.2639 165,87.7639 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="160,97.7639 155,87.7639 160,90.2639 165,87.7639 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="160" y1="140" x2="160" y2="150.264"/>
+    <polygon style="fill: #000000" points="160,157.764 155,147.764 160,150.264 165,147.764 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="160,157.764 155,147.764 160,150.264 165,147.764 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="160" y1="200" x2="160" y2="210.264"/>
+    <polygon style="fill: #000000" points="160,217.764 155,207.764 160,210.264 165,207.764 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="160,217.764 155,207.764 160,210.264 165,207.764 "/>
+  </g>
+</svg>

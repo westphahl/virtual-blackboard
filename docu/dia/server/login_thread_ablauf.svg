@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/PR-SVG-20010719/DTD/svg10.dtd">
+<svg width="15cm" height="18cm" viewBox="36 -282 287 347" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <g>
+    <path style="fill: #ffffff" d="M 140 -280 L 220,-280 C 231.046,-280 240,-271.046 240,-260 C 240,-248.954 231.046,-240 220,-240 L 140,-240 C 128.954,-240 120,-248.954 120,-260 C 120,-271.046 128.954,-280 140,-280z"/>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 140 -280 L 220,-280 C 231.046,-280 240,-271.046 240,-260 C 240,-248.954 231.046,-240 220,-240 L 140,-240 C 128.954,-240 120,-248.954 120,-260 C 120,-271.046 128.954,-280 140,-280"/>
+    <text style="fill: #000000;text-anchor:middle;font-size:11.2889;font-family:sanserif;font-style:normal;font-weight:normal" x="180" y="-256.472">
+      <tspan x="180" y="-256.472">Start</tspan>
+    </text>
+  </g>
+  <text style="fill: #000000;text-anchor:start;font-size:11.2889;font-family:sanserif;font-style:normal;font-weight:normal" x="180" y="-260">
+    <tspan x="180" y="-260"></tspan>
+  </text>
+  <g>
+    <path style="fill: #ffffff" d="M 320 -180 L 40,-180 L 96,-220 L 264,-220 L 320,-180z"/>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 320 -180 L 40,-180 L 96,-220 L 264,-220 L 320,-180"/>
+    <text style="fill: #000000;text-anchor:middle;font-size:11.2889;font-family:sanserif;font-style:normal;font-weight:normal" x="180" y="-196.472">
+      <tspan x="180" y="-196.472">Endlosschleife</tspan>
+    </text>
+  </g>
+  <g>
+    <path style="fill: #ffffff" d="M 40 -40 L 320,-40 L 264,0 L 96,0 L 40,-40z"/>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 40 -40 L 320,-40 L 264,0 L 96,0 L 40,-40"/>
+    <text style="fill: #000000;text-anchor:middle;font-size:11.2889;font-family:sanserif;font-style:normal;font-weight:normal" x="180" y="-16.4722">
+      <tspan x="180" y="-16.4722"></tspan>
+    </text>
+  </g>
+  <g>
+    <path style="fill: #ffffff" d="M 140 20 L 220,20 C 231.046,20 240,29.8497 240,42 C 240,54.1503 231.046,64 220,64 L 140,64 C 128.954,64 120,54.1503 120,42 C 120,29.8497 128.954,20 140,20z"/>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 140 20 L 220,20 C 231.046,20 240,29.8497 240,42 C 240,54.1503 231.046,64 220,64 L 140,64 C 128.954,64 120,54.1503 120,42 C 120,29.8497 128.954,20 140,20"/>
+    <text style="fill: #000000;text-anchor:middle;font-size:11.2889;font-family:sanserif;font-style:normal;font-weight:normal" x="180" y="45.5278">
+      <tspan x="180" y="45.5278">Ende</tspan>
+    </text>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="180" y1="-240" x2="180" y2="-229.736"/>
+    <polygon style="fill: #000000" points="180,-222.236 175,-232.236 180,-229.736 185,-232.236 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="180,-222.236 175,-232.236 180,-229.736 185,-232.236 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="180" y1="0" x2="180" y2="10.2639"/>
+    <polygon style="fill: #000000" points="180,17.7639 175,7.76393 180,10.2639 185,7.76393 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="180,17.7639 175,7.76393 180,10.2639 185,7.76393 "/>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="80" y="-100" width="200" height="40"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="80" y="-100" width="200" height="40"/>
+    <text style="fill: #000000;text-anchor:middle;font-size:11.2889;font-family:sanserif;font-style:normal;font-weight:normal" x="180" y="-83.6111">
+      <tspan x="180" y="-83.6111">Starte neuen</tspan>
+      <tspan x="180" y="-69.5">Client-Thread</tspan>
+    </text>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="180" y1="-120" x2="180" y2="-109.736"/>
+    <polygon style="fill: #000000" points="180,-102.236 175,-112.236 180,-109.736 185,-112.236 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="180,-102.236 175,-112.236 180,-109.736 185,-112.236 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="180" y1="-60" x2="180" y2="-49.7361"/>
+    <polygon style="fill: #000000" points="180,-42.2361 175,-52.2361 180,-49.7361 185,-52.2361 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="180,-42.2361 175,-52.2361 180,-49.7361 185,-52.2361 "/>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="80" y="-160" width="200" height="40"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="80" y="-160" width="200" height="40"/>
+    <text style="fill: #000000;text-anchor:middle;font-size:11.2889;font-family:sanserif;font-style:normal;font-weight:normal" x="180" y="-136.556">
+      <tspan x="180" y="-136.556">Warte auf neuen Login</tspan>
+    </text>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="180" y1="-180" x2="180" y2="-171.977"/>
+    <polygon style="fill: #000000" points="175,-171.977 180,-161.977 185,-171.977 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="175,-171.977 180,-161.977 185,-171.977 "/>
+  </g>
+</svg>

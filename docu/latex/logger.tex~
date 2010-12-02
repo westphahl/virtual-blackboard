@@ -1,0 +1,13 @@
+\section{Logger}
+
+\subsection{Programmablauf}
+\myfigure{Programmablauf Logger}{ablaeufe/server/logger_ablauf.pdf}{0.5}
+
+\subsection{Funktionshierarchie}
+\myfigure{Funktionshierarchie Logger}{hierarchie/logger.pdf}{0.8}
+
+\subsection{Modulhierarchie}
+\myfigure{Modulhierarchie Logger}{module/server/logger_module.pdf}{0.5}
+
+\subsection{Quellcode}
+Der Quellcode ist auf der CD zu finden.

@@ -5,13 +5,13 @@
 
 \providecommand{\code}[1]{\texttt{#1}}
 
-\providecommand{\myfigure}[2]{
+\providecommand{\myfigure}[3]{
 	\begin{figure}[H]
 		\begin{center}
-			\epsfig{file=Bilder/#2,scale=0.5}
+			\epsfig{file=Bilder/#2,scale=#3}
 		\end{center}
 		\vspace{-3ex}
-		\caption{#1 \label{#1}}
+		\caption{#1 \label{fig:#1}}
 	\end{figure}
 }
 

@@ -1,0 +1,98 @@
+\documentclass[12pt]{article}
+
+\usepackage{amssymb,amsmath,amsbsy,amsfonts}
+\usepackage{color}
+\usepackage{epsfig}
+\usepackage{fancybox,fancyhdr}
+\usepackage{float}
+\usepackage{framed}
+\usepackage{fullpage}
+\usepackage{graphicx}
+\usepackage{listing}
+\usepackage{listings}
+\usepackage{shadow}
+\usepackage{url}
+\usepackage{version}
+\usepackage{wrapfig}
+\usepackage{pdfpages}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, ngerman]{babel}
+\usepackage{ae}
+
+\lstset{
+	literate=
+		{ö}{{\"o}}1
+		{Ö}{{\"O}}1
+		{ä}{{\"a}}1
+		{Ä}{{\"A}}1
+		{ü}{{\"u}}1
+		{Ü}{{\"U}}1
+		{ß}{{ss}}1
+}
+
+\lstset{ %
+	language=c,
+	basicstyle=\footnotesize,
+	numbers=left,
+	numberstyle=\tiny,
+	stepnumber=1,
+	numbersep=5pt,
+	backgroundcolor=\color{white},
+	showspaces=false,
+	showstringspaces=false,
+	frame=single,
+	showtabs=false,
+	tabsize=2,
+	captionpos=none,
+	breaklines=true,
+	breakatwhitespace=false,
+	title=\lstname,
+	escapeinside={\#}{\ },
+	morekeywords={*,...}
+}
+
+\usepackage[
+	pdftitle={Systemprogrammierung Dokumentation},
+	bookmarks=true,
+	bookmarksnumbered=true,
+	colorlinks,
+	linkcolor=red,
+	urlcolor=blue,
+	citecolor=black
+]{hyperref}
+
+%\pagestyle{fancy}
+\cfoot{}
+
+\setcounter{tocdepth}{4}
+
+\input{macros}
+
+\begin{document} 
+
+	\include{titlepage}
+
+	\tableofcontents
+
+	\include{komponentenentwurf}
+ 
+	\include{client}
+
+	\include{server}
+
+	\include{logger}
+
+	\include{archivierer}
+
+	\include{clientlist}
+
+	\include{blackboard}
+
+	\include{fazit}
+
+	%\includepdf[fitpaper=true]{client.pdf}
+	%\includepdf[fitpaper=true]{server.pdf}
+
+\end{document} 

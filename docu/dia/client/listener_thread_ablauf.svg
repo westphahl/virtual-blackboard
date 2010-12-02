@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/PR-SVG-20010719/DTD/svg10.dtd">
+<svg width="35cm" height="26cm" viewBox="-62 218 683 503" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <g>
+    <rect style="fill: #ffffff" x="240" y="220" width="80" height="40"/>
+    <path style="fill: #ffffff" d="M 240,220 A 20,20 0 0 0 220,240 L 240,240 z"/>
+    <path style="fill: #ffffff" d="M 340,240 A 20,20 0 0 0 320,220 L 320,240 z"/>
+    <rect style="fill: #ffffff" x="220" y="240" width="120" height="0"/>
+    <path style="fill: #ffffff" d="M 220,240 A 20,20 0 0 0 240,260 L 240,240 z"/>
+    <path style="fill: #ffffff" d="M 320,260 A 20,20 0 0 0 340,240 L 320,240 z"/>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="240" y1="220" x2="320" y2="220"/>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="240" y1="260" x2="320" y2="260"/>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 240,220 A 20,20 0 0 0 220,240"/>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 340,240 A 20,20 0 0 0 320,220"/>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="220" y1="240" x2="220" y2="240"/>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="340" y1="240" x2="340" y2="240"/>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 220,240 A 20,20 0 0 0 240,260"/>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 320,260 A 20,20 0 0 0 340,240"/>
+    <text style="fill: #000000;text-anchor:middle;font-size:11.2889;font-family:sanserif;font-style:normal;font-weight:normal" x="280" y="243.444">
+      <tspan x="280" y="243.444">Start</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="80" y="440" width="120" height="60"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="80" y="440" width="120" height="60"/>
+    <text style="fill: #000000;text-anchor:middle;font-size:11.2889;font-family:sanserif;font-style:normal;font-weight:normal" x="140" y="466.389">
+      <tspan x="140" y="466.389">Fehlernachricht</tspan>
+      <tspan x="140" y="480.5">anzeigen</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="220" y="440" width="120" height="60"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="220" y="440" width="120" height="60"/>
+    <text style="fill: #000000;text-anchor:middle;font-size:11.2889;font-family:sanserif;font-style:normal;font-weight:normal" x="280" y="466.389">
+      <tspan x="280" y="466.389">Tafel</tspan>
+      <tspan x="280" y="480.5">aktuallisieren</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="360" y="440" width="120" height="60"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="360" y="440" width="120" height="60"/>
+    <text style="fill: #000000;text-anchor:middle;font-size:11.2889;font-family:sanserif;font-style:normal;font-weight:normal" x="420" y="466.389">
+      <tspan x="420" y="466.389">Dialog</tspan>
+      <tspan x="420" y="480.5">anzeigen</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="-60" y="440" width="120" height="60"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="-60" y="440" width="120" height="60"/>
+    <text style="fill: #000000;text-anchor:middle;font-size:11.2889;font-family:sanserif;font-style:normal;font-weight:normal" x="0" y="466.389">
+      <tspan x="0" y="466.389">Client-Data</tspan>
+      <tspan x="0" y="480.5">aktuallisieren</tspan>
+    </text>
+  </g>
+  <g>
+    <polygon style="fill: #ffffff" points="-40,280 600,280 620,300 620,320 -60,320 -60,300 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="-40,280 600,280 620,300 620,320 -60,320 -60,300 "/>
+  </g>
+  <g>
+    <polygon style="fill: #ffffff" points="-60,620 620,620 620,640 600,660 -40,660 -60,640 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="-60,620 620,620 620,640 600,660 -40,660 -60,640 "/>
+  </g>
+  <text style="fill: #000000;text-anchor:middle;font-size:12.8;font-family:sanserif;font-style:normal;font-weight:normal" x="280" y="304.425">
+    <tspan x="280" y="304.425">Endlosschleife</tspan>
+  </text>
+  <g>
+    <rect style="fill: #ffffff" x="240" y="680" width="80" height="40"/>
+    <path style="fill: #ffffff" d="M 240,680 A 20,20 0 0 0 220,700 L 240,700 z"/>
+    <path style="fill: #ffffff" d="M 340,700 A 20,20 0 0 0 320,680 L 320,700 z"/>
+    <rect style="fill: #ffffff" x="220" y="700" width="120" height="0"/>
+    <path style="fill: #ffffff" d="M 220,700 A 20,20 0 0 0 240,720 L 240,700 z"/>
+    <path style="fill: #ffffff" d="M 320,720 A 20,20 0 0 0 340,700 L 320,700 z"/>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="240" y1="680" x2="320" y2="680"/>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="240" y1="720" x2="320" y2="720"/>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 240,680 A 20,20 0 0 0 220,700"/>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 340,700 A 20,20 0 0 0 320,680"/>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="220" y1="700" x2="220" y2="700"/>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="340" y1="700" x2="340" y2="700"/>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 220,700 A 20,20 0 0 0 240,720"/>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 320,720 A 20,20 0 0 0 340,700"/>
+    <text style="fill: #000000;text-anchor:middle;font-size:11.2889;font-family:sanserif;font-style:normal;font-weight:normal" x="280" y="703.444">
+      <tspan x="280" y="703.444">Ende</tspan>
+    </text>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="280" y1="660" x2="280" y2="669"/>
+    <polygon style="fill: #000000" points="275,669 280,679 285,669 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="275,669 280,679 285,669 "/>
+  </g>
+  <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="0" y1="600" x2="560" y2="600"/>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="280" y1="600" x2="280" y2="609"/>
+    <polygon style="fill: #000000" points="275,609 280,619 285,609 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="275,609 280,619 285,609 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="280" y1="260.977" x2="280" y2="269"/>
+    <polygon style="fill: #000000" points="275,269 280,279 285,269 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="275,269 280,279 285,269 "/>
+  </g>
+  <g>
+    <ellipse style="fill: #ffffff" cx="280" cy="360.67" rx="40" ry="20.67"/>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" cx="280" cy="360.67" rx="40" ry="20.67"/>
+    <text style="fill: #000000;text-anchor:middle;font-size:12.8;font-family:sanserif;font-style:normal;font-weight:normal" x="280" y="364.57">
+      <tspan x="280" y="364.57">Typ</tspan>
+    </text>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="280" y1="320.977" x2="280" y2="329"/>
+    <polygon style="fill: #000000" points="275,329 280,339 285,329 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="275,329 280,339 285,329 "/>
+  </g>
+  <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="280" y1="400" x2="280" y2="381.34"/>
+  <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="0" y1="400" x2="560" y2="400"/>
+  <text style="fill: #000000;text-anchor:end;font-size:12.8;font-family:sanserif;font-style:normal;font-weight:normal" x="0" y="416.95">
+    <tspan x="0" y="416.95">Status </tspan>
+  </text>
+  <text style="fill: #000000;text-anchor:end;font-size:12.8;font-family:sanserif;font-style:normal;font-weight:normal" x="140" y="416.95">
+    <tspan x="140" y="416.95">Error </tspan>
+  </text>
+  <text style="fill: #000000;text-anchor:end;font-size:12.8;font-family:sanserif;font-style:normal;font-weight:normal" x="280" y="416.95">
+    <tspan x="280" y="416.95">Board </tspan>
+  </text>
+  <text style="fill: #000000;text-anchor:end;font-size:12.8;font-family:sanserif;font-style:normal;font-weight:normal" x="420" y="416.95">
+    <tspan x="420" y="416.95">Query </tspan>
+  </text>
+  <text style="fill: #000000;text-anchor:end;font-size:12.8;font-family:sanserif;font-style:normal;font-weight:normal" x="560" y="416.95">
+    <tspan x="560" y="416.95">Default </tspan>
+  </text>
+  <g>
+    <rect style="fill: #ffffff" x="-60" y="520" width="120" height="60"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="-60" y="520" width="120" height="60"/>
+    <text style="fill: #000000;text-anchor:middle;font-size:11.2889;font-family:sanserif;font-style:normal;font-weight:normal" x="0" y="546.389">
+      <tspan x="0" y="546.389">GUI</tspan>
+      <tspan x="0" y="560.5">aktuallisieren</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="360" y="520" width="120" height="60"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="360" y="520" width="120" height="60"/>
+    <text style="fill: #000000;text-anchor:middle;font-size:11.2889;font-family:sanserif;font-style:normal;font-weight:normal" x="420" y="553.444">
+      <tspan x="420" y="553.444">Antwort senden</tspan>
+    </text>
+  </g>
+  <g>
+    <polygon style="fill: #ffffff" points="521.838,440 620,440 598.162,500 500,500 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="521.838,440 620,440 598.162,500 500,500 "/>
+    <text style="fill: #000000;text-anchor:middle;font-size:11.2889;font-family:sanserif;font-style:normal;font-weight:normal" x="560" y="466.389">
+      <tspan x="560" y="466.389">Unbekannter</tspan>
+      <tspan x="560" y="480.5">Datentyp</tspan>
+    </text>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="0" y1="400" x2="0" y2="429"/>
+    <polygon style="fill: #000000" points="-5,429 0,439 5,429 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="-5,429 0,439 5,429 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="140" y1="400" x2="140" y2="429"/>
+    <polygon style="fill: #000000" points="135,429 140,439 145,429 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="135,429 140,439 145,429 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="280" y1="400" x2="280" y2="429"/>
+    <polygon style="fill: #000000" points="275,429 280,439 285,429 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="275,429 280,439 285,429 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="420" y1="400" x2="420" y2="429"/>
+    <polygon style="fill: #000000" points="415,429 420,439 425,429 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="415,429 420,439 425,429 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="560" y1="400" x2="560" y2="428.016"/>
+    <polygon style="fill: #000000" points="555,428.016 560,438.016 565,428.016 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="555,428.016 560,438.016 565,428.016 "/>
+  </g>
+  <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="0" y1="580" x2="0" y2="600"/>
+  <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="420" y1="580" x2="420" y2="600"/>
+  <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="560" y1="500.992" x2="560" y2="600"/>
+  <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="280" y1="500" x2="280" y2="600"/>
+  <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="140" y1="500" x2="140" y2="600"/>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="0" y1="500" x2="0" y2="509"/>
+    <polygon style="fill: #000000" points="-5,509 0,519 5,509 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="-5,509 0,519 5,509 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="420" y1="500" x2="420" y2="509"/>
+    <polygon style="fill: #000000" points="415,509 420,519 425,509 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="415,509 420,519 425,509 "/>
+  </g>
+</svg>

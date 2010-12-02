@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/PR-SVG-20010719/DTD/svg10.dtd">
+<svg width="45cm" height="45cm" viewBox="38 32 883 889" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <g>
+    <rect style="fill: #ffffff" x="40" y="40" width="80" height="80"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="40" y="40" width="80" height="80"/>
+    <text style="fill: #000000;text-anchor:middle;font-size:12.8;font-family:sanserif;font-style:normal;font-weight:normal" x="80" y="83.9">
+      <tspan x="80" y="83.9">client</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="240" y="240" width="80" height="80"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="240" y="240" width="80" height="80"/>
+    <text style="fill: #000000;text-anchor:middle;font-size:12.8;font-family:sanserif;font-style:normal;font-weight:normal" x="280" y="275.9">
+      <tspan x="280" y="275.9">command-</tspan>
+      <tspan x="280" y="291.9">thread</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="340" y="340" width="80" height="80"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="340" y="340" width="80" height="80"/>
+    <text style="fill: #000000;text-anchor:middle;font-size:12.8;font-family:sanserif;font-style:normal;font-weight:normal" x="380" y="375.9">
+      <tspan x="380" y="375.9">live-</tspan>
+      <tspan x="380" y="391.9">agent</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="440" y="440" width="80" height="80"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="440" y="440" width="80" height="80"/>
+    <text style="fill: #000000;text-anchor:middle;font-size:12.8;font-family:sanserif;font-style:normal;font-weight:normal" x="480" y="475.9">
+      <tspan x="480" y="475.9">listener-</tspan>
+      <tspan x="480" y="491.9">thread</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="140" y="140" width="80" height="80"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="140" y="140" width="80" height="80"/>
+    <text style="fill: #000000;text-anchor:middle;font-size:12.8;font-family:sanserif;font-style:normal;font-weight:normal" x="180" y="183.9">
+      <tspan x="180" y="183.9">gui</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="540" y="540" width="80" height="80"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="540" y="540" width="80" height="80"/>
+    <text style="fill: #000000;text-anchor:middle;font-size:12.8;font-family:sanserif;font-style:normal;font-weight:normal" x="580" y="583.9">
+      <tspan x="580" y="583.9">utils</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="640" y="640" width="80" height="80"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="640" y="640" width="80" height="80"/>
+    <text style="fill: #000000;text-anchor:middle;font-size:12.8;font-family:sanserif;font-style:normal;font-weight:normal" x="680" y="683.9">
+      <tspan x="680" y="683.9">shared.h</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="740" y="740" width="80" height="80"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="740" y="740" width="80" height="80"/>
+    <text style="fill: #000000;text-anchor:middle;font-size:12.8;font-family:sanserif;font-style:normal;font-weight:normal" x="780" y="783.9">
+      <tspan x="780" y="783.9">commons.h</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="840" y="840" width="80" height="80"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="840" y="840" width="80" height="80"/>
+    <text style="fill: #000000;text-anchor:middle;font-size:12.8;font-family:sanserif;font-style:normal;font-weight:normal" x="880" y="875.9">
+      <tspan x="880" y="875.9">net-</tspan>
+      <tspan x="880" y="891.9">message</tspan>
+    </text>
+  </g>
+  <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="120" y1="80" x2="880" y2="80"/>
+  <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="880" y1="840" x2="880" y2="80"/>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="180" y1="140" x2="180" y2="74"/>
+    <path style="fill: #000000" d="M 180 74 C 182.5,74 185,76.5 185,79 C 185,81.5 182.5,84 180,84 C 177.5,84 175,81.5 175,79 C 175,76.5 177.5,74 180,74z"/>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 180 74 C 182.5,74 185,76.5 185,79 C 185,81.5 182.5,84 180,84 C 177.5,84 175,81.5 175,79 C 175,76.5 177.5,74 180,74"/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="280" y1="239.18" x2="280" y2="74"/>
+    <path style="fill: #000000" d="M 280 74 C 282.5,74 285,76.5 285,79 C 285,81.5 282.5,84 280,84 C 277.5,84 275,81.5 275,79 C 275,76.5 277.5,74 280,74z"/>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 280 74 C 282.5,74 285,76.5 285,79 C 285,81.5 282.5,84 280,84 C 277.5,84 275,81.5 275,79 C 275,76.5 277.5,74 280,74"/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="380" y1="340" x2="380" y2="74"/>
+    <path style="fill: #000000" d="M 380 74 C 382.5,74 385,76.5 385,79 C 385,81.5 382.5,84 380,84 C 377.5,84 375,81.5 375,79 C 375,76.5 377.5,74 380,74z"/>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 380 74 C 382.5,74 385,76.5 385,79 C 385,81.5 382.5,84 380,84 C 377.5,84 375,81.5 375,79 C 375,76.5 377.5,74 380,74"/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="480" y1="440" x2="480" y2="74"/>
+    <path style="fill: #000000" d="M 480 74 C 482.5,74 485,76.5 485,79 C 485,81.5 482.5,84 480,84 C 477.5,84 475,81.5 475,79 C 475,76.5 477.5,74 480,74z"/>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 480 74 C 482.5,74 485,76.5 485,79 C 485,81.5 482.5,84 480,84 C 477.5,84 475,81.5 475,79 C 475,76.5 477.5,74 480,74"/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="580" y1="539.961" x2="580" y2="74"/>
+    <path style="fill: #000000" d="M 580 74 C 582.5,74 585,76.5 585,79 C 585,81.5 582.5,84 580,84 C 577.5,84 575,81.5 575,79 C 575,76.5 577.5,74 580,74z"/>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 580 74 C 582.5,74 585,76.5 585,79 C 585,81.5 582.5,84 580,84 C 577.5,84 575,81.5 575,79 C 575,76.5 577.5,74 580,74"/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="680" y1="640" x2="680" y2="74"/>
+    <path style="fill: #000000" d="M 680 74 C 682.5,74 685,76.5 685,79 C 685,81.5 682.5,84 680,84 C 677.5,84 675,81.5 675,79 C 675,76.5 677.5,74 680,74z"/>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 680 74 C 682.5,74 685,76.5 685,79 C 685,81.5 682.5,84 680,84 C 677.5,84 675,81.5 675,79 C 675,76.5 677.5,74 680,74"/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="780" y1="740" x2="780" y2="74"/>
+    <path style="fill: #000000" d="M 780 74 C 782.5,74 785,76.5 785,79 C 785,81.5 782.5,84 780,84 C 777.5,84 775,81.5 775,79 C 775,76.5 777.5,74 780,74z"/>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 780 74 C 782.5,74 785,76.5 785,79 C 785,81.5 782.5,84 780,84 C 777.5,84 775,81.5 775,79 C 775,76.5 777.5,74 780,74"/>
+  </g>
+  <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="220" y1="180" x2="880" y2="180"/>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="240" y1="280" x2="74" y2="280"/>
+    <path style="fill: #000000" d="M 74 280 C 74,277.5 76.5,275 79,275 C 81.5,275 84,277.5 84,280 C 84,282.5 81.5,285 79,285 C 76.5,285 74,282.5 74,280z"/>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 74 280 C 74,277.5 76.5,275 79,275 C 81.5,275 84,277.5 84,280 C 84,282.5 81.5,285 79,285 C 76.5,285 74,282.5 74,280"/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="320" y1="280" x2="586" y2="280"/>
+    <path style="fill: #000000" d="M 586 280 C 586,282.5 583.5,285 581,285 C 578.5,285 576,282.5 576,280 C 576,277.5 578.5,275 581,275 C 583.5,275 586,277.5 586,280z"/>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 586 280 C 586,282.5 583.5,285 581,285 C 578.5,285 576,282.5 576,280 C 576,277.5 578.5,275 581,275 C 583.5,275 586,277.5 586,280"/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="580" y1="280" x2="686" y2="280"/>
+    <path style="fill: #000000" d="M 686 280 C 686,282.5 683.5,285 681,285 C 678.5,285 676,282.5 676,280 C 676,277.5 678.5,275 681,275 C 683.5,275 686,277.5 686,280z"/>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 686 280 C 686,282.5 683.5,285 681,285 C 678.5,285 676,282.5 676,280 C 676,277.5 678.5,275 681,275 C 683.5,275 686,277.5 686,280"/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="680" y1="280" x2="786" y2="280"/>
+    <path style="fill: #000000" d="M 786 280 C 786,282.5 783.5,285 781,285 C 778.5,285 776,282.5 776,280 C 776,277.5 778.5,275 781,275 C 783.5,275 786,277.5 786,280z"/>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 786 280 C 786,282.5 783.5,285 781,285 C 778.5,285 776,282.5 776,280 C 776,277.5 778.5,275 781,275 C 783.5,275 786,277.5 786,280"/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="780" y1="280" x2="886" y2="280"/>
+    <path style="fill: #000000" d="M 886 280 C 886,282.5 883.5,285 881,285 C 878.5,285 876,282.5 876,280 C 876,277.5 878.5,275 881,275 C 883.5,275 886,277.5 886,280z"/>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 886 280 C 886,282.5 883.5,285 881,285 C 878.5,285 876,282.5 876,280 C 876,277.5 878.5,275 881,275 C 883.5,275 886,277.5 886,280"/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="280" y1="380" x2="74" y2="380"/>
+    <path style="fill: #000000" d="M 74 380 C 74,377.5 76.5,375 79,375 C 81.5,375 84,377.5 84,380 C 84,382.5 81.5,385 79,385 C 76.5,385 74,382.5 74,380z"/>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 74 380 C 74,377.5 76.5,375 79,375 C 81.5,375 84,377.5 84,380 C 84,382.5 81.5,385 79,385 C 76.5,385 74,382.5 74,380"/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="340" y1="380" x2="274" y2="380"/>
+    <path style="fill: #000000" d="M 274 380 C 274,377.5 276.5,375 279,375 C 281.5,375 284,377.5 284,380 C 284,382.5 281.5,385 279,385 C 276.5,385 274,382.5 274,380z"/>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 274 380 C 274,377.5 276.5,375 279,375 C 281.5,375 284,377.5 284,380 C 284,382.5 281.5,385 279,385 C 276.5,385 274,382.5 274,380"/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="420" y1="380" x2="586" y2="380"/>
+    <path style="fill: #000000" d="M 586 380 C 586,382.5 583.5,385 581,385 C 578.5,385 576,382.5 576,380 C 576,377.5 578.5,375 581,375 C 583.5,375 586,377.5 586,380z"/>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 586 380 C 586,382.5 583.5,385 581,385 C 578.5,385 576,382.5 576,380 C 576,377.5 578.5,375 581,375 C 583.5,375 586,377.5 586,380"/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="580" y1="380" x2="686" y2="380"/>
+    <path style="fill: #000000" d="M 686 380 C 686,382.5 683.5,385 681,385 C 678.5,385 676,382.5 676,380 C 676,377.5 678.5,375 681,375 C 683.5,375 686,377.5 686,380z"/>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 686 380 C 686,382.5 683.5,385 681,385 C 678.5,385 676,382.5 676,380 C 676,377.5 678.5,375 681,375 C 683.5,375 686,377.5 686,380"/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="680" y1="380" x2="786" y2="380"/>
+    <path style="fill: #000000" d="M 786 380 C 786,382.5 783.5,385 781,385 C 778.5,385 776,382.5 776,380 C 776,377.5 778.5,375 781,375 C 783.5,375 786,377.5 786,380z"/>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 786 380 C 786,382.5 783.5,385 781,385 C 778.5,385 776,382.5 776,380 C 776,377.5 778.5,375 781,375 C 783.5,375 786,377.5 786,380"/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="780" y1="380" x2="886" y2="380"/>
+    <path style="fill: #000000" d="M 886 380 C 886,382.5 883.5,385 881,385 C 878.5,385 876,382.5 876,380 C 876,377.5 878.5,375 881,375 C 883.5,375 886,377.5 886,380z"/>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 886 380 C 886,382.5 883.5,385 881,385 C 878.5,385 876,382.5 876,380 C 876,377.5 878.5,375 881,375 C 883.5,375 886,377.5 886,380"/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="280" y1="480" x2="174" y2="480"/>
+    <path style="fill: #000000" d="M 174 480 C 174,477.5 176.5,475 179,475 C 181.5,475 184,477.5 184,480 C 184,482.5 181.5,485 179,485 C 176.5,485 174,482.5 174,480z"/>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 174 480 C 174,477.5 176.5,475 179,475 C 181.5,475 184,477.5 184,480 C 184,482.5 181.5,485 179,485 C 176.5,485 174,482.5 174,480"/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="180" y1="480" x2="74" y2="480"/>
+    <path style="fill: #000000" d="M 74 480 C 74,477.5 76.5,475 79,475 C 81.5,475 84,477.5 84,480 C 84,482.5 81.5,485 79,485 C 76.5,485 74,482.5 74,480z"/>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 74 480 C 74,477.5 76.5,475 79,475 C 81.5,475 84,477.5 84,480 C 84,482.5 81.5,485 79,485 C 76.5,485 74,482.5 74,480"/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="440" y1="480" x2="274" y2="480"/>
+    <path style="fill: #000000" d="M 274 480 C 274,477.5 276.5,475 279,475 C 281.5,475 284,477.5 284,480 C 284,482.5 281.5,485 279,485 C 276.5,485 274,482.5 274,480z"/>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 274 480 C 274,477.5 276.5,475 279,475 C 281.5,475 284,477.5 284,480 C 284,482.5 281.5,485 279,485 C 276.5,485 274,482.5 274,480"/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="520" y1="480" x2="586" y2="480"/>
+    <path style="fill: #000000" d="M 586 480 C 586,482.5 583.5,485 581,485 C 578.5,485 576,482.5 576,480 C 576,477.5 578.5,475 581,475 C 583.5,475 586,477.5 586,480z"/>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 586 480 C 586,482.5 583.5,485 581,485 C 578.5,485 576,482.5 576,480 C 576,477.5 578.5,475 581,475 C 583.5,475 586,477.5 586,480"/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="580" y1="480" x2="686" y2="480"/>
+    <path style="fill: #000000" d="M 686 480 C 686,482.5 683.5,485 681,485 C 678.5,485 676,482.5 676,480 C 676,477.5 678.5,475 681,475 C 683.5,475 686,477.5 686,480z"/>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 686 480 C 686,482.5 683.5,485 681,485 C 678.5,485 676,482.5 676,480 C 676,477.5 678.5,475 681,475 C 683.5,475 686,477.5 686,480"/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="680" y1="480" x2="786" y2="480"/>
+    <path style="fill: #000000" d="M 786 480 C 786,482.5 783.5,485 781,485 C 778.5,485 776,482.5 776,480 C 776,477.5 778.5,475 781,475 C 783.5,475 786,477.5 786,480z"/>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 786 480 C 786,482.5 783.5,485 781,485 C 778.5,485 776,482.5 776,480 C 776,477.5 778.5,475 781,475 C 783.5,475 786,477.5 786,480"/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="780" y1="480" x2="886" y2="480"/>
+    <path style="fill: #000000" d="M 886 480 C 886,482.5 883.5,485 881,485 C 878.5,485 876,482.5 876,480 C 876,477.5 878.5,475 881,475 C 883.5,475 886,477.5 886,480z"/>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 886 480 C 886,482.5 883.5,485 881,485 C 878.5,485 876,482.5 876,480 C 876,477.5 878.5,475 881,475 C 883.5,475 886,477.5 886,480"/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="620" y1="580" x2="886" y2="580"/>
+    <path style="fill: #000000" d="M 886 580 C 886,582.5 883.5,585 881,585 C 878.5,585 876,582.5 876,580 C 876,577.5 878.5,575 881,575 C 883.5,575 886,577.5 886,580z"/>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 886 580 C 886,582.5 883.5,585 881,585 C 878.5,585 876,582.5 876,580 C 876,577.5 878.5,575 881,575 C 883.5,575 886,577.5 886,580"/>
+  </g>
+  <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="540" y1="580" x2="80" y2="580"/>
+  <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="640" y1="680" x2="80" y2="680"/>
+  <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="740" y1="780" x2="80" y2="780"/>
+  <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="840" y1="880" x2="80" y2="880"/>
+  <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="820" y1="780" x2="880" y2="780"/>
+  <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="720" y1="680" x2="880" y2="680"/>
+  <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="780" y1="820" x2="780" y2="880"/>
+  <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="680" y1="720" x2="680" y2="880"/>
+  <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="580" y1="620" x2="580" y2="880"/>
+  <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="480" y1="520" x2="480" y2="880"/>
+  <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="380" y1="420" x2="380" y2="880"/>
+  <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="280" y1="320" x2="280" y2="880"/>
+  <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="180" y1="220" x2="180" y2="880"/>
+  <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="80" y1="120" x2="80" y2="880"/>
+  <text style="fill: #000000;text-anchor:middle;font-size:12.8;font-family:sanserif;font-style:normal;font-weight:normal" x="480" y="44.425">
+    <tspan x="480" y="44.425">benutzt</tspan>
+  </text>
+  <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="440" y1="40" x2="280" y2="40"/>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="520" y1="40" x2="675.528" y2="40"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="667.764,45 677.764,40 667.764,35 "/>
+  </g>
+  <text style="fill: #000000;text-anchor:middle;font-size:12.8;font-family:sanserif;font-style:normal;font-weight:normal" x="480" y="904.425">
+    <tspan x="480" y="904.425">benutzt</tspan>
+  </text>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="440" y1="900" x2="284.472" y2="900"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="292.236,895 282.236,900 292.236,905 "/>
+  </g>
+  <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="520" y1="900" x2="680" y2="900"/>
+</svg>

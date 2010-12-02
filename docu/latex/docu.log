@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2010.10.6)  29 OCT 2010 12:02
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2010.10.6)  2 DEC 2010 13:37
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -238,6 +238,39 @@ Package version Info: Excluding comment environments declared on input line 115
 \WF@everypar=\toks28
 Package: wrapfig 2003/01/31  v 3.6
 )
+(/usr/share/texmf-texlive/tex/latex/pdfpages/pdfpages.sty
+Package: pdfpages 2009/02/07 v0.4g Insert pages of external PDF documents (AM)
+
+(/usr/share/texmf-texlive/tex/latex/base/ifthen.sty
+Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
+)
+(/usr/share/texmf-texlive/tex/latex/tools/calc.sty
+Package: calc 2007/08/22 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count111
+\calc@Bcount=\count112
+\calc@Adimen=\dimen133
+\calc@Bdimen=\dimen134
+\calc@Askip=\skip56
+\calc@Bskip=\skip57
+LaTeX Info: Redefining \setlength on input line 76.
+LaTeX Info: Redefining \addtolength on input line 77.
+\calc@Ccount=\count113
+\calc@Cskip=\skip58
+)
+(/usr/share/texmf-texlive/tex/latex/eso-pic/eso-pic.sty
+Package: eso-pic 2006/07/14 v1.1d eso-pic (RN)
+
+(/usr/share/texmf-texlive/tex/latex/ms/everyshi.sty
+Package: everyshi 2001/05/15 v3.00 EveryShipout Package (MS)
+))
+(/usr/share/texmf-texlive/tex/latex/pdfpages/pppdftex.def
+File: pppdftex.def 2009/02/07 v0.4g Pdfpages driver for pdfTeX (AM)
+)
+\AM@pagebox=\box36
+\AM@toc@title=\toks29
+\c@AM@survey=\count114
+\AM@templatesizebox=\box37
+)
 (/usr/share/texmf-texlive/tex/latex/base/fontenc.sty
 Package: fontenc 2005/09/27 v1.99g Standard LaTeX package
 
@@ -247,8 +280,8 @@ LaTeX Font Info:    Redeclaring font encoding T1 on input line 43.
 ))
 (/usr/share/texmf-texlive/tex/latex/base/inputenc.sty
 Package: inputenc 2008/03/30 v1.1d Input encoding file
-\inpenc@prehook=\toks29
-\inpenc@posthook=\toks30
+\inpenc@prehook=\toks30
+\inpenc@posthook=\toks31
 
 (/usr/share/texmf-texlive/tex/latex/base/utf8.def
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
@@ -470,8 +503,8 @@ Language: english 2005/03/30 v3.3o English support from the babel system
 
 (/usr/share/texmf-texlive/tex/generic/babel/babel.def
 File: babel.def 2008/07/06 v3.8l Babel common definitions
-\babel@savecnt=\count111
-\U@D=\dimen133
+\babel@savecnt=\count115
+\U@D=\dimen135
 )
 \l@canadian = a dialect from \language\l@american 
 \l@australian = a dialect from \language\l@british 
@@ -524,9 +557,9 @@ O)
 (/usr/share/texmf-texlive/tex/latex/oberdiek/xcolor-patch.sty
 Package: xcolor-patch 2009/10/02 xcolor patch
 ))
-\@linkdim=\dimen134
-\Hy@linkcounter=\count112
-\Hy@pagecounter=\count113
+\@linkdim=\dimen136
+\Hy@linkcounter=\count116
+\Hy@pagecounter=\count117
 
 (/usr/share/texmf-texlive/tex/latex/hyperref/pd1enc.def
 File: pd1enc.def 2009/10/09 v6.79a Hyperref: PDFDocEncoding definition (HO)
@@ -592,10 +625,10 @@ Package pdftexcmds Info: LuaTeX not detected.
 Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
 )))
-\Fld@menulength=\count114
-\Field@Width=\dimen135
-\Fld@charsize=\dimen136
-\Field@toks=\toks31
+\Fld@menulength=\count118
+\Field@Width=\dimen137
+\Fld@charsize=\dimen138
+\Field@toks=\toks32
 Package hyperref Info: Hyper figures OFF on input line 4377.
 Package hyperref Info: Link nesting OFF on input line 4382.
 Package hyperref Info: Hyper index ON on input line 4385.
@@ -607,18 +640,22 @@ Package hyperref Info: PDF/A mode OFF on input line 4407.
 (/usr/share/texmf-texlive/tex/generic/oberdiek/atbegshi.sty
 Package: atbegshi 2008/07/31 v1.9 At begin shipout hook (HO)
 )
-\Hy@abspage=\count115
-\c@Item=\count116
-\c@Hfootnote=\count117
+\Hy@abspage=\count119
+\c@Item=\count120
+\c@Hfootnote=\count121
 )
 *hyperref using default driver hpdftex*
 (/usr/share/texmf-texlive/tex/latex/hyperref/hpdftex.def
 File: hpdftex.def 2009/10/09 v6.79a Hyperref driver for pdfTeX
-\Fld@listcount=\count118
+\Fld@listcount=\count122
 ) (./macros.tex)
-(./docu.aux (./titlepage.aux) (./komponentenentwurf.aux) (./client.aux)
-(./server.aux) (./logger.aux) (./archivierer.aux) (./clientlist.aux)
-(./blackboard.aux) (./fazit.aux))
+(./docu.aux (./titlepage.aux) (./aufgabenverteilung.aux)
+(./komponentenentwurf.aux) (./client.aux) (./server.aux
+
+LaTeX Warning: Label `fig:Ablauf Hauptprogramm' multiply defined.
+
+) (./logger.aux) (./archivierer.aux) (./clientlist.aux) (./blackboard.aux)
+(./fazit.aux))
 \openout1 = `docu.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 73.
@@ -635,29 +672,30 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 73.
 LaTeX Font Info:    ... okay on input line 73.
 LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 73.
 LaTeX Font Info:    ... okay on input line 73.
-
-(/usr/share/texmf/tex/context/base/supp-pdf.mkii
+ (/usr/share/texmf/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count119
-\scratchdimen=\dimen137
-\scratchbox=\box36
-\nofMPsegments=\count120
-\nofMParguments=\count121
-\everyMPshowfont=\toks32
-\MPscratchCnt=\count122
-\MPscratchDim=\dimen138
-\MPnumerator=\count123
-\everyMPtoPDFconversion=\toks33
+\scratchcounter=\count123
+\scratchdimen=\dimen139
+\scratchbox=\box38
+\nofMPsegments=\count124
+\nofMParguments=\count125
+\everyMPshowfont=\toks33
+\MPscratchCnt=\count126
+\MPscratchDim=\dimen140
+\MPnumerator=\count127
+\everyMPtoPDFconversion=\toks34
 )
-\c@lstlisting=\count124
+\c@lstlisting=\count128
+ ABD: EveryShipout initializing macros
 Package hyperref Info: Link coloring ON on input line 73.
- (/usr/share/texmf-texlive/tex/latex/hyperref/nameref.sty
+
+(/usr/share/texmf-texlive/tex/latex/hyperref/nameref.sty
 Package: nameref 2007/05/29 v2.31 Cross-referencing by name of section
 
 (/usr/share/texmf-texlive/tex/latex/oberdiek/refcount.sty
 Package: refcount 2008/08/11 v3.1 Data extraction from references (HO)
 )
-\c@section@level=\count125
+\c@section@level=\count129
 )
 LaTeX Info: Redefining \ref on input line 73.
 LaTeX Info: Redefining \pageref on input line 73.
@@ -666,7 +704,7 @@ LaTeX Info: Redefining \pageref on input line 73.
 \@outlinefile=\write4
 \openout4 = `docu.out'.
 
-\AtBeginShipoutBox=\box37
+\AtBeginShipoutBox=\box39
 \openout2 = `titlepage.aux'.
 
  (./titlepage.tex
@@ -683,7 +721,7 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 5.
 (/usr/share/texmf-texlive/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 )
-<Bilder/logo_welle_de.png, id=263, 171.039pt x 66.7293pt>
+<Bilder/logo_welle_de.png, id=267, 171.039pt x 66.7293pt>
 File: Bilder/logo_welle_de.png Graphic file (type png)
 
 <use Bilder/logo_welle_de.png>
@@ -700,18 +738,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 5--20
 
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./Bilder/logo_welle_de.png
- (PNG copy)>]) (./docu.toc
-
-Package Fancyhdr Warning: \headheight is too small (0.0pt): 
- Make it at least 14.49998pt.
- We now make it that large for the rest of the document.
- This may cause the page layout to be inconsistent, however.
-
-pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
-been already used, duplicate ignored
+ (PNG copy)>]) (./docu.tocpdfTeX warning (ext4): destination with the same iden
+tifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.42 ...grammabl\IeC {\"a}ufe}{15}{subsection.3.1}
+l.42 ...grammabl\IeC {\"a}ufe}{19}{subsection.4.1}
                                                    [1
 
 ])
@@ -719,12 +750,18 @@ l.42 ...grammabl\IeC {\"a}ufe}{15}{subsection.3.1}
 \openout5 = `docu.toc'.
 
  [2]
+\openout2 = `aufgabenverteilung.aux'.
+
+
+(./aufgabenverteilung.tex) [3
+
+]
 \openout2 = `komponentenentwurf.aux'.
 
-
-(./komponentenentwurf.tex
+ (./komponentenentwurf.tex
 LaTeX Font Info:    Try loading font information for OMS+aer on input line 7.
- (/usr/share/texmf-texlive/tex/latex/ae/omsaer.fd
+
+(/usr/share/texmf-texlive/tex/latex/ae/omsaer.fd
 File: omsaer.fd 1999/12/27
 )
 LaTeX Font Info:    Font shape `OMS/aer/m/n' in size <12> not available
@@ -733,75 +770,76 @@ LaTeX Font Info:    Try loading font information for T1+aett on input line 18.
 
 (/usr/share/texmf-texlive/tex/latex/ae/t1aett.fd
 File: t1aett.fd 1997/11/16 Font definitions for T1/aett.
-) [3
+) [4
+
 
 ]
 Underfull \hbox (badness 10000) in paragraph at lines 53--60
 
  []
 
-[4] [5] [6]
+[5] [6] [7]
 
 pdfTeX warning: /usr/bin/pdflatex (file ./Bilder/header.pdf): PDF inclusion: fo
 und PDF version <1.5>, but at most version <1.4> allowed
-<Bilder/header.pdf, id=377, 910.48819pt x 113.81102pt>
+<Bilder/header.pdf, id=386, 910.48819pt x 113.81102pt>
 File: Bilder/header.pdf Graphic file (type pdf)
  <use Bilder/header.pdf>
 
 pdfTeX warning: /usr/bin/pdflatex (file ./Bilder/login.pdf): PDF inclusion: fou
 nd PDF version <1.5>, but at most version <1.4> allowed
-<Bilder/login.pdf, id=379, 910.48819pt x 170.71654pt>
+<Bilder/login.pdf, id=388, 910.48819pt x 170.71654pt>
 File: Bilder/login.pdf Graphic file (type pdf)
  <use Bilder/login.pdf>
-[7 <./Bilder/header.pdf>]
+[8 <./Bilder/header.pdf>]
 
 pdfTeX warning: /usr/bin/pdflatex (file ./Bilder/board_content.pdf): PDF inclus
 ion: found PDF version <1.5>, but at most version <1.4> allowed
-<Bilder/board_content.pdf, id=402, 910.48819pt x 113.81102pt>
+<Bilder/board_content.pdf, id=411, 910.48819pt x 113.81102pt>
 File: Bilder/board_content.pdf Graphic file (type pdf)
 
 <use Bilder/board_content.pdf>
 
 pdfTeX warning: /usr/bin/pdflatex (file ./Bilder/clear_board.pdf): PDF inclusio
 n: found PDF version <1.5>, but at most version <1.4> allowed
-<Bilder/clear_board.pdf, id=404, 682.86612pt x 113.81102pt>
+<Bilder/clear_board.pdf, id=413, 682.86612pt x 113.81102pt>
 File: Bilder/clear_board.pdf Graphic file (type pdf)
 
-<use Bilder/clear_board.pdf> [8 <./Bilder/login.pdf> <./Bilder/board_content.pd
-f> <./Bilder/clear_board.pdf>]
+<use Bilder/clear_board.pdf>
 
 pdfTeX warning: /usr/bin/pdflatex (file ./Bilder/write_request.pdf): PDF inclus
 ion: found PDF version <1.5>, but at most version <1.4> allowed
-<Bilder/write_request.pdf, id=437, 910.48819pt x 113.81102pt>
+<Bilder/write_request.pdf, id=415, 910.48819pt x 113.81102pt>
 File: Bilder/write_request.pdf Graphic file (type pdf)
 
-<use Bilder/write_request.pdf>
+<use Bilder/write_request.pdf> [9 <./Bilder/login.pdf> <./Bilder/board_content.
+pdf> <./Bilder/clear_board.pdf>]
 
 pdfTeX warning: /usr/bin/pdflatex (file ./Bilder/write_requested.pdf): PDF incl
 usion: found PDF version <1.5>, but at most version <1.4> allowed
-<Bilder/write_requested.pdf, id=439, 910.48819pt x 170.71654pt>
+<Bilder/write_requested.pdf, id=449, 910.48819pt x 170.71654pt>
 File: Bilder/write_requested.pdf Graphic file (type pdf)
 
 <use Bilder/write_requested.pdf>
 
 pdfTeX warning: /usr/bin/pdflatex (file ./Bilder/request_reply.pdf): PDF inclus
 ion: found PDF version <1.5>, but at most version <1.4> allowed
-<Bilder/request_reply.pdf, id=441, 910.48819pt x 170.71654pt>
+<Bilder/request_reply.pdf, id=451, 910.48819pt x 170.71654pt>
 File: Bilder/request_reply.pdf Graphic file (type pdf)
 
-<use Bilder/request_reply.pdf> [9 <./Bilder/write_request.pdf> <./Bilder/write_
-requested.pdf> <./Bilder/request_reply.pdf>]
+<use Bilder/request_reply.pdf> [10 <./Bilder/write_request.pdf> <./Bilder/write
+_requested.pdf> <./Bilder/request_reply.pdf>]
 
 pdfTeX warning: /usr/bin/pdflatex (file ./Bilder/shutdown.pdf): PDF inclusion: 
 found PDF version <1.5>, but at most version <1.4> allowed
-<Bilder/shutdown.pdf, id=477, 682.86612pt x 113.81102pt>
+<Bilder/shutdown.pdf, id=486, 682.86612pt x 113.81102pt>
 File: Bilder/shutdown.pdf Graphic file (type pdf)
 
 <use Bilder/shutdown.pdf>
 
 pdfTeX warning: /usr/bin/pdflatex (file ./Bilder/status_nachricht.pdf): PDF inc
 lusion: found PDF version <1.5>, but at most version <1.4> allowed
-<Bilder/status_nachricht.pdf, id=479, 910.48819pt x 227.62204pt>
+<Bilder/status_nachricht.pdf, id=488, 910.48819pt x 227.62204pt>
 File: Bilder/status_nachricht.pdf Graphic file (type pdf)
 
 <use Bilder/status_nachricht.pdf>
@@ -813,91 +851,258 @@ Overfull \hbox (45.0628pt too wide) in paragraph at lines 241--249
 
 pdfTeX warning: /usr/bin/pdflatex (file ./Bilder/error_message.pdf): PDF inclus
 ion: found PDF version <1.5>, but at most version <1.4> allowed
-<Bilder/error_message.pdf, id=481, 910.48819pt x 170.71654pt>
+<Bilder/error_message.pdf, id=490, 910.48819pt x 170.71654pt>
 File: Bilder/error_message.pdf Graphic file (type pdf)
 
-<use Bilder/error_message.pdf> [10 <./Bilder/shutdown.pdf> <./Bilder/status_nac
-hricht.pdf>])
-Overfull \hbox (21.84192pt too wide) in paragraph at lines 254--79
+<use Bilder/error_message.pdf>)
+Overfull \hbox (21.84192pt too wide) in paragraph at lines 254--81
 [][] 
  []
 
-[11 <./Bilder/error_message.pdf>]
+[11 <./Bilder/shutdown.pdf> <./Bilder/status_nachricht.pdf> <./Bilder/error_mes
+sage.pdf>] [12]
 \openout2 = `client.aux'.
 
- (./client.tex [12
+ (./client.tex
+
+pdfTeX warning: /usr/bin/pdflatex (file ./Bilder/ablaeufe/client/client_ablauf.
+pdf): PDF inclusion: found PDF version <1.5>, but at most version <1.4> allowed
+
+<Bilder/ablaeufe/client/client_ablauf.pdf, id=528, 711.31892pt x 967.39365pt>
+File: Bilder/ablaeufe/client/client_ablauf.pdf Graphic file (type pdf)
+
+<use Bilder/ablaeufe/client/client_ablauf.pdf>
+
+pdfTeX warning: /usr/bin/pdflatex (file ./Bilder/ablaeufe/client/command_thread
+_ablauf.pdf): PDF inclusion: found PDF version <1.5>, but at most version <1.4>
+ allowed
+
+<Bilder/ablaeufe/client/command_thread_ablauf.pdf, id=530, 825.12991pt x 625.96
+065pt>
+File: Bilder/ablaeufe/client/command_thread_ablauf.pdf Graphic file (type pdf)
+ <use Bilder/ablaeufe/client/command_thread_ablauf.pdf> [13
 
 
-] [13]) [14]
+ <./Bilder/ablaeufe/client/client_ablauf.pdf>]
+
+pdfTeX warning: /usr/bin/pdflatex (file ./Bilder/ablaeufe/client/live_agent_abl
+auf.pdf): PDF inclusion: found PDF version <1.5>, but at most version <1.4> all
+owed
+
+<Bilder/ablaeufe/client/live_agent_ablauf.pdf, id=545, 369.88583pt x 426.79132p
+t>
+File: Bilder/ablaeufe/client/live_agent_ablauf.pdf Graphic file (type pdf)
+ <use Bilder/ablaeufe/client/live_agent_ablauf.pdf> [14 <./Bilder/ablaeufe/clie
+nt/command_thread_ablauf.pdf>]
+
+pdfTeX warning: /usr/bin/pdflatex (file ./Bilder/ablaeufe/client/listener_threa
+d_ablauf.pdf): PDF inclusion: found PDF version <1.5>, but at most version <1.4
+> allowed
+
+<Bilder/ablaeufe/client/listener_thread_ablauf.pdf, id=560, 995.84645pt x 739.7
+7165pt>
+File: Bilder/ablaeufe/client/listener_thread_ablauf.pdf Graphic file (type pdf)
+
+ <use Bilder/ablaeufe/client/listener_thread_ablauf.pdf>
+Overfull \hbox (28.16699pt too wide) in paragraph at lines 15--15
+ [] 
+ []
+
+[15 <./Bilder/ablaeufe/client/live_agent_ablauf.pdf>]
+
+pdfTeX warning: /usr/bin/pdflatex (file ./Bilder/hierarchie/client.pdf): PDF in
+clusion: found PDF version <1.5>, but at most version <1.4> allowed
+<Bilder/hierarchie/client.pdf, id=575, 668.4975pt x 1013.7875pt>
+File: Bilder/hierarchie/client.pdf Graphic file (type pdf)
+
+<use Bilder/hierarchie/client.pdf> [16 <./Bilder/ablaeufe/client/listener_threa
+d_ablauf.pdf>]
+
+pdfTeX warning: /usr/bin/pdflatex (file ./Bilder/module/client/client_module.pd
+f): PDF inclusion: found PDF version <1.5>, but at most version <1.4> allowed
+<Bilder/module/client/client_module.pdf, id=590, 1280.37404pt x 1280.37404pt>
+File: Bilder/module/client/client_module.pdf Graphic file (type pdf)
+
+<use Bilder/module/client/client_module.pdf> [17 <./Bilder/hierarchie/client.pd
+f>]) [18 <./Bilder/module/client/client_module.pdf>]
 \openout2 = `server.aux'.
 
  (./server.tex
-[15
+
+pdfTeX warning: /usr/bin/pdflatex (file ./Bilder/ablaeufe/server/server_ablauf.
+pdf): PDF inclusion: found PDF version <1.5>, but at most version <1.4> allowed
+
+<Bilder/ablaeufe/server/server_ablauf.pdf, id=619, 369.88583pt x 825.12991pt>
+File: Bilder/ablaeufe/server/server_ablauf.pdf Graphic file (type pdf)
+
+<use Bilder/ablaeufe/server/server_ablauf.pdf>
+
+pdfTeX warning: /usr/bin/pdflatex (file ./Bilder/ablaeufe/server/login_thread_a
+blauf.pdf): PDF inclusion: found PDF version <1.5>, but at most version <1.4> a
+llowed
+
+<Bilder/ablaeufe/server/login_thread_ablauf.pdf, id=621, 426.79132pt x 512.1496
+3pt>
+File: Bilder/ablaeufe/server/login_thread_ablauf.pdf Graphic file (type pdf)
+ <use Bilder/ablaeufe/server/login_thread_ablauf.pdf> [19
 
 
-] [16]
-LaTeX Font Info:    Font shape `OMS/aer/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 140.
- [17]) [18]
+ <./Bilder/ablaeufe/server/server_ablauf.pdf>]
+
+pdfTeX warning: /usr/bin/pdflatex (file ./Bilder/ablaeufe/server/client_thread_
+ablauf.pdf): PDF inclusion: found PDF version <1.5>, but at most version <1.4> 
+allowed
+
+<Bilder/ablaeufe/server/client_thread_ablauf.pdf, id=636, 1251.92131pt x 1081.2
+0465pt>
+File: Bilder/ablaeufe/server/client_thread_ablauf.pdf Graphic file (type pdf)
+ <use Bilder/ablaeufe/server/client_thread_ablauf.pdf> [20 <./Bilder/ablaeufe/s
+erver/login_thread_ablauf.pdf>]
+
+pdfTeX warning: /usr/bin/pdflatex (file ./Bilder/ablaeufe/server/broadcasting_t
+hread_ablauf.pdf): PDF inclusion: found PDF version <1.5>, but at most version 
+<1.4> allowed
+
+<Bilder/ablaeufe/server/broadcasting_thread_ablauf.pdf, id=651, 654.41339pt x 7
+11.31892pt>
+File: Bilder/ablaeufe/server/broadcasting_thread_ablauf.pdf Graphic file (type 
+pdf)
+ <use Bilder/ablaeufe/server/broadcasting_thread_ablauf.pdf>
+[21 <./Bilder/ablaeufe/server/client_thread_ablauf.pdf>]
+
+pdfTeX warning: /usr/bin/pdflatex (file ./Bilder/hierarchie/server.pdf): PDF in
+clusion: found PDF version <1.5>, but at most version <1.4> allowed
+<Bilder/hierarchie/server.pdf, id=666, 927.465pt x 1146.2825pt>
+File: Bilder/hierarchie/server.pdf Graphic file (type pdf)
+
+<use Bilder/hierarchie/server.pdf> [22 <./Bilder/ablaeufe/server/broadcasting_t
+hread_ablauf.pdf>]
+
+pdfTeX warning: /usr/bin/pdflatex (file ./Bilder/module/server/server_module.pd
+f): PDF inclusion: found PDF version <1.5>, but at most version <1.4> allowed
+<Bilder/module/server/server_module.pdf, id=681, 597.50786pt x 845.04686pt>
+File: Bilder/module/server/server_module.pdf Graphic file (type pdf)
+
+<use Bilder/module/server/server_module.pdf> [23 <./Bilder/hierarchie/server.pd
+f>]) [24 <./Bilder/module/server/server_module.pdf>] [25]
 \openout2 = `logger.aux'.
 
- (./logger.tex) [19
+ (./logger.tex
+
+pdfTeX warning: /usr/bin/pdflatex (file ./Bilder/ablaeufe/server/logger_ablauf.
+pdf): PDF inclusion: found PDF version <1.5>, but at most version <1.4> allowed
+
+<Bilder/ablaeufe/server/logger_ablauf.pdf, id=714, 369.88583pt x 512.14963pt>
+File: Bilder/ablaeufe/server/logger_ablauf.pdf Graphic file (type pdf)
+
+<use Bilder/ablaeufe/server/logger_ablauf.pdf>
+
+pdfTeX warning: /usr/bin/pdflatex (file ./Bilder/hierarchie/logger.pdf): PDF in
+clusion: found PDF version <1.5>, but at most version <1.4> allowed
+<Bilder/hierarchie/logger.pdf, id=716, 218.8175pt x 142.5325pt>
+File: Bilder/hierarchie/logger.pdf Graphic file (type pdf)
+
+<use Bilder/hierarchie/logger.pdf>
+
+pdfTeX warning: /usr/bin/pdflatex (file ./Bilder/module/server/logger_module.pd
+f): PDF inclusion: found PDF version <1.5>, but at most version <1.4> allowed
+<Bilder/module/server/logger_module.pdf, id=718, 426.79132pt x 426.79132pt>
+File: Bilder/module/server/logger_module.pdf Graphic file (type pdf)
+
+<use Bilder/module/server/logger_module.pdf> [26
 
 
-]
+ <./Bilder/ablaeufe/server/logger_ablauf.pdf> <./Bilder/hierarchie/logger.pdf>]
+) [27 <./Bilder/module/server/logger_module.pdf>]
 \openout2 = `archivierer.aux'.
 
- (./archivierer.tex) [20
+ (./archivierer.tex
+
+pdfTeX warning: /usr/bin/pdflatex (file ./Bilder/ablaeufe/server/archiver_ablau
+f.pdf): PDF inclusion: found PDF version <1.5>, but at most version <1.4> allow
+ed
+
+<Bilder/ablaeufe/server/archiver_ablauf.pdf, id=755, 625.96065pt x 654.41339pt>
+File: Bilder/ablaeufe/server/archiver_ablauf.pdf Graphic file (type pdf)
+<use Bilder/ablaeufe/server/archiver_ablauf.pdf>
+
+pdfTeX warning: /usr/bin/pdflatex (file ./Bilder/hierarchie/archiver.pdf): PDF 
+inclusion: found PDF version <1.5>, but at most version <1.4> allowed
+<Bilder/hierarchie/archiver.pdf, id=757, 413.545pt x 413.545pt>
+File: Bilder/hierarchie/archiver.pdf Graphic file (type pdf)
+
+<use Bilder/hierarchie/archiver.pdf> [28
 
 
-]
+ <./Bilder/ablaeufe/server/archiver_ablauf.pdf>]
+
+pdfTeX warning: /usr/bin/pdflatex (file ./Bilder/module/server/archivierer_modu
+le.pdf): PDF inclusion: found PDF version <1.5>, but at most version <1.4> allo
+wed
+
+<Bilder/module/server/archivierer_module.pdf, id=772, 569.05513pt x 569.05513pt
+>
+File: Bilder/module/server/archivierer_module.pdf Graphic file (type pdf)
+ <use Bilder/module/server/archivierer_module.pdf> [29 <./Bilder/hierarchie/arc
+hiver.pdf>]) [30 <./Bilder/module/server/archivierer_module.pdf>]
 \openout2 = `clientlist.aux'.
 
 
 (./clientlist.tex
-LaTeX Font Info:    Font shape `OMS/aer/m/it' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 9.
-) [21
+LaTeX Font Info:    Font shape `OMS/aer/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 16.
+) [31
 
 
 ]
 \openout2 = `blackboard.aux'.
 
- (./blackboard.tex) [22
+ (./blackboard.tex) [32
 
 
 ]
 \openout2 = `fazit.aux'.
 
- (./fazit.tex) (./docu.aux
-(./titlepage.aux) (./komponentenentwurf.aux) (./client.aux) (./server.aux)
-(./logger.aux) (./archivierer.aux) (./clientlist.aux) (./blackboard.aux)
-(./fazit.aux)) ) 
+ (./fazit.tex) [33
+
+
+]
+<Bilder/petrinetz.pdf, id=853, 628.3475pt x 1090.0725pt>
+File: Bilder/petrinetz.pdf Graphic file (type pdf)
+
+<use Bilder/petrinetz.pdf> [34
+
+ <./Bilder/petrinetz.pdf>] (./docu.aux
+(./titlepage.aux) (./aufgabenverteilung.aux) (./komponentenentwurf.aux)
+(./client.aux) (./server.aux) (./logger.aux) (./archivierer.aux)
+(./clientlist.aux) (./blackboard.aux) (./fazit.aux))
+
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
 Here is how much of TeX's memory you used:
- 9441 strings out of 493848
- 126441 string characters out of 1152823
- 513397 words of memory out of 3000000
- 12001 multiletter control sequences out of 15000+50000
- 52918 words of font info for 107 fonts, out of 3000000 for 9000
+ 9481 strings out of 493848
+ 131921 string characters out of 1152823
+ 345026 words of memory out of 3000000
+ 12218 multiletter control sequences out of 15000+50000
+ 48198 words of font info for 101 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
- 38i,13n,49p,249b,1812s stack positions out of 5000i,500n,10000p,200000b,50000s
-</usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx10
-.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/
-share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf
--texlive/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-texlive/fo
-nts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-texlive/fonts/type1/pu
-blic/amsfonts/cm/cmr12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfont
-s/cm/cmr6.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr7.pfb
-></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/
-texmf-texlive/fonts/type1/public/amsfonts/cm/cmsl12.pfb></usr/share/texmf-texli
-ve/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/share/texmf-texlive/fonts/ty
-pe1/public/amsfonts/cm/cmss17.pfb></usr/share/texmf-texlive/fonts/type1/public/
-amsfonts/cm/cmssbx10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/
-cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti10.p
-fb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on docu.pdf (23 pages, 467786 bytes).
+ 38i,13n,49p,249b,1183s stack positions out of 5000i,500n,10000p,200000b,50000s
+</usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/sha
+re/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-te
+xlive/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-texlive/fonts
+/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-texlive/fonts/type1/publi
+c/amsfonts/cm/cmr12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/c
+m/cmr6.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr7.pfb></
+usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/tex
+mf-texlive/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/share/texmf-texlive/
+fonts/type1/public/amsfonts/cm/cmss17.pfb></usr/share/texmf-texlive/fonts/type1
+/public/amsfonts/cm/cmssbx10.pfb></usr/share/texmf-texlive/fonts/type1/public/a
+msfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/
+cmtt12.pfb>
+Output written on docu.pdf (35 pages, 773476 bytes).
 PDF statistics:
- 994 PDF objects out of 1000 (max. 8388607)
- 399 named destinations out of 1000 (max. 500000)
- 576 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 950 PDF objects out of 1000 (max. 8388607)
+ 177 named destinations out of 1000 (max. 500000)
+ 679 words of extra memory for PDF output out of 10000 (max. 10000000)
 

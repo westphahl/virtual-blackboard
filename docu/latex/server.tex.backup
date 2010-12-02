@@ -1,0 +1,164 @@
+\section{Server}
+
+\subsection{Programmabläufe}
+
+\subsubsection{Hauptprogramm}
+\begin{lstlisting}
+# Sicherstellen, dass noch kein Server läuft
+# Mutex für Tafelzugriff initialisieren
+# Mutex für Zugriff auf Client-Liste initialisieren
+# Initialisierung der Tafel (Shared Memory)
+# Initialisierung der Client-Liste (doppelt verkettete Liste)
+# Initialisierung Semaphore (Zähler) für aktive Clients
+# Message Queue für Logging initialisieren
+# Initialisiere Trigger für Broadcasting-Agent (Condition Variable > pthread)
+# Initialisiere Trigger "Tafel archiviert" (Condition Variable > pthread)
+# Signal registrieren für "System beenden"
+# Socket für Netzwerkkommunikation öffnen
+
+# Fork: Logger (externes Programm)
+# Fork: Archivierer (externes Programm), wenn Debugmodus mit Archivierungsintervall
+# Starte Broadcasting-Agent als Thread
+# Starte Login-Thread
+\end{lstlisting}
+
+\subsubsection{Signal System beenden}
+\begin{lstlisting}
+# Mutex-Down: Clientliste
+    # Kill: Login-Thread
+# Mutex-Up: Clientliste
+# Trigger Broadcasting Agent: Clients beenden (quit)
+# Warte auf Sempahore (Clientzähler) == 0
+    # Kill: Broadcasting Agent
+# Netzwerksocket schließen
+# Kill: Archivierer
+# Kill: Logger
+# Message Queue (Logger) löschen
+# Freigabe: Shared Memory (Tafel)
+\end{lstlisting}
+
+\subsubsection{Login-Thread}
+\begin{lstlisting}
+# Warte auf Login von Client
+# Starte für jeden Login Client-Thread
+\end{lstlisting}
+
+\subsubsection{Client-Thread}
+\begin{lstlisting}
+# Mutex-Down für Zugriff auf Client-Liste 
+    # Wenn Rolle Dozent: Prüfung, bereits ein Dozent angemeldet?
+        # wenn Ja: ändere Rolle Dozent -> Student
+        # wenn Nein: Schreibrecht zuweisen
+    # Wenn Rolle egal: ändere Rolle zu Student oder Dozent falls noch nicht vorhanden
+    # Client-ID, Client-Name, Rolle + Zugriffsrecht in Liste eintragen
+    # Semaphore (Clientzähler) Up
+# Mutex-Up für Zugriff auf Client-Liste
+# Bei Fehler: Fehlernachticht an Client und Client-Thread beenden
+# Trigger Broadcasting-Agent: Statusnachricht an Clients
+# Warte auf Befehle von verbundenem Client
+\end{lstlisting}
+\begin{lstlisting}
+> quit (Client beenden) bzw. Client schließt Verbindung
+    # Mutex-Down für Zugriff auf Client-Liste
+        # Client aus Client-Liste austragen
+        # Semaphore (Client-Zähler) Down
+    # Mutex-Up
+    # Trigger Broadcasting-Agent: Sende neue Clientanzahl
+    # Tread beenden
+\end{lstlisting}
+\begin{lstlisting}
+> request (Schreibrechte anfordern)
+    # Mutex-Down für Zugriff auf Client-Liste
+        # hat Client bereits schreibrecht?
+            # wenn Ja: Fehlermeldung
+        # suche Dozent in Clientliste
+            # kein Dozent: Fehlermeldung
+    # Mutex-Up
+    # Anfrage für Schreibrecht an Dozent
+    # Warte auf Antwort von Dozent
+        # Antwort Nein: Fehlermeldung an anfragenden Benutzer
+    # Mutex-Down für Zugriff auf Client-Liste
+        # setze alter Benutzer mit Schreibrechten: keine Schreibrechte
+        # aktueller Benutzer: Schreibrecht
+    # Mutex-Up
+    # Statusänderung alter Benutzer: keine Schreibrechte
+    # Statusänderung anfragender Benutzer: Schreibrechte    
+    # Trigger Broadcasting-Agent: Tutor = 1
+\end{lstlisting}
+\begin{lstlisting}
+> shutdown
+    # Mutex-Down für Zugriff auf Client-Liste
+        # Benuter ist Dozent?
+            # wenn Nein: Fehlermeldung
+    # Mutex-Up
+    # Signal senden: System beenden
+\end{lstlisting}
+\begin{lstlisting}
+> release
+    # Mutex-Down für Zugriff auf Client-Liste
+        # Benutzer ist Tutor?
+            # wenn Nein: Fehlermeldung
+        # aktueller Benutzer: Schreibrecht > Nein
+        # ändere Rolle Tutor -> Student
+        # Dozent: Schreibrecht Ja
+    # Mutex-Up
+    # Trigger Broadcasting-Agent: Tutoren = 0
+    # Sende Statusänderung Dozent: Schreibrecht erhalten
+\end{lstlisting}
+\begin{lstlisting}
+> acquire
+    # Mutex-Down für Zugriff auf Client-Liste
+        # aktueller Benutzer ist Dozent?
+            # wenn Nein: Fehlermeldung
+        # entziehe Tutor Schreibrecht
+        # setze Dozent Schreibrecht
+    # Mutex-Up
+    # Statusänderung vorheriger Tutor: keine Schreibrechte
+    # Trigger Broadcasting-Agent: Tutoren = 0
+    # Sende Statusänderung Dozent: Schreibrechte
+\end{lstlisting}
+\begin{lstlisting}
+> modify
+    # Mutex-Down für Zugriff auf Client-Liste
+        # Benutzer hat Schreibrechte?
+            # wenn Nein: Fehlermeldung
+    # Mutex-Up
+    # Mutex-Down für Zugriff auf Tafel
+        # Änderungen in Shared Memory schreiben
+    # Mutex-Up
+    # Trigger Broadcasting-Agent: Tafeländerung
+\end{lstlisting}
+\begin{lstlisting}
+> clear
+    # Mutex-Down für Zugriff auf Client-Liste
+        # Benutzer hat Schreibrechte?
+            # wenn Nein: Fehlermeldung
+    # Mutex-Up
+    # Mutex-Down für Zugriff auf Tafel
+    # Trigger Archivierer
+        *** Im Archivierer ist kein Mutex-Down notwendig. Dies erfolgt vor
+        *** der Triggerung des Archivierers, um sicherzustellen, das in der
+        *** Zwischenzeit niemand anders auf die Tafel zugreift.
+        *** Der Archivierer macht nach dem Sichern der Tafel einen Mutex-Up
+    # Mutex-Down für Zugriff auf Tafel
+        # Lösche Tafel  
+    # Mutex Up
+    # Trigger Broadcasting-Agent: Tafel leer
+\end{lstlisting}
+
+\subsubsection{Broadcasting-Agent}
+\begin{lstlisting}
+# Warte auf Trigger
+# Wenn Tafeländerung
+    # Mutex-Down für Zugriff auf Tafel
+        # Lese Tafelinhalt
+    # Mutex-Up
+# Sende Nachricht an alle verbundenen Clients
+\end{lstlisting}
+
+\subsection{Funktionshierarchie}
+
+\subsection{Modulhierarchie}
+
+\subsection{Quellcode}
+Der Quellcode ist auf der CD zu finden.

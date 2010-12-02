@@ -1,65 +1,66 @@
-\BOOKMARK [1][-]{section.1}{1 Entwurf der Softwarekomponenten}{}
-\BOOKMARK [2][-]{subsection.1.1}{1.1 Funktionalit\344t Client}{section.1}
-\BOOKMARK [3][-]{subsubsection.1.1.1}{1.1.1 Command-Thread}{subsection.1.1}
-\BOOKMARK [3][-]{subsubsection.1.1.2}{1.1.2 Live-Agent}{subsection.1.1}
-\BOOKMARK [3][-]{subsubsection.1.1.3}{1.1.3 Listener-Thread}{subsection.1.1}
-\BOOKMARK [3][-]{subsubsection.1.1.4}{1.1.4 GUI}{subsection.1.1}
-\BOOKMARK [3][-]{subsubsection.1.1.5}{1.1.5 Tafel-Trigger}{subsection.1.1}
-\BOOKMARK [2][-]{subsection.1.2}{1.2 Funktionalit\344t Server}{section.1}
-\BOOKMARK [3][-]{subsubsection.1.2.1}{1.2.1 Login-Thread}{subsection.1.2}
-\BOOKMARK [3][-]{subsubsection.1.2.2}{1.2.2 Client-Thread}{subsection.1.2}
-\BOOKMARK [3][-]{subsubsection.1.2.3}{1.2.3 Broadcasting-Agent}{subsection.1.2}
-\BOOKMARK [2][-]{subsection.1.3}{1.3 Funktionalit\344t Logger}{section.1}
-\BOOKMARK [2][-]{subsection.1.4}{1.4 Funktionalit\344t Archivierer}{section.1}
-\BOOKMARK [2][-]{subsection.1.5}{1.5 Synchronisationsprotokoll}{section.1}
-\BOOKMARK [2][-]{subsection.1.6}{1.6 IPC-Schnittstellen}{section.1}
-\BOOKMARK [3][-]{subsubsection.1.6.1}{1.6.1 Shared-Memory}{subsection.1.6}
-\BOOKMARK [3][-]{subsubsection.1.6.2}{1.6.2 Message-Queues}{subsection.1.6}
-\BOOKMARK [3][-]{subsubsection.1.6.3}{1.6.3 Semaphore}{subsection.1.6}
-\BOOKMARK [3][-]{subsubsection.1.6.4}{1.6.4 Condition-Variablen}{subsection.1.6}
-\BOOKMARK [2][-]{subsection.1.7}{1.7 Netzwerkschnittstellen}{section.1}
-\BOOKMARK [3][-]{subsubsection.1.7.1}{1.7.1 Typen\374bersicht}{subsection.1.7}
-\BOOKMARK [3][-]{subsubsection.1.7.2}{1.7.2 Header}{subsection.1.7}
-\BOOKMARK [3][-]{subsubsection.1.7.3}{1.7.3 Login}{subsection.1.7}
-\BOOKMARK [3][-]{subsubsection.1.7.4}{1.7.4 Tafelinhalt}{subsection.1.7}
-\BOOKMARK [3][-]{subsubsection.1.7.5}{1.7.5 Tafel l\366schen}{subsection.1.7}
-\BOOKMARK [3][-]{subsubsection.1.7.6}{1.7.6 Schreibrechtanfrage}{subsection.1.7}
-\BOOKMARK [3][-]{subsubsection.1.7.7}{1.7.7 Beenden}{subsection.1.7}
-\BOOKMARK [3][-]{subsubsection.1.7.8}{1.7.8 Status-Nachricht}{subsection.1.7}
-\BOOKMARK [3][-]{subsubsection.1.7.9}{1.7.9 Fehlernachricht}{subsection.1.7}
-\BOOKMARK [1][-]{section.2}{2 Client}{}
-\BOOKMARK [2][-]{subsection.2.1}{2.1 Programmabl\344ufe}{section.2}
-\BOOKMARK [3][-]{subsubsection.2.1.1}{2.1.1 Hauptprogramm}{subsection.2.1}
-\BOOKMARK [3][-]{subsubsection.2.1.2}{2.1.2 Command-Thread}{subsection.2.1}
-\BOOKMARK [3][-]{subsubsection.2.1.3}{2.1.3 Live-Agent}{subsection.2.1}
-\BOOKMARK [3][-]{subsubsection.2.1.4}{2.1.4 Listener-Thread}{subsection.2.1}
+\BOOKMARK [1][-]{section.1}{1 Aufgabenverteilung}{}
+\BOOKMARK [1][-]{section.2}{2 Entwurf der Softwarekomponenten}{}
+\BOOKMARK [2][-]{subsection.2.1}{2.1 Funktionalit\344t Client}{section.2}
+\BOOKMARK [3][-]{subsubsection.2.1.1}{2.1.1 Command-Thread}{subsection.2.1}
+\BOOKMARK [3][-]{subsubsection.2.1.2}{2.1.2 Live-Agent}{subsection.2.1}
+\BOOKMARK [3][-]{subsubsection.2.1.3}{2.1.3 Listener-Thread}{subsection.2.1}
+\BOOKMARK [3][-]{subsubsection.2.1.4}{2.1.4 GUI}{subsection.2.1}
 \BOOKMARK [3][-]{subsubsection.2.1.5}{2.1.5 Tafel-Trigger}{subsection.2.1}
-\BOOKMARK [2][-]{subsection.2.2}{2.2 Funktionshierarchie}{section.2}
-\BOOKMARK [2][-]{subsection.2.3}{2.3 Modulhierarchie}{section.2}
-\BOOKMARK [2][-]{subsection.2.4}{2.4 Quellcode}{section.2}
-\BOOKMARK [1][-]{section.3}{3 Server}{}
+\BOOKMARK [2][-]{subsection.2.2}{2.2 Funktionalit\344t Server}{section.2}
+\BOOKMARK [3][-]{subsubsection.2.2.1}{2.2.1 Login-Thread}{subsection.2.2}
+\BOOKMARK [3][-]{subsubsection.2.2.2}{2.2.2 Client-Thread}{subsection.2.2}
+\BOOKMARK [3][-]{subsubsection.2.2.3}{2.2.3 Broadcasting-Agent}{subsection.2.2}
+\BOOKMARK [2][-]{subsection.2.3}{2.3 Funktionalit\344t Logger}{section.2}
+\BOOKMARK [2][-]{subsection.2.4}{2.4 Funktionalit\344t Archivierer}{section.2}
+\BOOKMARK [2][-]{subsection.2.5}{2.5 Synchronisationsprotokoll}{section.2}
+\BOOKMARK [2][-]{subsection.2.6}{2.6 IPC-Schnittstellen}{section.2}
+\BOOKMARK [3][-]{subsubsection.2.6.1}{2.6.1 Shared-Memory}{subsection.2.6}
+\BOOKMARK [3][-]{subsubsection.2.6.2}{2.6.2 Message-Queues}{subsection.2.6}
+\BOOKMARK [3][-]{subsubsection.2.6.3}{2.6.3 Semaphore}{subsection.2.6}
+\BOOKMARK [3][-]{subsubsection.2.6.4}{2.6.4 Condition-Variablen}{subsection.2.6}
+\BOOKMARK [2][-]{subsection.2.7}{2.7 Netzwerkschnittstellen}{section.2}
+\BOOKMARK [3][-]{subsubsection.2.7.1}{2.7.1 Typen\374bersicht}{subsection.2.7}
+\BOOKMARK [3][-]{subsubsection.2.7.2}{2.7.2 Header}{subsection.2.7}
+\BOOKMARK [3][-]{subsubsection.2.7.3}{2.7.3 Login}{subsection.2.7}
+\BOOKMARK [3][-]{subsubsection.2.7.4}{2.7.4 Tafelinhalt}{subsection.2.7}
+\BOOKMARK [3][-]{subsubsection.2.7.5}{2.7.5 Tafel l\366schen}{subsection.2.7}
+\BOOKMARK [3][-]{subsubsection.2.7.6}{2.7.6 Schreibrechtanfrage}{subsection.2.7}
+\BOOKMARK [3][-]{subsubsection.2.7.7}{2.7.7 Beenden}{subsection.2.7}
+\BOOKMARK [3][-]{subsubsection.2.7.8}{2.7.8 Status-Nachricht}{subsection.2.7}
+\BOOKMARK [3][-]{subsubsection.2.7.9}{2.7.9 Fehlernachricht}{subsection.2.7}
+\BOOKMARK [1][-]{section.3}{3 Client}{}
 \BOOKMARK [2][-]{subsection.3.1}{3.1 Programmabl\344ufe}{section.3}
 \BOOKMARK [3][-]{subsubsection.3.1.1}{3.1.1 Hauptprogramm}{subsection.3.1}
-\BOOKMARK [3][-]{subsubsection.3.1.2}{3.1.2 Signal System beenden}{subsection.3.1}
-\BOOKMARK [3][-]{subsubsection.3.1.3}{3.1.3 Login-Thread}{subsection.3.1}
-\BOOKMARK [3][-]{subsubsection.3.1.4}{3.1.4 Client-Thread}{subsection.3.1}
-\BOOKMARK [3][-]{subsubsection.3.1.5}{3.1.5 Broadcasting-Agent}{subsection.3.1}
+\BOOKMARK [3][-]{subsubsection.3.1.2}{3.1.2 Command-Thread}{subsection.3.1}
+\BOOKMARK [3][-]{subsubsection.3.1.3}{3.1.3 Live-Agent}{subsection.3.1}
+\BOOKMARK [3][-]{subsubsection.3.1.4}{3.1.4 Listener-Thread}{subsection.3.1}
 \BOOKMARK [2][-]{subsection.3.2}{3.2 Funktionshierarchie}{section.3}
 \BOOKMARK [2][-]{subsection.3.3}{3.3 Modulhierarchie}{section.3}
 \BOOKMARK [2][-]{subsection.3.4}{3.4 Quellcode}{section.3}
-\BOOKMARK [1][-]{section.4}{4 Logger}{}
-\BOOKMARK [2][-]{subsection.4.1}{4.1 Programmablauf}{section.4}
+\BOOKMARK [1][-]{section.4}{4 Server}{}
+\BOOKMARK [2][-]{subsection.4.1}{4.1 Programmabl\344ufe}{section.4}
+\BOOKMARK [3][-]{subsubsection.4.1.1}{4.1.1 Hauptprogramm}{subsection.4.1}
+\BOOKMARK [3][-]{subsubsection.4.1.2}{4.1.2 Login-Thread}{subsection.4.1}
+\BOOKMARK [3][-]{subsubsection.4.1.3}{4.1.3 Client-Thread}{subsection.4.1}
+\BOOKMARK [3][-]{subsubsection.4.1.4}{4.1.4 Broadcasting-Agent}{subsection.4.1}
 \BOOKMARK [2][-]{subsection.4.2}{4.2 Funktionshierarchie}{section.4}
 \BOOKMARK [2][-]{subsection.4.3}{4.3 Modulhierarchie}{section.4}
 \BOOKMARK [2][-]{subsection.4.4}{4.4 Quellcode}{section.4}
-\BOOKMARK [1][-]{section.5}{5 Archivierer}{}
+\BOOKMARK [1][-]{section.5}{5 Logger}{}
 \BOOKMARK [2][-]{subsection.5.1}{5.1 Programmablauf}{section.5}
 \BOOKMARK [2][-]{subsection.5.2}{5.2 Funktionshierarchie}{section.5}
 \BOOKMARK [2][-]{subsection.5.3}{5.3 Modulhierarchie}{section.5}
 \BOOKMARK [2][-]{subsection.5.4}{5.4 Quellcode}{section.5}
-\BOOKMARK [1][-]{section.6}{6 Client-Liste}{}
-\BOOKMARK [2][-]{subsection.6.1}{6.1 Datenstrukturen}{section.6}
-\BOOKMARK [2][-]{subsection.6.2}{6.2 Exportierte Funktionen}{section.6}
-\BOOKMARK [1][-]{section.7}{7 Tafel}{}
+\BOOKMARK [1][-]{section.6}{6 Archivierer}{}
+\BOOKMARK [2][-]{subsection.6.1}{6.1 Programmablauf}{section.6}
+\BOOKMARK [2][-]{subsection.6.2}{6.2 Funktionshierarchie}{section.6}
+\BOOKMARK [2][-]{subsection.6.3}{6.3 Modulhierarchie}{section.6}
+\BOOKMARK [2][-]{subsection.6.4}{6.4 Quellcode}{section.6}
+\BOOKMARK [1][-]{section.7}{7 Client-Liste}{}
 \BOOKMARK [2][-]{subsection.7.1}{7.1 Datenstrukturen}{section.7}
 \BOOKMARK [2][-]{subsection.7.2}{7.2 Exportierte Funktionen}{section.7}
+\BOOKMARK [1][-]{section.8}{8 Tafel}{}
+\BOOKMARK [2][-]{subsection.8.1}{8.1 Datenstrukturen}{section.8}
+\BOOKMARK [2][-]{subsection.8.2}{8.2 Exportierte Funktionen}{section.8}
+\BOOKMARK [1][-]{section.9}{9 Zusammenfassung und Fazit}{}
+\BOOKMARK [1][-]{appendix.A}{A Petrinetz}{}

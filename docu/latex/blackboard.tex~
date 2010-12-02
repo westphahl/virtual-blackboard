@@ -1,0 +1,13 @@
+\section{Tafel}
+
+\subsection{Datenstrukturen}
+Die Talel wird im Shared-Memory angelegt.
+
+\subsection{Exportierte Funktionen}
+\begin{lstlisting}
+int get_blackboard (key_t key)
+char *blackboard_attach (int shmid)
+void blackboard_detach (char *bboard)
+int init_blackboard (key_t key)
+void delete_blackboard (int shmid)
+\end{lstlisting}

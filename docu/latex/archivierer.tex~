@@ -1,0 +1,13 @@
+\section{Archivierer}
+
+\subsection{Programmablauf}
+\myfigure{Programmablauf Archivierer}{ablaeufe/server/archiver_ablauf.pdf}{0.5}
+
+\subsection{Funktionshierarchie}
+\myfigure{Funktionshierarchie Archivierer}{hierarchie/archiver.pdf}{0.5}
+
+\subsection{Modulhierarchie}
+\myfigure{Modulhierarchie Archivierer}{module/server/archivierer_module.pdf}{0.5}
+
+\subsection{Quellcode}
+Der Quellcode ist auf der CD zu finden.

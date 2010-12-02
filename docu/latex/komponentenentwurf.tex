@@ -40,7 +40,7 @@ Tafel und der Statusinformationen in der GUI zuständig.
 	\item Status- und Fehlermeldungen für den Client werden in einem Bereich unter der Tafel angezeigt.
 	\item Die Aufträge des Clients an den Server können über Buttons angewählt werden. Die Buttons werden 
 in einem Bereich links neben der Tafel angezeigt. Es sind immer nur die Buttons aktiviert, die vom 
-Client in seiner jeweiligen Rolle auch angewählt werden können
+Client in seiner jeweiligen Rolle auch angewählt werden können.
 \end{itemize}
 
 \subsubsection{Tafel-Trigger}
@@ -90,7 +90,7 @@ diese Aufträge ausführt. Der Client-Thread hat Zugriff auf die virtuelle Tafel
 
 \subsubsection{Broadcasting-Agent}
 Der Broadcasting-Agent sendet die Statusnachrichten an alle Clients bei einer Statusänderung. Außerdem ist er für
-das versenden der Tafel bei einer Änderung an alle angemeldeten Clients zuständig.
+das Versenden der Tafel bei einer Änderung an alle angemeldeten Clients zuständig.
 
 \subsection{Funktionalität Logger}
 Der Logger protokolliert alle Protokoll-Meldungen in einer Logdatei.
@@ -99,7 +99,7 @@ Der Logger protokolliert alle Protokoll-Meldungen in einer Logdatei.
 Der Archivierer ist ein Prozess zum Speichern von Tafelinhalten und ist als Sohnprozess des Servers zu realisieren. \\
 Der Archivierer hat 2 Funktionen:
 \begin{itemize}
- \item Archivieren des Tafelinhaltes in eine Archivdatei, wenn die virtuelle Tafel gelöscht werden soll
+ \item Archivieren des Tafelinhaltes in eine Archivdatei, wenn die virtuelle Tafel gelöscht werden soll.
  \item Speichern der Tafel periodisch in eine Debugdatei, wenn der Testmodus eingestellt ist. Die Zeitdauer soll 
 einstellbar sein. Der Testmodus und die Zeitdauer wird beim Starten des Archivierers eingestellt.
 \end{itemize}
@@ -107,7 +107,7 @@ Der Archivierer wird vom Server einmal erzeugt und wartet dann auf einen Trigger
 gesetzt, wenn die Tafel gelöscht werden soll oder aber von einem Timer, wenn der Testmodus eigestellt ist.
 
 \subsection{Synchronisationsprotokoll}
-siehe Petrinetz.
+Siehe Anhang \ref{sec:petrinetz}.
 
 \subsection{IPC-Schnittstellen}
 
@@ -157,24 +157,24 @@ Nr. & Name & Beschreibung \\ \hline
 \end{tabular}
 
 \subsubsection{Header}
-\myfigure{Header}{header.pdf}
+\myfigure{Header}{header.pdf}{0.5}
 \begin{tabular}{lll}
 Type: & uint8\_t & | beschreibt den Typ der folgenden Nachricht \\
 Lenght: & uint16\_t & | gibt die Anzahl der folgenden Bytes an
 \end{tabular}
 
 \subsubsection{Login}
-Der Client sendet eine Login Nachricht \\
+Der Client sendet eine Login Nachricht. \\
 Der Server antwortet mit einer Status Nachricht oder Fehler Nachricht --> Auf beides reagieren!
 \begin{itemize}
-	\item Kommt eine ungültige Rolle zurück, dann muss sich der Client beenden
-	\item Die Rolle die zurück kommt ist verpflichtend
-	\item Der Server schickt die Tafel dem Client die Tafel
+	\item Kommt eine ungültige Rolle zurück, dann muss sich der Client beenden.
+	\item Die Rolle die zurück kommt ist verpflichtend.
+	\item Der Server schickt die Tafel dem Client.
 \end{itemize}
 Nach jedem Login wird eine Status Message an jeden Client gesendet, da sich die Zahl der Studenten
-oder Dozenten geändert hat (das selbe gilt für einen Logout).
+oder Dozenten geändert hat (das Selbe gilt für einen Logout).
 
-\myfigure{Login}{login.pdf}
+\myfigure{Login}{login.pdf}{0.5}
 \begin{tabular}{lll}
 Role: & uint8\_t & | Egal = 0; Student =  1; Dozent = 2; Alles andere Ungültig! \\
 Name: & Char-Array & | Nicht null-terminiert (Length - 1) Bytes lang
@@ -184,7 +184,7 @@ Name: & Char-Array & | Nicht null-terminiert (Length - 1) Bytes lang
 Der Client tippt, und schickt die ganze neue Tafel, der Server nimmt die neue Tafel auf und verteilt 
 die Tafel mit einer Board-Content Nachricht an alle, die keine Schreibrechte haben.
 
-\myfigure{Tafelinhalt}{board_content.pdf}
+\myfigure{Tafelinhalt}{board_content.pdf}{0.5}
 \begin{tabular}{lll}
 Board-Content: & Char-Array & | nicht null-terminiert Length Bytes lang
 \end{tabular}
@@ -193,7 +193,7 @@ Board-Content: & Char-Array & | nicht null-terminiert Length Bytes lang
 Der Client mit Schreibrechte schickt eine Clear-Board Nachricht an den Server. Der Server triggert 
 den Archivierer, löscht den Tafelinhalt und schickt eine leere Tafel an alle Clients. 
 
-\myfigure{Tafel löschen}{clear_board.pdf}
+\myfigure{Tafel löschen}{clear_board.pdf}{0.5}
 
 \subsubsection{Schreibrechtanfrage}
 \paragraph*{Der Student wünscht sich Schreibrecht: \\}
@@ -201,7 +201,7 @@ Es wird eine Write Request Nachricht an den Server geschickt, dieser leitet eine
 Nachricht an den Dozenten Client weiter. Der Dozent beantwortet die Anfrage und es wird vom Dozenten 
 Client eine Request-Reply Nachricht an den Server geschickt, dieser verarbeitet diese dann.
 
-\myfigure{Schreibrechtanfrage C -> S}{write_request.pdf}
+\myfigure{Schreibrechtanfrage C -> S}{write_request.pdf}{0.5}
 \begin{tabular}{lll}
 Write-Per: & uint8\_t & | Gewünschtes Schreibrecht
 \end{tabular}
@@ -210,7 +210,7 @@ Write-Per: & uint8\_t & | Gewünschtes Schreibrecht
 Vom Dozenten Client wird eine Write-Request an den Server geschickt. Der Server entzieht dem Client 
 mit Schreibrecht das Schreibrecht.
 
-\myfigure{Schreibrechtanfrage S -> D}{write_requested.pdf}
+\myfigure{Schreibrechtanfrage S -> D}{write_requested.pdf}{0.5}
 \begin{tabular}{lll}
 Client-ID: & uint16\_t & | Die ID des Clients der Schreibrecht angefordert hat \\
 Name: & Char-Array & | nicht null-terminiert, (Lendth - 2) Bytes lang
@@ -220,7 +220,7 @@ Name: & Char-Array & | nicht null-terminiert, (Lendth - 2) Bytes lang
 Vom Dozenten Client wird eine Write-Request an den Server geschickt. Der Server entzieht dem Client 
 mit Schreibrecht das Schreibrecht und setzt dem Dozenten das Schreibrecht. 
 
-\myfigure{Schreibrechtanfrage D -> S}{request_reply.pdf}
+\myfigure{Schreibrechtanfrage D -> S}{request_reply.pdf}{0.5}
 \begin{tabular}{lll}
 Write-Per: & uint8\_t & | Das neue Schreibrecht\\
 Client-ID: & uint16\_t & | Die Identifizierungsnummer
@@ -232,12 +232,12 @@ mit Error-Code 0 (Servernachricht) und einem Shutdown Text an alle Clients über
 Der Client zeigt diese Nachricht an. Der Server fährt sich herunter und schließt dabei alle 
 Verbindungen. Der Client wartet bis die Verbindung schlussendlich getrennt wird.
 
-\myfigure{Beenden}{shutdown.pdf}
+\myfigure{Beenden}{shutdown.pdf}{0.5}
 
 \subsubsection{Status-Nachricht}
 Nach jeder Rechteänderung wird eine Statusmeldung an alle Clients gesendet.
 
-\myfigure{Status-Nachricht}{status_nachricht.pdf}
+\myfigure{Status-Nachricht}{status_nachricht.pdf}{0.5}
 \begin{tabular}{lll}
 Role: & uint8\_t & | Student = 1; Dozent = 2 \\
 Client-ID: & uint16\_t & | Die Identifizierungsnummer \\
@@ -250,7 +250,7 @@ Studenten: & uint16\_t & | Anzahl der Studenten
 \subsubsection{Fehlernachricht}
 Fehlermeldungen können über Error-Msg gesendet werden, sowie Benachrichtigungen an den Client.
 
-\myfigure{Fehlernachticht}{error_message.pdf}
+\myfigure{Fehlernachticht}{error_message.pdf}{0.5}
 \begin{tabular}{lll}
 Error-Code: & uint8\_t & | Grobe Beschreibung des Fehlers\\
 Detail: & Char-Array & | nicht null-terminierter (length - 1) Bytes lang; Leer möglich!
