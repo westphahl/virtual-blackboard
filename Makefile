@@ -1,6 +1,6 @@
 CC      	= gcc
 
-CFLAGS  	= -g -pthread -ansi -std=c99 -D_SVID_SOURCE -pedantic-errors -Wall -pg
+CFLAGS  	= -g -pthread -ansi -std=c99 -D_SVID_SOURCE  -Wall -pg
 CCLIENT 	= $(CFLAGS) `pkg-config --cflags gtk+-2.0`
 CSERVER 	= $(CFLAGS)
 
@@ -21,7 +21,7 @@ server: build/server.o \
 	build/broadcasting.o \
 	build/semaphore.o \
 	build/singelton.o
-	$(CC) $(CSERVER) $(LDSERVER) -o build/server \
+	$(CC) $(CSERVER) -o build/server \
 		build/server.o \
 		build/signal_handler.o \
 		build/mq.o \
@@ -35,7 +35,8 @@ server: build/server.o \
 		build/broadcasting.o \
 		build/message_builder.o \
 		build/semaphore.o \
-		build/singelton.o
+		build/singelton.o \
+		$(LDSERVER) 
 
 build/server.o:
 	$(CC) $(CSERVER) -c -o build/server.o src/server/server.c
@@ -87,7 +88,7 @@ build/singelton.o:
 # Build the logger
 logger: build/logger.o \
 	build/mq.o
-	$(CC) $(CSERVER) $(LDSERVER) -o build/logger build/logger.o build/mq.o
+	$(CC) $(CSERVER) -o build/logger build/logger.o build/mq.o $(LDSERVER) 
 
 build/logger.o:
 	$(CC) $(CSERVER) -c -o build/logger.o src/server/logger.c
@@ -96,9 +97,10 @@ build/logger.o:
 archiver: build/archiver.o \
 	build/semaphore.o \
 	build/blackboard.o
-	$(CC) $(CSERVER) $(LDSERVER) -o build/archiver build/archiver.o \
+	$(CC) $(CSERVER) -o build/archiver build/archiver.o \
 		build/semaphore.o \
-		build/blackboard.o
+		build/blackboard.o \
+		$(LDSERVER) 
 
 build/archiver.o:
 	$(CC) $(CSERVER) -c -o build/archiver.o src/server/archiver.c
@@ -110,13 +112,14 @@ client: build/gui.o \
 	build/liveagent_thread.o \
 	build/command_thread.o \
 	build/cutils.o
-	$(CC) $(CCLIENT) $(LDCLIENT) -o build/client \
+	$(CC) $(CCLIENT) -o build/client \
 		build/client.o \
 		build/gui.o \
 		build/listener_thread.o \
 		build/liveagent_thread.o \
 		build/command_thread.o \
-		build/cutils.o
+		build/cutils.o \
+		$(LDCLIENT) 
 
 build/client.o: src/client/client.c
 	$(CC) $(CCLIENT) -c -o build/client.o src/client/client.c
